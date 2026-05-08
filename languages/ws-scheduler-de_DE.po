@@ -1,0 +1,601 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WS Scheduler\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%1$s · Propulsé par %2$s"
+msgstr "%1$s · Bereitgestellt von %2$s"
+
+msgid "1 an"
+msgstr "1 Jahr"
+
+msgid "1 mois"
+msgstr "1 Monat"
+
+msgid "1 semaine"
+msgstr "1 Woche"
+
+msgid "2 mois"
+msgstr "2 Monate"
+
+msgid "2 semaines"
+msgstr "2 Wochen"
+
+msgid "3 mois"
+msgstr "3 Monate"
+
+msgid "6 mois"
+msgstr "6 Monate"
+
+msgid "Accès refusé."
+msgstr "Zugriff verweigert."
+
+msgid "Achetez votre clé sur %s et collez-la ici."
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Activer"
+msgstr "Aktivieren"
+
+msgid "Activer la licence Pro"
+msgstr ""
+
+msgid "Adresse email invalide."
+msgstr ""
+
+msgid "Ajouter"
+msgstr ""
+
+msgid "Ajouter une indisponibilité"
+msgstr ""
+
+msgid "Annuler"
+msgstr "Stornieren"
+
+msgid "Annuler ce rendez-vous ? Le client sera notifié par email."
+msgstr ""
+
+msgid "Annulé"
+msgstr "Storniert"
+
+msgid "Annulés"
+msgstr "Storniert"
+
+msgid "Aucun créneau disponible ce jour."
+msgstr ""
+
+msgid "Aucun rendez-vous trouvé."
+msgstr "Keine Termine gefunden."
+
+msgid "Aucune indisponibilité enregistrée."
+msgstr ""
+
+msgid "Bonjour %s,"
+msgstr "Hallo %s,"
+
+msgid "Bouton front-office"
+msgstr ""
+
+msgid "Ce créneau n'est plus disponible."
+msgstr "Dieses Zeitfenster ist nicht mehr verfügbar."
+
+msgid "Champ requis manquant : "
+msgstr ""
+
+msgid "Chaque RDV s'ajoute automatiquement à votre agenda"
+msgstr "Jeder Termin wird automatisch in Ihren Kalender eingetragen"
+
+msgid "Chargement…"
+msgstr "Laden…"
+
+msgid "Choisissez votre créneau"
+msgstr ""
+
+msgid "Client"
+msgstr "Kunde"
+
+msgid "Clé de licence"
+msgstr ""
+
+msgid "Collez votre clé de licence ici…"
+msgstr ""
+
+msgid "Complet"
+msgstr "Voll"
+
+msgid "Complétez le formulaire pour finaliser votre réservation."
+msgstr ""
+
+msgid "Confirmer"
+msgstr "Bestätigen"
+
+msgid "Confirmer le rendez-vous"
+msgstr "Termin bestätigen"
+
+msgid "Confirmé"
+msgstr "Bestätigt"
+
+msgid "Confirmés"
+msgstr "Bestätigt"
+
+msgid "Continuer"
+msgstr "Weiter"
+
+msgid "Couleurs front"
+msgstr ""
+
+msgid "Créneau invalide."
+msgstr ""
+
+msgid "Créneaux disponibles"
+msgstr ""
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Date invalide."
+msgstr ""
+
+msgid "Date/heure début"
+msgstr ""
+
+msgid "Date/heure fin"
+msgstr ""
+
+msgid "Dates requises."
+msgstr ""
+
+msgid "Dim"
+msgstr "So"
+
+msgid "Dimanche"
+msgstr "Sonntag"
+
+msgid "Disponible"
+msgstr "Verfügbar"
+
+msgid "Durée"
+msgstr "Dauer"
+
+msgid "Durée d'un créneau (minutes)"
+msgstr "Dauer eines Zeitfensters (Minuten)"
+
+msgid "Début"
+msgstr ""
+
+msgid "Début de journée"
+msgstr ""
+
+msgid "Découvrir la licence Pro →"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Email de notification"
+msgstr ""
+
+msgid "En attente"
+msgstr "Ausstehend"
+
+msgid "Erreur lors de l'enregistrement."
+msgstr "Fehler beim Speichern."
+
+msgid "Ex: Vacances, Jour férié…"
+msgstr ""
+
+msgid "Export CSV"
+msgstr ""
+
+msgid "Fermer"
+msgstr "Schließen"
+
+msgid "Fermé"
+msgstr "Geschlossen"
+
+msgid "Fin"
+msgstr ""
+
+msgid "Fin de journée"
+msgstr ""
+
+msgid "Gestion des"
+msgstr ""
+
+msgid "Google Calendar"
+msgstr ""
+
+msgid "Google Meet"
+msgstr ""
+
+msgid "Heure"
+msgstr "Uhrzeit"
+
+msgid "Horaires et créneaux"
+msgstr ""
+
+msgid "ID manquant."
+msgstr ""
+
+msgid "Indisponibilité supprimée."
+msgstr ""
+
+msgid "Indisponibilités"
+msgstr "Nichtverfügbarkeiten"
+
+msgid "Indisponibilités enregistrées"
+msgstr ""
+
+msgid "Informations générales"
+msgstr ""
+
+msgid "Jeu"
+msgstr "Do"
+
+msgid "Jeudi"
+msgstr "Donnerstag"
+
+msgid "Jours ouvrables"
+msgstr ""
+
+msgid "La popup aux couleurs exactes de votre site"
+msgstr "Popup in den exakten Farben Ihrer Website"
+
+msgid "Le logo WebStrategy est masqué dans la popup"
+msgstr "WebStrategy-Logo im Popup ausgeblendet"
+
+msgid "Les clients ne pourront pas réserver au-delà de cette période."
+msgstr ""
+
+msgid "Libellé"
+msgstr ""
+
+msgid "Libellé (optionnel)"
+msgstr ""
+
+msgid "Licence Pro"
+msgstr "Pro-Lizenz"
+
+msgid "Lien"
+msgstr "Link"
+
+msgid "Lien de conférence généré à chaque réservation"
+msgstr "Konferenzlink wird bei jeder Buchung erstellt"
+
+msgid "Lun"
+msgstr "Mo"
+
+msgid "Lundi"
+msgstr "Montag"
+
+msgid "Mar"
+msgstr "Di"
+
+msgid "Mardi"
+msgstr "Dienstag"
+
+msgid "Meet"
+msgstr ""
+
+msgid "Mer"
+msgstr "Mi"
+
+msgid "Mercredi"
+msgstr "Mittwoch"
+
+msgid "Message"
+msgstr ""
+
+msgid "Message (optionnel)"
+msgstr ""
+
+msgid "Message du client"
+msgstr ""
+
+msgid "Mettre à jour"
+msgstr "Aktualisieren"
+
+msgid "Modifier"
+msgstr "Ändern"
+
+msgid "Mois invalide."
+msgstr ""
+
+msgid "Mois précédent"
+msgstr ""
+
+msgid "Mois suivant"
+msgstr ""
+
+msgid "Mon texte"
+msgstr ""
+
+msgid "Nom"
+msgstr "Nachname"
+
+msgid "Nom de l'entreprise"
+msgstr "Firmenname"
+
+msgid "Nouveau rendez-vous reçu !"
+msgstr ""
+
+msgid "Paramètres invalides."
+msgstr ""
+
+msgid "Passer à la version Pro"
+msgstr ""
+
+msgid "Propulsé par %s"
+msgstr "Bereitgestellt von %s"
+
+msgid "Précisez l'objet de votre rendez-vous…"
+msgstr "Beschreiben Sie den Zweck Ihres Termins…"
+
+msgid "Prénom"
+msgstr "Vorname"
+
+msgid "Rappels email"
+msgstr ""
+
+msgid "Recevra les notifications de nouveaux RDV."
+msgstr ""
+
+msgid "Rejoindre Google Meet"
+msgstr ""
+
+msgid "Rendez-vous"
+msgstr "Termine"
+
+msgid "Rendez-vous confirmé !"
+msgstr "Termin bestätigt!"
+
+msgid "Rendez-vous supprimé."
+msgstr ""
+
+msgid "Renseignez les deux dates."
+msgstr ""
+
+msgid "Retour"
+msgstr "Zurück"
+
+msgid "Réglages"
+msgstr "Einstellungen"
+
+msgid "Réservation possible jusqu'à"
+msgstr "Buchung möglich bis"
+
+msgid "Réserver un créneau"
+msgstr "Zeitfenster buchen"
+
+msgid "Sam"
+msgstr "Sa"
+
+msgid "Samedi"
+msgstr "Samstag"
+
+msgid "Sans logo"
+msgstr ""
+
+msgid "Sauvegarder les réglages"
+msgstr "Einstellungen speichern"
+
+msgid "Shortcode : %1$s — accepte aussi %2$s"
+msgstr ""
+
+msgid ""
+"Si vous devez annuler ou reporter, contactez-nous directement en répondant à"
+" cet email."
+msgstr ""
+
+msgid ""
+"Si vous souhaitez reprendre rendez-vous, réservez un nouveau créneau sur "
+"notre site."
+msgstr ""
+
+msgid "Société"
+msgstr "Unternehmen"
+
+msgid "Statut"
+msgstr ""
+
+msgid "Statut mis à jour."
+msgstr ""
+
+msgid "Supprimer"
+msgstr "Löschen"
+
+msgid "Supprimer cette indisponibilité ?"
+msgstr ""
+
+msgid ""
+"Supprimer définitivement ? Le client sera notifié si le RDV était actif."
+msgstr ""
+
+msgid "Sélectionnez une date disponible, puis un horaire."
+msgstr ""
+
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+msgid "Texte du bouton"
+msgstr ""
+
+msgid "Tous"
+msgstr "Alle"
+
+msgid "Tous vos rendez-vous exportables et filtrables"
+msgstr "Alle Ihre Termine exportierbar und filterbar"
+
+msgid "Téléphone"
+msgstr "Telefon"
+
+msgid "Un mail automatique J-7 et J-1 avant le rendez-vous"
+msgstr "Automatische E-Mail 7 Tage und 1 Tag vor dem Termin"
+
+msgid "Une erreur est survenue."
+msgstr ""
+
+msgid "Ven"
+msgstr "Fr"
+
+msgid "Vendredi"
+msgstr "Freitag"
+
+msgid ""
+"Vos clients réservent, vous confirmez. Mais qui synchronise l'agenda, envoie"
+" les rappels, et génère le lien Meet ? La version Pro s'en charge."
+msgstr ""
+"Ihre Kunden buchen, Sie bestätigen. Aber wer synchronisiert den Kalender, "
+"sendet Erinnerungen und erstellt den Meet-Link? Die Pro-Version erledigt "
+"das."
+
+msgid "Vos coordonnées"
+msgstr ""
+
+msgid "Votre clé de licence"
+msgstr ""
+
+msgid "Votre rendez-vous est confirmé. Voici les détails :"
+msgstr ""
+
+msgid "Votre rendez-vous prévu le %1$s à %2$s a été annulé."
+msgstr ""
+
+msgid "Vous allez recevoir un email de confirmation."
+msgstr ""
+
+msgid "[%1$s] Confirmation de rendez-vous — %2$s à %3$s"
+msgstr "[%1$s] Terminbestätigung — %2$s um %3$s"
+
+msgid "[%1$s] Nouveau RDV — %2$s %3$s — %4$s"
+msgstr "[%1$s] Neuer Termin — %2$s %3$s — %4$s"
+
+msgid "[%1$s] Rendez-vous annulé — %2$s à %3$s"
+msgstr "[%1$s] Termin storniert — %2$s um %3$s"
+
+msgid "août"
+msgstr "August"
+
+msgid "avril"
+msgstr "April"
+
+msgid "décembre"
+msgstr "Dezember"
+
+msgid "février"
+msgstr "Februar"
+
+msgid "janvier"
+msgstr "Januar"
+
+msgid "juillet"
+msgstr "Juli"
+
+msgid "juin"
+msgstr "Juni"
+
+msgid "mai"
+msgstr "Mai"
+
+msgid "mars"
+msgstr "März"
+
+msgid "minutes"
+msgstr "Minuten"
+
+msgid "novembre"
+msgstr "November"
+
+msgid "octobre"
+msgstr "Oktober"
+
+msgid "septembre"
+msgstr "September"
+
+msgid "À venir"
+msgstr "Bevorstehend"
+
+msgid "Étape %1$d / %2$d"
+msgstr "Schritt %1$d / %2$d"
+
+msgid "◆ Premium actif"
+msgstr ""
+
+msgid "○ Mode gratuit"
+msgstr ""
+
+msgid "✅ Clé de licence enregistrée."
+msgstr ""
+
+msgid "✅ Réglages sauvegardés."
+msgstr ""
+
+msgid "✗ Licence invalide"
+msgstr ""
+
+msgid "Langue du plugin"
+msgstr "Plugin-Sprache"
+
+msgid "Langue du site (par défaut)"
+msgstr "Website-Sprache (Standard)"
+
+msgid "Appliqué au back-office, à la popup et aux emails."
+msgstr "Gilt für Back-Office, Popup und E-Mails."
+
+msgid "Créneaux du"
+msgstr "Zeitfenster für"
+
+msgid "Janvier"
+msgstr "Januar"
+
+msgid "Février"
+msgstr "Februar"
+
+msgid "Mars"
+msgstr "März"
+
+msgid "Avril"
+msgstr "April"
+
+msgid "Mai"
+msgstr "Mai"
+
+msgid "Juin"
+msgstr "Juni"
+
+msgid "Juillet"
+msgstr "Juli"
+
+msgid "Août"
+msgstr "August"
+
+msgid "Septembre"
+msgstr "September"
+
+msgid "Octobre"
+msgstr "Oktober"
+
+msgid "Novembre"
+msgstr "November"
+
+msgid "Décembre"
+msgstr "Dezember"
+
+msgid "Emails personnalisés"
+msgstr "Personalisierte E-Mails"
+
+msgid "Votre logo, vos textes et vos couleurs dans chaque email"
+msgstr "Ihr Logo, Texte und Farben in jeder E-Mail"
+
+msgid "Template email"
+msgstr "E-Mail-Vorlage"
+
+msgid "Confirmation et annulation entièrement configurables"
+msgstr "Bestätigung und Stornierung vollständig konfigurierbar"

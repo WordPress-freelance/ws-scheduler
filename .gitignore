@@ -1,0 +1,11 @@
+vendor/
+composer.lock
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+coverage/
+build/
+node_modules/
