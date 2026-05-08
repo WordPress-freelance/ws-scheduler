@@ -64,3 +64,29 @@ class Test_WS_Scheduler extends TestCase {
         $this->assertInstanceOf( 'WS_Scheduler_Loader', $loader );
     }
 }
+
+    /**
+     * Teste que run() peut être appelé sans fatal error.
+     */
+    public function test_plugin_run_executes_without_error() {
+        \WP_Mock::userFunction( 'add_action' );
+        \WP_Mock::userFunction( 'add_filter' );
+        \WP_Mock::userFunction( 'add_shortcode' );
+
+        $plugin = new WS_Scheduler();
+        $plugin->run();
+        $this->assertTrue( true );
+    }
+
+    /**
+     * Teste que get_loader() retourne bien un WS_Scheduler_Loader valide.
+     */
+    public function test_loader_is_instance_of_ws_scheduler_loader() {
+        \WP_Mock::userFunction( 'add_action' );
+        \WP_Mock::userFunction( 'add_filter' );
+        \WP_Mock::userFunction( 'add_shortcode' );
+
+        $plugin = new WS_Scheduler();
+        $this->assertInstanceOf( 'WS_Scheduler_Loader', $plugin->get_loader() );
+    }
+}

@@ -195,3 +195,164 @@ class Test_WS_Scheduler_Slots extends TestCase {
         }
     }
 }
+
+// ── Tests supplémentaires ────────────────────────────────────────────
+
+class Test_WS_Scheduler_Slots_Extended extends TestCase {
+
+    public function setUp(): void { parent::setUp(); }
+    public function tearDown(): void { parent::tearDown(); }
+
+    /**
+     * Les créneaux générés doivent être des chaînes au format H:i (ex: "09:00").
+     */
+    public function test_slot_strings_match_h_i_format() {
+        \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'UTC' ] );
+        \WP_Mock::userFunction( 'get_option', [
+            'return' => function( $k, $d = false ) {
+                $map = [
+                    'ws_working_days'    => [1,2,3,4,5,6,7],
+                    'ws_max_booking_days'=> 365,
+                    'ws_work_start'      => '09:00',
+                    'ws_work_end'        => '10:00',
+                    'ws_slot_duration'   => 30,
+                ];
+                return $map[$k] ?? $d;
+            },
+        ] );
+
+        // Trouver un lundi futur
+        $ts = strtotime('next monday');
+        $date = gmdate('Y-m-d', $ts);
+
+        // Mock DB pour retourner zéro créneaux réservés
+        $wpdb = new MockWpdb();
+        $wpdb->return_rows = [];
+        $GLOBALS['wpdb'] = $wpdb;
+
+        $slots = WS_Scheduler_Slots::get_slots_for_date( $date );
+
+        foreach ( $slots as $slot ) {
+            $this->assertMatchesRegularExpression( '/^\d{2}:\d{2}$/', $slot,
+                "Créneau '$slot' ne respecte pas le format H:i" );
+        }
+    }
+
+    /**
+     * La durée de créneau affecte le nombre de créneaux générés.
+     * 60 min de plage / 30 min par slot = 2 créneaux.
+     * 60 min de plage / 15 min par slot = 4 créneaux.
+     */
+    public function test_slot_duration_affects_slot_count() {
+        $wpdb = new MockWpdb();
+        $wpdb->return_rows = [];
+        $GLOBALS['wpdb'] = $wpdb;
+
+        $ts   = strtotime( 'next monday' );
+        $date = gmdate( 'Y-m-d', $ts );
+
+        // 30 min slots
+        \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'UTC' ] );
+        \WP_Mock::userFunction( 'get_option', [
+            'return' => function( $k, $d = false ) {
+                $map = [
+                    'ws_working_days'    => [1,2,3,4,5,6,7],
+                    'ws_max_booking_days'=> 365,
+                    'ws_work_start'      => '09:00',
+                    'ws_work_end'        => '10:00',
+                    'ws_slot_duration'   => 30,
+                ];
+                return $map[$k] ?? $d;
+            },
+        ] );
+        $slots_30 = WS_Scheduler_Slots::get_slots_for_date( $date );
+
+        \WP_Mock::tearDown();
+        \WP_Mock::setUp();
+
+        // 15 min slots
+        \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'UTC' ] );
+        \WP_Mock::userFunction( 'get_option', [
+            'return' => function( $k, $d = false ) {
+                $map = [
+                    'ws_working_days'    => [1,2,3,4,5,6,7],
+                    'ws_max_booking_days'=> 365,
+                    'ws_work_start'      => '09:00',
+                    'ws_work_end'        => '10:00',
+                    'ws_slot_duration'   => 15,
+                ];
+                return $map[$k] ?? $d;
+            },
+        ] );
+        $slots_15 = WS_Scheduler_Slots::get_slots_for_date( $date );
+
+        $this->assertGreaterThan( count( $slots_30 ), count( $slots_15 ) );
+    }
+
+    /**
+     * Un mois futur doit avoir des jours avec statut 'available' ou 'closed'.
+     */
+    public function test_future_month_has_no_past_days() {
+        \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'UTC' ] );
+        \WP_Mock::userFunction( 'get_option', [
+            'return' => function( $k, $d = false ) {
+                $map = [
+                    'ws_working_days'    => [1,2,3,4,5],
+                    'ws_max_booking_days'=> 365,
+                    'ws_work_start'      => '09:00',
+                    'ws_work_end'        => '18:00',
+                    'ws_slot_duration'   => 30,
+                ];
+                return $map[$k] ?? $d;
+            },
+        ] );
+
+        $wpdb = new MockWpdb();
+        $wpdb->return_rows = [];
+        $GLOBALS['wpdb'] = $wpdb;
+
+        // Mois dans 2 ans
+        $result = WS_Scheduler_Slots::get_month_availability( (int)date('Y') + 2, 6 );
+
+        foreach ( $result as $date => $status ) {
+            $this->assertNotEquals( 'past', $status,
+                "La date $date ne devrait pas avoir le statut 'past' (mois futur)" );
+        }
+    }
+
+    /**
+     * Les samedis et dimanches doivent être 'closed' si seuls les jours 1-5 sont ouvrés.
+     */
+    public function test_weekends_are_closed_when_not_in_working_days() {
+        \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'UTC' ] );
+        \WP_Mock::userFunction( 'get_option', [
+            'return' => function( $k, $d = false ) {
+                $map = [
+                    'ws_working_days'    => [1,2,3,4,5], // Lun-Ven uniquement
+                    'ws_max_booking_days'=> 365,
+                ];
+                return $map[$k] ?? $d;
+            },
+        ] );
+
+        // Mars 2027 : on cherche un samedi (N=6) ou dimanche (N=7)
+        $result = WS_Scheduler_Slots::get_month_availability( 2027, 3 );
+
+        foreach ( $result as $date_str => $status ) {
+            $dow = (int) ( new DateTime( $date_str ) )->format( 'N' );
+            if ( in_array( $dow, [ 6, 7 ] ) ) {
+                $this->assertNotEquals( 'available', $status,
+                    "Le $date_str (sam/dim) devrait être 'closed', pas '$status'" );
+            }
+        }
+    }
+
+    /**
+     * get_slots_for_date doit toujours retourner un tableau.
+     */
+    public function test_get_slots_always_returns_array() {
+        // Pas de mock WP — utilise les stubs du bootstrap
+        $result = WS_Scheduler_Slots::get_slots_for_date( '2020-01-01' );
+        $this->assertIsArray( $result );
+    }
+}
