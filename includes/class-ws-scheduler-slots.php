@@ -53,9 +53,16 @@ class WS_Scheduler_Slots {
 		);
 		$booked_ranges = array();
 		foreach ( $booked as $b ) {
+			// Parse via DateTimeZone WP (cohérent avec $cursor) — strtotime
+			// utiliserait PHP timezone (= UTC dans WordPress), ce qui décalait
+			// les ranges et faisait apparaître des slots disponibles qui
+			// auraient dû être bloqués sur les serveurs en Europe/Paris.
+			$dt_bs = DateTime::createFromFormat( 'Y-m-d H:i:s', $b->slot_start, $tz );
+			$dt_be = DateTime::createFromFormat( 'Y-m-d H:i:s', $b->slot_end,   $tz );
+			if ( ! $dt_bs || ! $dt_be ) continue;
 			$booked_ranges[] = array(
-				'start' => strtotime( $b->slot_start ),
-				'end'   => strtotime( $b->slot_end ),
+				'start' => $dt_bs->getTimestamp(),
+				'end'   => $dt_be->getTimestamp(),
 			);
 		}
 
@@ -74,16 +81,23 @@ class WS_Scheduler_Slots {
 				$days = array_map( 'intval', explode( ',', $u->recur_days ) );
 				if ( ! in_array( $dow, $days, true ) ) continue;
 				if ( empty( $u->time_start ) || empty( $u->time_end ) ) continue;
+				// Parse via DateTimeZone WP (timezone-aware), pas strtotime.
+				$dt_us = DateTime::createFromFormat( 'Y-m-d H:i:s', $date . ' ' . $u->time_start, $tz );
+				$dt_ue = DateTime::createFromFormat( 'Y-m-d H:i:s', $date . ' ' . $u->time_end,   $tz );
+				if ( ! $dt_us || ! $dt_ue ) continue;
 				$unavail_ranges[] = array(
-					'start' => strtotime( $date . ' ' . $u->time_start ),
-					'end'   => strtotime( $date . ' ' . $u->time_end ),
+					'start' => $dt_us->getTimestamp(),
+					'end'   => $dt_ue->getTimestamp(),
 				);
 			} else {
 				// Ponctuel : datetimes complets stockés en BDD.
 				if ( empty( $u->date_start ) || empty( $u->date_end ) ) continue;
+				$dt_us = DateTime::createFromFormat( 'Y-m-d H:i:s', $u->date_start, $tz );
+				$dt_ue = DateTime::createFromFormat( 'Y-m-d H:i:s', $u->date_end,   $tz );
+				if ( ! $dt_us || ! $dt_ue ) continue;
 				$unavail_ranges[] = array(
-					'start' => strtotime( $u->date_start ),
-					'end'   => strtotime( $u->date_end ),
+					'start' => $dt_us->getTimestamp(),
+					'end'   => $dt_ue->getTimestamp(),
 				);
 			}
 		}

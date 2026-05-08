@@ -4,7 +4,7 @@ Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.0.2
+Stable tag: 4.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,10 @@ This plugin stores personal data submitted by visitors when they book an appoint
 
 == Changelog ==
 
+= 4.0.3 =
+* Fixed: critical timezone bug in unavailability storage and reading. Hours saved in the admin (e.g. "Wednesday 13:30 → 18:00 recurring") were converted to UTC via `strtotime + gmdate` on save, then read back via `strtotime` (PHP timezone = UTC under WordPress) instead of via `wp_timezone_string`. Result: a 1-hour shift (2 hours in DST) on European servers, making slots that should have been blocked appear available on the front-end calendar. The fix removes the UTC conversion on save (TIME columns store local hours, not timestamps) and uses `DateTime::createFromFormat` with `wp_timezone_string` on read. Three regression tests added for Europe/Paris timezone scenarios (recurring afternoon block, full-day block, punctual slot).
+* Note: existing recurring/punctual unavailabilities created before this version on European-timezone sites may have stored shifted hours. After upgrading, recreate them from the admin to get correct local-hour storage.
+
 = 4.0.2 =
 * Removed the dedicated "Licence Pro" admin sub-page entirely (Plugin Directory guideline 11 — keep upsell prompts contextual, not as a top-level admin page).
 * Added "Settings | Pro version" links on the plugin list page via `plugin_action_links_<basename>` (the discreet, conventional location for upsell links).
@@ -167,6 +171,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 * Security and ecosystem alignment audit.
 
 == Upgrade Notice ==
+
+= 4.0.3 =
+Critical timezone fix for unavailabilities on European-timezone sites. Hours were shifted by 1-2 hours, leaving slots that should have been blocked available on the front-end. Existing unavailabilities should be recreated to use correct local-hour storage. No database schema change.
 
 = 4.0.2 =
 Removes the dedicated Licence Pro admin sub-page (replaced by a discreet "Pro version" link on the plugin list page) and adds an in-dashboard installation help card. Fixes a parse error in the now-removed partial. No database changes.

@@ -196,14 +196,17 @@ class WS_Scheduler_Ajax {
 					wp_send_json_error( __( 'Heures de début et de fin requises (format HH:MM).', 'ws-scheduler' ) );
 					return;
 				}
-				$ts_start = strtotime( $d . ' ' . $t_s );
-				$ts_end   = strtotime( $d . ' ' . $t_e );
-				if ( $ts_end <= $ts_start ) {
+				// Normalisation HH:MM → HH:MM:SS sans conversion timezone.
+				// Les heures saisies en admin sont locales et stockées telles
+				// quelles. La comparaison string fonctionne pour le format ISO.
+				$t_s_norm = strlen( $t_s ) === 5 ? $t_s . ':00' : $t_s;
+				$t_e_norm = strlen( $t_e ) === 5 ? $t_e . ':00' : $t_e;
+				if ( $t_e_norm <= $t_s_norm ) {
 					wp_send_json_error( __( 'L\'heure de fin doit être postérieure à l\'heure de début.', 'ws-scheduler' ) );
 					return;
 				}
-				$payload['date_start']   = gmdate( 'Y-m-d H:i:s', $ts_start );
-				$payload['date_end']     = gmdate( 'Y-m-d H:i:s', $ts_end );
+				$payload['date_start']   = $d . ' ' . $t_s_norm;
+				$payload['date_end']     = $d . ' ' . $t_e_norm;
 				$payload['is_recurring'] = 0;
 				$payload['recur_days']   = '';
 				$payload['time_start']   = null;
@@ -229,16 +232,22 @@ class WS_Scheduler_Ajax {
 					wp_send_json_error( __( 'Heures de début et de fin requises (format HH:MM).', 'ws-scheduler' ) );
 					return;
 				}
-				$ts_s = strtotime( '2000-01-01 ' . $t_s );
-				$ts_e = strtotime( '2000-01-01 ' . $t_e );
-				if ( $ts_e <= $ts_s ) {
+				// Normalisation HH:MM → HH:MM:SS sans conversion timezone.
+				// Une colonne MySQL TIME représente une heure locale du jour
+				// (et pas un timestamp absolu). Le passage par strtotime/gmdate
+				// décalait l'heure d'1h (2h en heure d'été) dès que la timezone
+				// PHP du serveur n'était pas UTC — bug observé en prod sur
+				// Hostinger/serveurs européens.
+				$t_s_norm = strlen( $t_s ) === 5 ? $t_s . ':00' : $t_s;
+				$t_e_norm = strlen( $t_e ) === 5 ? $t_e . ':00' : $t_e;
+				if ( $t_e_norm <= $t_s_norm ) {
 					wp_send_json_error( __( 'L\'heure de fin doit être postérieure à l\'heure de début.', 'ws-scheduler' ) );
 					return;
 				}
 				$payload['date_start']   = null;
 				$payload['date_end']     = null;
-				$payload['time_start']   = gmdate( 'H:i:s', $ts_s );
-				$payload['time_end']     = gmdate( 'H:i:s', $ts_e );
+				$payload['time_start']   = $t_s_norm;
+				$payload['time_end']     = $t_e_norm;
 				$payload['is_recurring'] = 1;
 				$payload['recur_days']   = implode( ',', $days );
 				break;

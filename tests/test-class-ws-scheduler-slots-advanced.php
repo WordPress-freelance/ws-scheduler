@@ -338,4 +338,139 @@ class Test_WS_Scheduler_Slots_Advanced extends TestCase {
             }
         }
     }
+
+    // ── Regression tests : timezone Europe/Paris (bug #4.0.3) ──────
+    //
+    // WordPress force PHP timezone à UTC dans wp-settings.php, mais le site
+    // peut être en Europe/Paris. Avant le fix 4.0.3, Slots utilisait strtotime()
+    // qui interprétait les TIME stockés en UTC, alors que $cursor utilisait
+    // wp_timezone (Europe/Paris) — décalage d'1h (2h en heure d'été), faisant
+    // apparaître des slots disponibles qui auraient dû être bloqués.
+
+    public function test_paris_timezone_recurring_unavail_blocks_correct_local_hours() {
+        // Simule WP en Paris, PHP en UTC (configuration WP standard).
+        $original_php_tz = date_default_timezone_get();
+        date_default_timezone_set( 'UTC' );
+        try {
+            \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'Europe/Paris' ] );
+            \WP_Mock::userFunction( 'get_option', [ 'return' => function( $k, $d = false ) {
+                $opts = [
+                    'ws_working_days'     => [ 1, 2, 3, 4, 5, 6, 7 ],
+                    'ws_max_booking_days' => 365,
+                    'ws_work_start'       => '09:00',
+                    'ws_work_end'         => '18:00',
+                    'ws_slot_duration'    => 30,
+                ];
+                return $opts[ $k ] ?? $d;
+            } ] );
+
+            // Mercredi 13:30 → 18:00 récurrent — heure locale Paris.
+            $tz   = new DateTimeZone( 'Europe/Paris' );
+            $next = new DateTime( 'next wednesday', $tz );
+            $next->modify( '+7 days' );
+            $date = $next->format( 'Y-m-d' );
+            $dow  = (int) $next->format( 'N' );
+
+            $this->routeRows( [], [
+                [
+                    'is_recurring' => 1,
+                    'recur_days'   => (string) $dow,
+                    'time_start'   => '13:30:00',
+                    'time_end'     => '18:00:00',
+                    'date_start'   => null,
+                    'date_end'     => null,
+                ],
+            ] );
+
+            $slots = WS_Scheduler_Slots::get_slots_for_date( $date );
+            // Avant 13:30 Paris : dispo
+            $this->assertContains( '09:00', $slots );
+            $this->assertContains( '13:00', $slots );
+            // À partir de 13:30 Paris : bloqué (et pas décalé en UTC)
+            $this->assertNotContains( '13:30', $slots );
+            $this->assertNotContains( '15:00', $slots );
+            $this->assertNotContains( '17:30', $slots );
+        } finally {
+            date_default_timezone_set( $original_php_tz );
+        }
+    }
+
+    public function test_paris_timezone_punctual_unavail_blocks_correct_local_hours() {
+        $original_php_tz = date_default_timezone_get();
+        date_default_timezone_set( 'UTC' );
+        try {
+            \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'Europe/Paris' ] );
+            \WP_Mock::userFunction( 'get_option', [ 'return' => function( $k, $d = false ) {
+                $opts = [
+                    'ws_working_days'     => [ 1, 2, 3, 4, 5, 6, 7 ],
+                    'ws_max_booking_days' => 365,
+                    'ws_work_start'       => '09:00',
+                    'ws_work_end'         => '18:00',
+                    'ws_slot_duration'    => 30,
+                ];
+                return $opts[ $k ] ?? $d;
+            } ] );
+
+            $tz   = new DateTimeZone( 'Europe/Paris' );
+            $next = new DateTime( 'next monday', $tz );
+            $next->modify( '+7 days' );
+            $date = $next->format( 'Y-m-d' );
+
+            $this->routeRows( [], [
+                [
+                    'is_recurring' => 0, 'recur_days' => '',
+                    'date_start'   => $date . ' 10:00:00', // heure locale Paris
+                    'date_end'     => $date . ' 11:30:00',
+                    'time_start'   => null, 'time_end' => null,
+                ],
+            ] );
+
+            $slots = WS_Scheduler_Slots::get_slots_for_date( $date );
+            $this->assertContains( '09:00', $slots );
+            $this->assertNotContains( '10:00', $slots );
+            $this->assertNotContains( '11:00', $slots );
+            $this->assertContains( '11:30', $slots );
+        } finally {
+            date_default_timezone_set( $original_php_tz );
+        }
+    }
+
+    public function test_paris_timezone_full_day_recurring_blocks_everything() {
+        $original_php_tz = date_default_timezone_get();
+        date_default_timezone_set( 'UTC' );
+        try {
+            \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'Europe/Paris' ] );
+            \WP_Mock::userFunction( 'get_option', [ 'return' => function( $k, $d = false ) {
+                $opts = [
+                    'ws_working_days'     => [ 1, 2, 3, 4, 5, 6, 7 ],
+                    'ws_max_booking_days' => 365,
+                    'ws_work_start'       => '09:00',
+                    'ws_work_end'         => '18:00',
+                    'ws_slot_duration'    => 30,
+                ];
+                return $opts[ $k ] ?? $d;
+            } ] );
+
+            $tz   = new DateTimeZone( 'Europe/Paris' );
+            $next = new DateTime( 'next wednesday', $tz );
+            $next->modify( '+7 days' );
+            $date = $next->format( 'Y-m-d' );
+            $dow  = (int) $next->format( 'N' );
+
+            $this->routeRows( [], [
+                [
+                    'is_recurring' => 1,
+                    'recur_days'   => (string) $dow,
+                    'time_start'   => '00:00:00',
+                    'time_end'     => '23:59:00',
+                    'date_start'   => null, 'date_end' => null,
+                ],
+            ] );
+
+            $slots = WS_Scheduler_Slots::get_slots_for_date( $date );
+            $this->assertEmpty( $slots );
+        } finally {
+            date_default_timezone_set( $original_php_tz );
+        }
+    }
 }
