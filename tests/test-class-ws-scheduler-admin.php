@@ -7,7 +7,7 @@ class Test_WS_Scheduler_Admin extends TestCase {
 
     public function setUp(): void {
         parent::setUp();
-        $this->admin = new WS_Scheduler_Admin( 'ws-scheduler', '4.0.1' );
+        $this->admin = new WS_Scheduler_Admin( 'ws-scheduler', '4.0.2' );
     }
     public function tearDown(): void { parent::tearDown(); }
 
@@ -76,7 +76,7 @@ class Test_WS_Scheduler_Admin extends TestCase {
 
     public function test_add_plugin_admin_menu_registers_main_page() {
         \WP_Mock::userFunction( 'add_menu_page',    [ 'times' => 1, 'return' => 'ws-scheduler' ] );
-        \WP_Mock::userFunction( 'add_submenu_page', [ 'times' => 4, 'return' => 'ws-scheduler' ] );
+        \WP_Mock::userFunction( 'add_submenu_page', [ 'times' => 3, 'return' => 'ws-scheduler' ] );
         $this->admin->add_plugin_admin_menu();
         $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
@@ -93,7 +93,7 @@ class Test_WS_Scheduler_Admin extends TestCase {
         $this->assertContains( 'ws-scheduler',          $slugs );
         $this->assertContains( 'ws-scheduler-unavail',  $slugs );
         $this->assertContains( 'ws-scheduler-settings', $slugs );
-        $this->assertContains( 'ws-scheduler-licence',  $slugs );
+        $this->assertNotContains( 'ws-scheduler-licence', $slugs );
     }
 
     // ── enqueue_styles ────────────────────────────────────────────────

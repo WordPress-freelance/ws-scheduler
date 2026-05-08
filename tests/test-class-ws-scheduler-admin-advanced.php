@@ -23,7 +23,7 @@ class Test_WS_Scheduler_Admin_Advanced extends TestCase {
 
     public function setUp(): void {
         parent::setUp();
-        $this->admin = new WS_Scheduler_Admin( 'ws-scheduler', '4.0.1' );
+        $this->admin = new WS_Scheduler_Admin( 'ws-scheduler', '4.0.2' );
         $_POST = [];
     }
 
@@ -198,7 +198,7 @@ class Test_WS_Scheduler_Admin_Advanced extends TestCase {
 
     // ── add_plugin_admin_menu ─────────────────────────────────────
 
-    public function test_add_plugin_admin_menu_creates_4_submenus_plus_top_level() {
+    public function test_add_plugin_admin_menu_creates_3_submenus_plus_top_level() {
         $top    = 0;
         $subs   = 0;
         \WP_Mock::userFunction( 'add_menu_page', [
@@ -209,7 +209,7 @@ class Test_WS_Scheduler_Admin_Advanced extends TestCase {
         ] );
         $this->admin->add_plugin_admin_menu();
         $this->assertEquals( 1, $top );
-        $this->assertEquals( 4, $subs );
+        $this->assertEquals( 3, $subs );
     }
 
     public function test_add_plugin_admin_menu_uses_manage_options_capability() {
@@ -223,6 +223,60 @@ class Test_WS_Scheduler_Admin_Advanced extends TestCase {
         \WP_Mock::userFunction( 'add_submenu_page', [ 'return' => 'sub' ] );
         $this->admin->add_plugin_admin_menu();
         $this->assertEquals( 'manage_options', $captured_cap );
+    }
+
+    // ── add_action_links (plugin_action_links_<basename>) ────────
+
+    public function test_add_action_links_prepends_settings_and_pro_links() {
+        \WP_Mock::userFunction( 'admin_url', [ 'return' => 'http://x/admin.php?page=ws-scheduler-settings' ] );
+        \WP_Mock::userFunction( 'esc_url',     [ 'return' => function( $u ) { return $u; } ] );
+        \WP_Mock::userFunction( 'esc_html__',  [ 'return' => function( $s ) { return $s; } ] );
+
+        $links = [ 'deactivate' => '<a href="#">Désactiver</a>' ];
+        $result = $this->admin->add_action_links( $links );
+
+        // Custom links viennent en premier
+        $keys = array_keys( $result );
+        $this->assertEquals( 'settings',   $keys[0] );
+        $this->assertEquals( 'pro',        $keys[1] );
+        $this->assertEquals( 'deactivate', $keys[2] );
+    }
+
+    public function test_add_action_links_settings_points_to_settings_page() {
+        \WP_Mock::userFunction( 'admin_url', [
+            'return' => function( $p ) { return 'http://x/' . $p; },
+        ] );
+        \WP_Mock::userFunction( 'esc_url',    [ 'return' => function( $u ) { return $u; } ] );
+        \WP_Mock::userFunction( 'esc_html__', [ 'return' => function( $s ) { return $s; } ] );
+
+        $result = $this->admin->add_action_links( [] );
+        $this->assertStringContainsString( 'page=ws-scheduler-settings', $result['settings'] );
+        $this->assertStringContainsString( 'Réglages', $result['settings'] );
+    }
+
+    public function test_add_action_links_pro_points_to_external_url() {
+        \WP_Mock::userFunction( 'admin_url',  [ 'return' => 'http://x/' ] );
+        \WP_Mock::userFunction( 'esc_url',    [ 'return' => function( $u ) { return $u; } ] );
+        \WP_Mock::userFunction( 'esc_html__', [ 'return' => function( $s ) { return $s; } ] );
+
+        $result = $this->admin->add_action_links( [] );
+        $this->assertStringContainsString( 'plugin.wordpress-freelance.com', $result['pro'] );
+        $this->assertStringContainsString( 'target="_blank"', $result['pro'] );
+        $this->assertStringContainsString( 'Version Pro', $result['pro'] );
+    }
+
+    public function test_add_action_links_preserves_existing_links() {
+        \WP_Mock::userFunction( 'admin_url',  [ 'return' => 'http://x/' ] );
+        \WP_Mock::userFunction( 'esc_url',    [ 'return' => function( $u ) { return $u; } ] );
+        \WP_Mock::userFunction( 'esc_html__', [ 'return' => function( $s ) { return $s; } ] );
+
+        $existing = [
+            'deactivate' => '<a href="#deactivate">Désactiver</a>',
+            'edit'       => '<a href="#edit">Modifier</a>',
+        ];
+        $result = $this->admin->add_action_links( $existing );
+        $this->assertEquals( '<a href="#deactivate">Désactiver</a>', $result['deactivate'] );
+        $this->assertEquals( '<a href="#edit">Modifier</a>',         $result['edit'] );
     }
 
     // ── render_* (smoke tests : on capture la sortie) ────────────

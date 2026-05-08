@@ -16,7 +16,7 @@ class WS_Scheduler {
 	protected $version;
 
 	public function __construct() {
-		$this->version     = defined( 'WS_SCHEDULER_VERSION' ) ? WS_SCHEDULER_VERSION : '4.0.1';
+		$this->version     = defined( 'WS_SCHEDULER_VERSION' ) ? WS_SCHEDULER_VERSION : '4.0.2';
 		$this->plugin_name = 'ws-scheduler';
 
 		$this->load_dependencies();
@@ -57,6 +57,7 @@ class WS_Scheduler {
 		$this->loader->add_filter( 'admin_body_class',      $plugin_admin, 'admin_body_class' );
 		$this->loader->add_action( 'admin_head',            $plugin_admin, 'admin_head_reset' );
 		$this->loader->add_action( 'admin_post_ws_scheduler_save_settings', $plugin_admin, 'save_settings' );
+		$this->loader->add_filter( 'plugin_action_links_' . WS_SCHEDULER_PLUGIN_BASENAME, $plugin_admin, 'add_action_links' );
 
 		$this->loader->add_action( 'wp_ajax_ws_update_appointment',   $plugin_ajax, 'update_appointment' );
 		$this->loader->add_action( 'wp_ajax_ws_delete_appointment',   $plugin_ajax, 'delete_appointment' );

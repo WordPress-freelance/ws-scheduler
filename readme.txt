@@ -4,7 +4,7 @@ Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.0.1
+Stable tag: 4.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -121,13 +121,19 @@ This plugin stores personal data submitted by visitors when they book an appoint
 
 == Screenshots ==
 
-1. Admin dashboard — appointment list with status filters and counters (upcoming, confirmed, pending, cancelled).
+1. Admin dashboard — appointment list with status filters and counters (upcoming, confirmed, pending, cancelled), and the in-dashboard installation help card.
 2. Unavailabilities manager — three input modes (full period, punctual slot, weekly recurring) and the list of active rules.
 3. Settings page — working days, opening hours, slot duration, notification email, button label, and the optional "Powered by" credit toggle (off by default).
 4. Front-end popup, step 1 — calendar with available, fully-booked, and closed dates clearly distinguished, plus the time slot picker for the selected day.
 5. Front-end popup, step 2 — booking form with a recap bar showing the chosen date and time.
 
 == Changelog ==
+
+= 4.0.2 =
+* Removed the dedicated "Licence Pro" admin sub-page entirely (Plugin Directory guideline 11 — keep upsell prompts contextual, not as a top-level admin page).
+* Added "Settings | Pro version" links on the plugin list page via `plugin_action_links_<basename>` (the discreet, conventional location for upsell links).
+* Added an in-dashboard "How to install the booking button" help card with the shortcode and CSS class methods, side-by-side, copy-paste-ready. Open by default while there are no appointments yet, collapsible afterwards.
+* Fixed: parse error in the Licence Pro partial (unescaped apostrophes in single-quoted French translation strings) — moot since the page is removed, but identified by `php -l` audit.
 
 = 4.0.1 =
 * Added: WordPress personal data exporter and eraser hooks (Tools → Personal Data) — full GDPR compliance.
@@ -161,6 +167,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 * Security and ecosystem alignment audit.
 
 == Upgrade Notice ==
+
+= 4.0.2 =
+Removes the dedicated Licence Pro admin sub-page (replaced by a discreet "Pro version" link on the plugin list page) and adds an in-dashboard installation help card. Fixes a parse error in the now-removed partial. No database changes.
 
 = 4.0.1 =
 Adds GDPR personal data exporter/eraser, removes an admin-side notice-hiding rule that violated WordPress.org guideline 11, and ships full screenshots. No database changes.

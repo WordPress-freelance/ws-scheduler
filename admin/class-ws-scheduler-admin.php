@@ -24,7 +24,6 @@ class WS_Scheduler_Admin {
 			'toplevel_page_ws-scheduler',
 			'ws-scheduler_page_ws-scheduler-unavail',
 			'ws-scheduler_page_ws-scheduler-settings',
-			'ws-scheduler_page_ws-scheduler-licence',
 		);
 		if ( ! in_array( $hook_suffix, $allowed, true ) ) return;
 
@@ -54,7 +53,6 @@ class WS_Scheduler_Admin {
 			'toplevel_page_ws-scheduler',
 			'ws-scheduler_page_ws-scheduler-unavail',
 			'ws-scheduler_page_ws-scheduler-settings',
-			'ws-scheduler_page_ws-scheduler-licence',
 		);
 		if ( ! in_array( $hook_suffix, $allowed, true ) ) return;
 
@@ -113,7 +111,6 @@ class WS_Scheduler_Admin {
 		add_submenu_page( 'ws-scheduler', __( 'Tableau de bord', 'ws-scheduler' ), __( 'Tableau de bord', 'ws-scheduler' ), 'manage_options', 'ws-scheduler',          array( $this, 'render_dashboard' ) );
 		add_submenu_page( 'ws-scheduler', __( 'Indisponibilités', 'ws-scheduler' ), __( 'Indisponibilités', 'ws-scheduler' ), 'manage_options', 'ws-scheduler-unavail',   array( $this, 'render_unavail' ) );
 		add_submenu_page( 'ws-scheduler', __( 'Réglages', 'ws-scheduler' ), __( 'Réglages', 'ws-scheduler' ), 'manage_options', 'ws-scheduler-settings',  array( $this, 'render_settings' ) );
-		add_submenu_page( 'ws-scheduler', __( 'Licence Pro', 'ws-scheduler' ), __( 'Licence Pro', 'ws-scheduler' ), 'manage_options', 'ws-scheduler-licence',  array( $this, 'render_licence' ) );
 	}
 
 	public function render_dashboard() {
@@ -128,8 +125,22 @@ class WS_Scheduler_Admin {
 		include WS_SCHEDULER_PLUGIN_DIR . 'admin/partials/ws-scheduler-admin-settings.php';
 	}
 
-	public function render_licence() {
-		include WS_SCHEDULER_PLUGIN_DIR . 'admin/partials/ws-scheduler-admin-licence.php';
+	/**
+	 * plugin_action_links — affiche "Settings | Version Pro" sur la ligne du
+	 * plugin dans la liste des extensions.
+	 *
+	 * @param  array $links Liens existants WordPress (Désactiver, etc.)
+	 * @return array
+	 */
+	public function add_action_links( $links ) {
+		$settings = '<a href="' . esc_url( admin_url( 'admin.php?page=ws-scheduler-settings' ) ) . '">'
+		          . esc_html__( 'Réglages', 'ws-scheduler' ) . '</a>';
+
+		$pro = '<a href="https://plugin.wordpress-freelance.com/ws-scheduler-pro/" target="_blank" rel="noopener" style="color:#7C5CBF;font-weight:600;">'
+		     . esc_html__( 'Version Pro', 'ws-scheduler' ) . '</a>';
+
+		// Préfixe les liens custom avant les liens natifs
+		return array_merge( array( 'settings' => $settings, 'pro' => $pro ), $links );
 	}
 
 	public function save_settings() {

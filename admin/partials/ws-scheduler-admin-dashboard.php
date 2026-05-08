@@ -94,5 +94,68 @@ $count_cancelled = WS_Scheduler_DB::count_by_status( 'cancelled' );
           </table>
         <?php endif; ?>
       </div>
+
+      <!-- Carte d'aide installation : visible en permanence, repliable -->
+      <details class="ws-card ws-help-card" <?php echo empty( $appointments ) ? 'open' : ''; ?>>
+        <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;font-family:'Lora',Georgia,serif;font-size:18px;font-weight:600;color:#F0EDE8;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A899D4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <?php esc_html_e( 'Comment afficher le bouton de réservation sur votre site', 'ws-scheduler' ); ?>
+          <span style="margin-left:auto;font-size:12px;font-weight:400;color:#9590A8;font-family:Inter,sans-serif;"><?php esc_html_e( 'cliquer pour replier/déplier', 'ws-scheduler' ); ?></span>
+        </summary>
+
+        <div style="margin-top:18px;color:#C4BFDA;line-height:1.65;font-size:13px;">
+
+          <p style="margin:0 0 16px 0;color:#9590A8;">
+            <?php esc_html_e( 'Vous avez deux méthodes pour placer le bouton qui ouvrira la popup de réservation. Choisissez celle qui correspond le mieux à votre site.', 'ws-scheduler' ); ?>
+          </p>
+
+          <!-- Méthode 1 : shortcode -->
+          <div style="background:#221D32;border:1px solid #2E2B38;border-radius:10px;padding:16px 18px;margin-bottom:14px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+              <span style="background:#7C5CBF;color:#F0EDE8;font-size:11px;font-weight:600;padding:3px 8px;border-radius:10px;letter-spacing:.04em;"><?php esc_html_e( 'MÉTHODE 1', 'ws-scheduler' ); ?></span>
+              <strong style="color:#F0EDE8;font-size:14px;"><?php esc_html_e( 'Shortcode', 'ws-scheduler' ); ?></strong>
+            </div>
+            <p style="margin:0 0 10px 0;">
+              <?php esc_html_e( 'Collez ce shortcode dans n\'importe quelle page, article ou widget texte :', 'ws-scheduler' ); ?>
+            </p>
+            <code style="display:block;background:#0E0C15;border:1px solid #2E2B38;border-radius:6px;padding:10px 14px;color:#A899D4;font-family:'Courier New',monospace;font-size:13px;margin:0 0 10px 0;user-select:all;">[ws_booking_button]</code>
+            <p style="margin:0 0 8px 0;font-size:12px;color:#9590A8;">
+              <?php esc_html_e( 'Pour personnaliser le libellé du bouton :', 'ws-scheduler' ); ?>
+            </p>
+            <code style="display:block;background:#0E0C15;border:1px solid #2E2B38;border-radius:6px;padding:10px 14px;color:#A899D4;font-family:'Courier New',monospace;font-size:13px;user-select:all;">[ws_booking_button label="Réserver une démo"]</code>
+          </div>
+
+          <!-- Méthode 2 : classe CSS -->
+          <div style="background:#221D32;border:1px solid #2E2B38;border-radius:10px;padding:16px 18px;margin-bottom:14px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+              <span style="background:#7C5CBF;color:#F0EDE8;font-size:11px;font-weight:600;padding:3px 8px;border-radius:10px;letter-spacing:.04em;"><?php esc_html_e( 'MÉTHODE 2', 'ws-scheduler' ); ?></span>
+              <strong style="color:#F0EDE8;font-size:14px;"><?php esc_html_e( 'Classe CSS sur un bouton existant', 'ws-scheduler' ); ?></strong>
+            </div>
+            <p style="margin:0 0 10px 0;">
+              <?php esc_html_e( 'Pratique si vous utilisez Avada, Elementor, Divi, ou un constructeur de header : ajoutez simplement la classe CSS', 'ws-scheduler' ); ?>
+              <code style="background:#0E0C15;border:1px solid #2E2B38;padding:1px 6px;border-radius:3px;color:#A899D4;font-size:12px;">ws-book-btn</code>
+              <?php esc_html_e( 'à n\'importe quel bouton ou lien existant. Le clic ouvrira automatiquement la popup.', 'ws-scheduler' ); ?>
+            </p>
+            <p style="margin:0;font-size:12px;color:#9590A8;">
+              <?php esc_html_e( 'Exemple — dans un éditeur de bouton de votre constructeur de page, dans le champ « Classe CSS » ou « Class », saisissez simplement :', 'ws-scheduler' ); ?>
+              <code style="background:#0E0C15;border:1px solid #2E2B38;padding:1px 6px;border-radius:3px;color:#A899D4;font-family:'Courier New',monospace;font-size:12px;user-select:all;">ws-book-btn</code>
+            </p>
+          </div>
+
+          <!-- Test -->
+          <div style="background:linear-gradient(135deg,#1A1724 0%,#221D32 100%);border:1px solid #4A4260;border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A899D4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+            <div style="flex:1;min-width:200px;">
+              <strong style="color:#F0EDE8;display:block;margin-bottom:2px;font-size:13px;"><?php esc_html_e( 'Une fois placé, testez en navigation privée', 'ws-scheduler' ); ?></strong>
+              <span style="color:#9590A8;font-size:12px;"><?php esc_html_e( 'Pour vérifier que la popup s\'ouvre côté visiteur sans cookies de connexion admin.', 'ws-scheduler' ); ?></span>
+            </div>
+            <a href="<?php echo esc_url( home_url() ); ?>" target="_blank" rel="noopener" style="background:#221D32;border:1px solid #4A4260;color:#A899D4;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:500;white-space:nowrap;">
+              <?php esc_html_e( 'Ouvrir le site →', 'ws-scheduler' ); ?>
+            </a>
+          </div>
+
+        </div>
+      </details>
+
     </main>
 </div>

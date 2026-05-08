@@ -29,10 +29,5 @@ $current_page = isset( $_GET['page'] ) ? $_GET['page'] : 'ws-scheduler';
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
       Réglages
     </a>
-    <a class="ws-menu-item <?php echo $current_page === 'ws-scheduler-licence' ? 'active' : ''; ?>"
-       href="<?php echo esc_url( admin_url( 'admin.php?page=ws-scheduler-licence' ) ); ?>">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Licence Pro
-    </a>
   </nav>
 </aside>
