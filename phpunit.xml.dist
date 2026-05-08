@@ -20,6 +20,8 @@
             <directory>tests/</directory>
             <directory>languages/</directory>
             <directory>vendor/</directory>
+            <directory suffix=".php">admin/partials</directory>
+            <directory suffix=".php">public/partials</directory>
         </exclude>
         <report>
             <clover outputFile="coverage/clover.xml"/>
