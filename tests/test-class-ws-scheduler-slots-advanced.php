@@ -473,4 +473,158 @@ class Test_WS_Scheduler_Slots_Advanced extends TestCase {
             date_default_timezone_set( $original_php_tz );
         }
     }
+
+    /**
+     * Matrice multi-timezone : le fix doit donner le même résultat sur
+     * toutes les timezones, qu'elles soient avec DST, sans DST, ou à offset
+     * non-entier (Kolkata = UTC+5:30, Adelaide = UTC+9:30, etc).
+     *
+     * Scénario commun : indispo récurrente 13:30 → 18:00, work hours
+     * 09:00–18:00, slots de 30 min. Le résultat doit toujours être :
+     *   - 09:00 à 13:00 : disponibles
+     *   - 13:30 à 17:30 : bloqués
+     *
+     * Régressionne quiconque réintroduirait strtotime() à la place de
+     * DateTimeZone-aware parsing.
+     *
+     * @dataProvider timezoneProvider
+     */
+    public function test_unavail_recurring_works_in_any_timezone( $tz_string ) {
+        $original_php_tz = date_default_timezone_get();
+        date_default_timezone_set( 'UTC' );
+        try {
+            \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => $tz_string ] );
+            \WP_Mock::userFunction( 'get_option', [ 'return' => function( $k, $d = false ) {
+                $opts = [
+                    'ws_working_days'     => [ 1, 2, 3, 4, 5, 6, 7 ],
+                    'ws_max_booking_days' => 365,
+                    'ws_work_start'       => '09:00',
+                    'ws_work_end'         => '18:00',
+                    'ws_slot_duration'    => 30,
+                ];
+                return $opts[ $k ] ?? $d;
+            } ] );
+
+            $tz   = new DateTimeZone( $tz_string );
+            $next = new DateTime( 'next wednesday', $tz );
+            $next->modify( '+7 days' );
+            $date = $next->format( 'Y-m-d' );
+            $dow  = (int) $next->format( 'N' );
+
+            $this->routeRows( [], [
+                [
+                    'is_recurring' => 1,
+                    'recur_days'   => (string) $dow,
+                    'time_start'   => '13:30:00',
+                    'time_end'     => '18:00:00',
+                    'date_start'   => null, 'date_end' => null,
+                ],
+            ] );
+
+            $slots = WS_Scheduler_Slots::get_slots_for_date( $date );
+            $this->assertContains(    '09:00', $slots, "[$tz_string] 09:00 should be available" );
+            $this->assertContains(    '13:00', $slots, "[$tz_string] 13:00 should be available" );
+            $this->assertNotContains( '13:30', $slots, "[$tz_string] 13:30 should be BLOCKED" );
+            $this->assertNotContains( '15:00', $slots, "[$tz_string] 15:00 should be BLOCKED" );
+            $this->assertNotContains( '17:30', $slots, "[$tz_string] 17:30 should be BLOCKED" );
+        } finally {
+            date_default_timezone_set( $original_php_tz );
+        }
+    }
+
+    public function timezoneProvider(): array {
+        return [
+            'UTC'                  => [ 'UTC' ],
+            'Europe/Paris CET/DST' => [ 'Europe/Paris' ],       // UTC+1/+2 hémisphère N
+            'Europe/London BST'    => [ 'Europe/London' ],      // UTC+0/+1
+            'America/New_York'     => [ 'America/New_York' ],   // UTC-5/-4 ouest
+            'America/Los_Angeles'  => [ 'America/Los_Angeles' ],// UTC-8/-7
+            'Asia/Tokyo'           => [ 'Asia/Tokyo' ],         // UTC+9, jamais DST
+            'Asia/Kolkata'         => [ 'Asia/Kolkata' ],       // UTC+5:30 (offset demi-heure)
+            'Asia/Kathmandu'       => [ 'Asia/Kathmandu' ],     // UTC+5:45 (offset 3/4 d'heure !)
+            'Australia/Adelaide'   => [ 'Australia/Adelaide' ], // UTC+9:30/+10:30 (DST + demi-heure)
+            'Pacific/Auckland'     => [ 'Pacific/Auckland' ],   // UTC+12/+13 hémisphère S, DST inversée
+            'Pacific/Chatham'      => [ 'Pacific/Chatham' ],    // UTC+12:45/+13:45 (encore plus exotique)
+            'Africa/Casablanca'    => [ 'Africa/Casablanca' ],  // DST avec règles spécifiques
+        ];
+    }
+
+    /**
+     * Mêmes timezones, mais avec une indispo PONCTUELLE (date_start/date_end
+     * en datetime complet, pas time_start/time_end TIME).
+     *
+     * @dataProvider timezoneProvider
+     */
+    public function test_unavail_punctual_works_in_any_timezone( $tz_string ) {
+        $original_php_tz = date_default_timezone_get();
+        date_default_timezone_set( 'UTC' );
+        try {
+            \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => $tz_string ] );
+            \WP_Mock::userFunction( 'get_option', [ 'return' => function( $k, $d = false ) {
+                $opts = [
+                    'ws_working_days'     => [ 1, 2, 3, 4, 5, 6, 7 ],
+                    'ws_max_booking_days' => 365,
+                    'ws_work_start'       => '09:00',
+                    'ws_work_end'         => '18:00',
+                    'ws_slot_duration'    => 30,
+                ];
+                return $opts[ $k ] ?? $d;
+            } ] );
+
+            $tz   = new DateTimeZone( $tz_string );
+            $next = new DateTime( 'next monday', $tz );
+            $next->modify( '+7 days' );
+            $date = $next->format( 'Y-m-d' );
+
+            $this->routeRows( [], [
+                [
+                    'is_recurring' => 0, 'recur_days' => '',
+                    'date_start'   => $date . ' 10:00:00',
+                    'date_end'     => $date . ' 11:30:00',
+                    'time_start'   => null, 'time_end' => null,
+                ],
+            ] );
+
+            $slots = WS_Scheduler_Slots::get_slots_for_date( $date );
+            $this->assertContains(    '09:00', $slots, "[$tz_string] 09:00 dispo" );
+            $this->assertNotContains( '10:00', $slots, "[$tz_string] 10:00 bloqué" );
+            $this->assertNotContains( '11:00', $slots, "[$tz_string] 11:00 bloqué" );
+            $this->assertContains(    '11:30', $slots, "[$tz_string] 11:30 dispo (fin de l'indispo)" );
+        } finally {
+            date_default_timezone_set( $original_php_tz );
+        }
+    }
+
+    /**
+     * Cas limite particulier : la transition heure d'été. Aux dates de
+     * passage (ex: dernier dimanche de mars en Paris), une heure n'existe
+     * pas (saut 02:00 → 03:00). Vérifie que get_slots_for_date ne plante
+     * pas sur ces dates.
+     */
+    public function test_dst_transition_dates_do_not_crash() {
+        $original_php_tz = date_default_timezone_get();
+        date_default_timezone_set( 'UTC' );
+        try {
+            \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'Europe/Paris' ] );
+            \WP_Mock::userFunction( 'get_option', [ 'return' => function( $k, $d = false ) {
+                $opts = [
+                    'ws_working_days'     => [ 1, 2, 3, 4, 5, 6, 7 ],
+                    'ws_max_booking_days' => 9999,
+                    'ws_work_start'       => '01:00', // englobe la transition
+                    'ws_work_end'         => '06:00',
+                    'ws_slot_duration'    => 30,
+                ];
+                return $opts[ $k ] ?? $d;
+            } ] );
+
+            // Dernier dimanche de mars 2030 (transition été à venir)
+            $this->routeRows( [], [] );
+            $slots = WS_Scheduler_Slots::get_slots_for_date( '2030-03-31' );
+            // On ne fait pas d'assertion sur le contenu exact (DST handling
+            // est ambigu par nature), juste qu'on n'a pas de fatal.
+            $this->assertIsArray( $slots );
+        } finally {
+            date_default_timezone_set( $original_php_tz );
+        }
+    }
 }
