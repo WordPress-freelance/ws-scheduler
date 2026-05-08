@@ -1,0 +1,22 @@
+name: Deploy to WordPress.org
+
+on:
+  workflow_dispatch:
+    inputs:
+      plugin_slug:
+        description: 'Plugin slug WordPress.org (ex: ws-scheduler)'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to WordPress.org
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.WORDPRESS_ORG_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.WORDPRESS_ORG_PASSWORD }}
+          SLUG: ${{ github.event.inputs.plugin_slug }}
