@@ -9,3 +9,12 @@ composer.lock
 coverage/
 build/
 node_modules/
+.github/
+
+# Screenshots assets (generated from SVG)
+assets/*.png
+assets/*.jpg
+
+# SVN build
+svn-repo/
+svn-deploy/
