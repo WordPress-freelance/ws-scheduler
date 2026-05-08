@@ -78,6 +78,7 @@ class Test_WS_Scheduler_Admin extends TestCase {
         \WP_Mock::userFunction( 'add_menu_page',    [ 'times' => 1, 'return' => 'ws-scheduler' ] );
         \WP_Mock::userFunction( 'add_submenu_page', [ 'times' => 4, 'return' => 'ws-scheduler' ] );
         $this->admin->add_plugin_admin_menu();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_add_plugin_admin_menu_registers_correct_subpages() {
@@ -101,12 +102,14 @@ class Test_WS_Scheduler_Admin extends TestCase {
         \WP_Mock::userFunction( 'wp_enqueue_style', [ 'times' => 0 ] );
         \WP_Mock::userFunction( 'apply_filters',    [ 'return' => true ] );
         $this->admin->enqueue_styles( 'edit.php' );
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_enqueue_styles_loads_on_allowed_hook() {
         \WP_Mock::userFunction( 'apply_filters', [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_enqueue_style', [ 'times' => 2 ] ); // fonts + plugin css
         $this->admin->enqueue_styles( 'toplevel_page_ws-scheduler' );
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     // ── enqueue_scripts ───────────────────────────────────────────────
@@ -117,11 +120,13 @@ class Test_WS_Scheduler_Admin extends TestCase {
         \WP_Mock::userFunction( 'wp_create_nonce',    [ 'return' => 'nonce' ] );
         \WP_Mock::userFunction( 'admin_url',          [ 'return' => 'http://example.com/wp-admin/admin-ajax.php' ] );
         $this->admin->enqueue_scripts( 'toplevel_page_ws-scheduler' );
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_enqueue_scripts_skips_on_unknown_hook() {
         \WP_Mock::userFunction( 'wp_enqueue_script',  [ 'times' => 0 ] );
         \WP_Mock::userFunction( 'wp_localize_script', [ 'times' => 0 ] );
         $this->admin->enqueue_scripts( 'edit.php' );
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 }

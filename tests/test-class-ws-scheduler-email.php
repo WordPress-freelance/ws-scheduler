@@ -108,6 +108,7 @@ class Test_WS_Scheduler_Email extends TestCase {
     public function test_send_calls_wp_mail() {
         \WP_Mock::userFunction( 'wp_mail', [ 'times' => 1, 'return' => true ] );
         WS_Scheduler_Email::send( 'test@example.com', 'Subject', '<p>HTML</p>' );
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_send_passes_html_content_type_header() {
@@ -127,11 +128,13 @@ class Test_WS_Scheduler_Email extends TestCase {
         $this->mockBaseOptions();
         \WP_Mock::userFunction( 'wp_mail', [ 'times' => 1, 'return' => true ] );
         WS_Scheduler_Email::send_client_confirmation( $this->appt() );
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_send_client_cancellation_calls_wp_mail() {
         $this->mockBaseOptions();
         \WP_Mock::userFunction( 'wp_mail', [ 'times' => 1, 'return' => true ] );
         WS_Scheduler_Email::send_client_cancellation( $this->appt() );
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 }

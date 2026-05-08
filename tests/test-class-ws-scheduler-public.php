@@ -17,6 +17,7 @@ class Test_WS_Scheduler_Public extends TestCase {
     public function test_enqueue_styles_calls_wp_enqueue_style() {
         \WP_Mock::userFunction( 'wp_enqueue_style', [ 'times' => 1 ] );
         $this->public->enqueue_styles();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_enqueue_scripts_registers_and_enqueues_handle() {
@@ -28,6 +29,7 @@ class Test_WS_Scheduler_Public extends TestCase {
         \WP_Mock::userFunction( 'admin_url',            [ 'return' => 'http://example.com/wp-admin/admin-ajax.php' ] );
         \WP_Mock::userFunction( 'get_option',           [ 'return' => 90 ] );
         $this->public->enqueue_scripts();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_enqueue_scripts_localizes_ajax_url_and_nonce() {

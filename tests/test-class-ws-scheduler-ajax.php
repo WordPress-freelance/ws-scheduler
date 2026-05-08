@@ -27,6 +27,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 0 ] );
         $this->ajax->get_available_slots();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_get_available_slots_rejects_empty_date() {
@@ -34,15 +35,21 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 0 ] );
         $this->ajax->get_available_slots();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_get_available_slots_accepts_valid_date() {
         $_POST['date'] = '2020-01-15'; // date passée → slots vides mais pas d'erreur
         \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'UTC' ] );
-        \WP_Mock::userFunction( 'get_option', [ 'return' => false ] );
+        // get_option doit retourner des valeurs valides (array pour ws_working_days)
+        // sinon in_array($dow, false) lève TypeError sur PHP 8.x
+        \WP_Mock::userFunction( 'get_option', [
+            'return' => function( $k, $d = false ) { return $d; },
+        ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 0 ] );
         $this->ajax->get_available_slots();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     // ── get_month_slots ───────────────────────────────────────────────
@@ -52,6 +59,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 0 ] );
         $this->ajax->get_month_slots();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_get_month_slots_rejects_month_thirteen() {
@@ -59,6 +67,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 0 ] );
         $this->ajax->get_month_slots();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_get_month_slots_accepts_valid_month() {
@@ -68,6 +77,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 0 ] );
         $this->ajax->get_month_slots();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     // ── book_appointment ──────────────────────────────────────────────
@@ -78,6 +88,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 0 ] );
         $this->ajax->book_appointment();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_book_appointment_rejects_invalid_email() {
@@ -86,6 +97,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 0 ] );
         $this->ajax->book_appointment();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_book_appointment_rejects_invalid_slot_format() {
@@ -94,6 +106,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 0 ] );
         $this->ajax->book_appointment();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     // ── update_appointment ────────────────────────────────────────────
@@ -104,6 +117,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',   [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_error', [ 'times' => 1 ] );
         $this->ajax->update_appointment();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_update_appointment_rejects_zero_id() {
@@ -112,6 +126,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',   [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_error', [ 'times' => 1 ] );
         $this->ajax->update_appointment();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_update_appointment_accepts_status_confirmed() {
@@ -121,6 +136,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 0 ] );
         $this->ajax->update_appointment();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_update_appointment_accepts_status_pending() {
@@ -130,6 +146,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 1 ] );
         \WP_Mock::userFunction( 'wp_send_json_error',   [ 'times' => 0 ] );
         $this->ajax->update_appointment();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     // ── delete_appointment ────────────────────────────────────────────
@@ -140,6 +157,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',   [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_error', [ 'times' => 1 ] );
         $this->ajax->delete_appointment();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_delete_appointment_accepts_valid_id() {
@@ -148,6 +166,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',     [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 1 ] );
         $this->ajax->delete_appointment();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     // ── add_unavailability ────────────────────────────────────────────
@@ -158,6 +177,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',   [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_error', [ 'times' => 1 ] );
         $this->ajax->add_unavailability();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_add_unavailability_period_full_requires_dates() {
@@ -166,6 +186,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',   [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_error', [ 'times' => 1 ] );
         $this->ajax->add_unavailability();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_add_unavailability_period_full_rejects_inverted_dates() {
@@ -174,6 +195,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',   [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_error', [ 'times' => 1 ] );
         $this->ajax->add_unavailability();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_add_unavailability_period_full_accepts_same_day() {
@@ -182,6 +204,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',     [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 1 ] );
         $this->ajax->add_unavailability();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_add_unavailability_recurring_requires_days() {
@@ -190,6 +213,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',   [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_error', [ 'times' => 1 ] );
         $this->ajax->add_unavailability();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_add_unavailability_recurring_rejects_inverted_times() {
@@ -198,6 +222,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',   [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_error', [ 'times' => 1 ] );
         $this->ajax->add_unavailability();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_add_unavailability_recurring_accepts_valid_payload() {
@@ -206,6 +231,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',     [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 1 ] );
         $this->ajax->add_unavailability();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     // ── delete_unavailability ─────────────────────────────────────────
@@ -216,6 +242,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',   [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_error', [ 'times' => 1 ] );
         $this->ajax->delete_unavailability();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 
     public function test_delete_unavailability_accepts_valid_id() {
@@ -224,5 +251,6 @@ class Test_WS_Scheduler_Ajax extends TestCase {
         \WP_Mock::userFunction( 'current_user_can',     [ 'return' => true ] );
         \WP_Mock::userFunction( 'wp_send_json_success', [ 'times' => 1 ] );
         $this->ajax->delete_unavailability();
+        $this->assertTrue( true ); // WP_Mock times assertions verified in tearDown
     }
 }
