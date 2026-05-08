@@ -104,8 +104,7 @@ class Test_WS_Scheduler_Slots_Advanced extends TestCase {
     public function test_get_slots_excludes_booked_slot_exact_match() {
         $this->mockOptions();
         $date = $this->futureDate();
-        $this->routeRows(
-            booked: [
+        $this->routeRows( [
                 [ 'slot_start' => $date . ' 10:00:00', 'slot_end' => $date . ' 10:30:00' ],
             ]
         );
@@ -120,7 +119,7 @@ class Test_WS_Scheduler_Slots_Advanced extends TestCase {
         $this->mockOptions();
         $date = $this->futureDate();
         // Booking de 09:45 à 10:15 : chevauche 09:30 et 10:00
-        $this->routeRows( booked: [
+        $this->routeRows( [
             [ 'slot_start' => $date . ' 09:45:00', 'slot_end' => $date . ' 10:15:00' ],
         ] );
         $slots = WS_Scheduler_Slots::get_slots_for_date( $date );
@@ -133,7 +132,7 @@ class Test_WS_Scheduler_Slots_Advanced extends TestCase {
     public function test_get_slots_excludes_multiple_booked() {
         $this->mockOptions();
         $date = $this->futureDate();
-        $this->routeRows( booked: [
+        $this->routeRows( [
             [ 'slot_start' => $date . ' 09:00:00', 'slot_end' => $date . ' 09:30:00' ],
             [ 'slot_start' => $date . ' 11:00:00', 'slot_end' => $date . ' 11:30:00' ],
         ] );
@@ -150,7 +149,7 @@ class Test_WS_Scheduler_Slots_Advanced extends TestCase {
         $this->mockOptions();
         $date = $this->futureDate();
         // Indispo ponctuelle de 10:00 à 11:30
-        $this->routeRows( unavails: [
+        $this->routeRows( [], [
             [
                 'is_recurring' => 0,
                 'date_start'   => $date . ' 10:00:00',
@@ -173,7 +172,7 @@ class Test_WS_Scheduler_Slots_Advanced extends TestCase {
         $this->mockOptions();
         $date = $this->futureDate();
         // Row corrompu : pas de date_start. Ne doit pas crasher, juste continue.
-        $this->routeRows( unavails: [
+        $this->routeRows( [], [
             [
                 'is_recurring' => 0,
                 'date_start'   => '',
@@ -195,7 +194,7 @@ class Test_WS_Scheduler_Slots_Advanced extends TestCase {
         $date = $this->futureDate();
         $dow  = (int) ( new DateTime( $date, $tz ) )->format( 'N' );
 
-        $this->routeRows( unavails: [
+        $this->routeRows( [], [
             [
                 'is_recurring' => 1,
                 'recur_days'   => (string) $dow, // matche le DOW de la date
@@ -219,7 +218,7 @@ class Test_WS_Scheduler_Slots_Advanced extends TestCase {
         // recur_days = un DOW DIFFÉRENT
         $other_dow = ( $dow % 7 ) + 1;
 
-        $this->routeRows( unavails: [
+        $this->routeRows( [], [
             [
                 'is_recurring' => 1,
                 'recur_days'   => (string) $other_dow,
@@ -239,7 +238,7 @@ class Test_WS_Scheduler_Slots_Advanced extends TestCase {
         $date = $this->futureDate();
         $dow  = (int) ( new DateTime( $date, $tz ) )->format( 'N' );
 
-        $this->routeRows( unavails: [
+        $this->routeRows( [], [
             [
                 'is_recurring' => 1,
                 'recur_days'   => (string) $dow,
