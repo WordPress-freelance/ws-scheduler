@@ -1,50 +1,37 @@
-# WS Scheduler
+# WS Scheduler — WordPress Appointment Booking Plugin
 
-Système de prise de rendez-vous complet pour WordPress avec popup calendrier, formulaire et emails automatiques.
+**The simplest way to let clients book appointments on your WordPress site.**
 
-## Features
+Perfect for consultants, therapists, freelancers, coaches, and service providers.
 
-- Popup calendrier responsive
-- Formulaire de réservation configuré
-- Emails de confirmation et annulation automatiques
-- Gestion des heures travaillées et jours
-- Indisponibilités (période complète, créneau ponctuel, récurrence hebdomadaire)
-- Durée de créneau personnalisable
+## ✨ Features
 
-## Installation
+### Frontend
+- 📅 **Responsive popup calendar** — Mobile-friendly date picker
+- ⏰ **Real-time slot availability** — Auto-managed scheduling
+- 📝 **Flexible contact form** — Customizable fields
+- 📧 **HTML email confirmations** — Professional, branded emails
+- 🌍 **Multilingual** — French, English, German, Spanish
 
-1. Activez le plugin via le tableau de bord WordPress
-2. Allez dans Réglages → WS Scheduler
-3. Configurez vos heures travaillées, durée de créneau, email admin
-4. Insérez le shortcode `[ws_booking_button]` dans une page ou un article
+### Backend
+- 📊 **Dashboard** — Manage all appointments
+- ⚙️ **Easy config** — Set hours, duration, max days
+- 🚫 **Unavailability** — Block periods, days, recurring times  
+- 🔔 **Notifications** — Email alerts for new bookings
+- 🛡️ **Secure** — Nonce verification, sanitized inputs
 
-## Développement
+## 🚀 Quick Start
 
-### Prérequis
+1. Install & activate
+2. Go to Settings → WS Scheduler
+3. Set working hours
+4. Add shortcode: `[ws_booking_button]`
+5. Done!
 
-- PHP 7.4+
-- Composer
+## 📦 Download
 
-### Setup local
+https://wordpress.org/plugins/ws-scheduler/
 
-```bash
-composer install
-```
+## 📄 License
 
-### Tests
-
-```bash
-# Tests sans coverage
-composer test
-
-# Tests avec coverage
-composer test:coverage
-```
-
-### Build
-
-Le plugin est automatiquement packagé à chaque push via GitHub Actions.
-
-## Licence
-
-GPL-2.0+
+GPLv2 or later

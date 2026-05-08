@@ -1,0 +1,24 @@
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7C5CBF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5A3FA3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" fill="#14121C"/>
+  <circle cx="128" cy="128" r="120" fill="url(#grad1)"/>
+  <g transform="translate(40, 40)">
+    <rect x="0" y="0" width="160" height="160" rx="12" fill="#F0EDE8" stroke="none"/>
+    <rect x="0" y="0" width="160" height="40" rx="12 12 0 0" fill="#7C5CBF"/>
+    <text x="80" y="28" font-family="Lora, serif" font-size="18" font-weight="600" fill="#F0EDE8" text-anchor="middle">May 2026</text>
+    <g font-family="Inter, sans-serif" font-size="10" fill="#14121C" text-anchor="middle">
+      <text x="12" y="58">S</text>
+      <text x="36" y="58">M</text>
+      <text x="60" y="58">T</text>
+      <text x="84" y="58">W</text>
+      <text x="108" y="58">T</text>
+      <text x="132" y="58">F</text>
+      <text x="156" y="58">S</text>
+    </g>
+  </g>
+</svg>
