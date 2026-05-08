@@ -87,13 +87,15 @@ class WS_Scheduler_Admin {
 	public function admin_head_reset() {
 		$screen = get_current_screen();
 		if ( ! $screen || strpos( $screen->id, 'ws-scheduler' ) === false ) return;
+		// Reset visuel limité à l'arrière-plan + marges WP. On NE masque PAS
+		// les notices d'admin (.notice / .updated) : ce serait cacher des
+		// alertes système importantes (sécurité, mises à jour WP) — guideline
+		// 11 du Plugin Directory ("should not hijack the admin dashboard").
 		echo '<style>
 		.ws-scheduler-page #wpwrap,
 		.ws-scheduler-page #wpcontent,
 		.ws-scheduler-page #wpbody-content { background: #14121C !important; }
 		.ws-scheduler-page .wrap { margin:0;padding:0;background:transparent;max-width:none; }
-		.ws-scheduler-page #wpbody-content > .notice,
-		.ws-scheduler-page #wpbody-content > .updated { display:none !important; }
 		</style>';
 	}
 

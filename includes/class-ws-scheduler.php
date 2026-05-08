@@ -16,7 +16,7 @@ class WS_Scheduler {
 	protected $version;
 
 	public function __construct() {
-		$this->version     = defined( 'WS_SCHEDULER_VERSION' ) ? WS_SCHEDULER_VERSION : '4.0.0';
+		$this->version     = defined( 'WS_SCHEDULER_VERSION' ) ? WS_SCHEDULER_VERSION : '4.0.1';
 		$this->plugin_name = 'ws-scheduler';
 
 		$this->load_dependencies();
@@ -34,6 +34,7 @@ class WS_Scheduler {
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'includes/class-ws-scheduler-slots.php';
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'includes/class-ws-scheduler-email.php';
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'includes/class-ws-scheduler-ajax.php';
+		require_once WS_SCHEDULER_PLUGIN_DIR . 'includes/class-ws-scheduler-privacy.php';
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'admin/class-ws-scheduler-admin.php';
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'public/class-ws-scheduler-public.php';
 
@@ -77,6 +78,13 @@ class WS_Scheduler {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_footer',          $plugin_public, 'render_popup_once' );
 		$this->loader->add_shortcode( 'ws_booking_button', $plugin_public, 'render_booking_button' );
+
+		// Privacy / RGPD : exporter, eraser et texte suggéré pour la politique
+		// de confidentialité du site. Le plugin stocke des PII (email, nom,
+		// téléphone, message) — guideline 7 du Plugin Directory.
+		$this->loader->add_filter( 'wp_privacy_personal_data_exporters', 'WS_Scheduler_Privacy', 'register_exporter' );
+		$this->loader->add_filter( 'wp_privacy_personal_data_erasers',   'WS_Scheduler_Privacy', 'register_eraser' );
+		$this->loader->add_action( 'admin_init',                          'WS_Scheduler_Privacy', 'add_privacy_policy_content' );
 	}
 
 	public function run() {

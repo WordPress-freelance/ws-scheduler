@@ -19,7 +19,7 @@ class Test_WS_Scheduler extends TestCase {
 
     public function test_plugin_version() {
         $this->mockAllHooks();
-        $this->assertEquals( '4.0.0', ( new WS_Scheduler() )->get_version() );
+        $this->assertEquals( '4.0.1', ( new WS_Scheduler() )->get_version() );
     }
 
     public function test_plugin_name() {

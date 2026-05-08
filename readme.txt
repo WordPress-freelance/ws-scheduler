@@ -2,8 +2,8 @@
 Contributors: webstrategy
 Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
-Tested up to: 6.7
-Stable tag: 4.0.0
+Tested up to: 6.8
+Stable tag: 4.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -50,7 +50,9 @@ WS Scheduler lets visitors book appointments directly on your site. A popup cale
 
 = Privacy =
 
-All appointment data is stored in your WordPress database. No data is transmitted to external servers. The booking JavaScript relies only on your site's own AJAX endpoint (`admin-ajax.php`).
+All appointment data is stored in your WordPress database (tables `wp_ws_appointments` and `wp_ws_unavailabilities`). No data is transmitted to external servers. The booking JavaScript relies only on your site's own AJAX endpoint (`admin-ajax.php`).
+
+The plugin registers WordPress's native personal data exporter and eraser (Tools → Personal Data → Export / Erase). Visitors can request the export or deletion of their booking data using their email address — WS Scheduler will return matching records. A suggested privacy policy paragraph is also added to **Settings → Privacy → Policy Guide**.
 
 If you use the Google Calendar / Meet integration (Pro), data is transmitted to Google's APIs under the OAuth2 flow you configure.
 
@@ -113,6 +115,12 @@ You can enable or disable it in **WS Scheduler → Settings → Credits**. It is
 
 == Changelog ==
 
+= 4.0.1 =
+* Added: WordPress personal data exporter and eraser hooks (Tools → Personal Data) — RGPD compliance for stored appointment PII (name, email, phone, message).
+* Added: Suggested privacy policy text registered via `wp_add_privacy_policy_content` (Settings → Privacy → Policy Guide).
+* Fixed: Removed `display:none` rule on `.notice` and `.updated` in admin pages — was hiding system-critical notices from other plugins / WP core (Plugin Directory guideline 11 compliance).
+* Tested up to WordPress 6.8.
+
 = 4.0.0 =
 * Removed dependency on ws-connector — the Free version is now fully standalone with no external API calls
 * Added opt-in display toggle for WebStrategy credit in Settings (off by default — guideline 10 compliance)
@@ -139,6 +147,9 @@ You can enable or disable it in **WS Scheduler → Settings → Credits**. It is
 * Security and ecosystem alignment audit
 
 == Upgrade Notice ==
+
+= 4.0.1 =
+Adds RGPD/privacy hooks and removes an admin notice-hiding rule that violated WordPress.org guideline 11. No database changes.
 
 = 4.0.0 =
 This version removes the ws-connector/hub_connector dependency. The plugin is now fully standalone. No data migration required — upgrade safely.

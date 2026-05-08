@@ -10,9 +10,11 @@ coverage/
 build/
 node_modules/
 
-# Screenshots assets (generated from SVG)
-assets/*.png
-assets/*.jpg
+# Screenshots PNG sont committed (deploy 10up les copie dans SVN /assets/)
+# Les SVG sources restent committed comme source de vérité.
+# Décommenter ci-dessous si on veut ignorer les PNG :
+# assets/*.png
+# assets/*.jpg
 
 # SVN build
 svn-repo/

@@ -14,7 +14,7 @@ if ( ! defined( 'WPINC' ) )          define( 'WPINC', 'wp-includes' );
 if ( ! defined( 'OBJECT' ) )         define( 'OBJECT', 'OBJECT' );
 if ( ! defined( 'WP_CONTENT_DIR' ) ) define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
 
-define( 'WS_SCHEDULER_VERSION',         '4.0.0' );
+define( 'WS_SCHEDULER_VERSION',         '4.0.1' );
 define( 'WS_SCHEDULER_PLUGIN_DIR',      ABSPATH );
 define( 'WS_SCHEDULER_PLUGIN_URL',      'http://example.com/wp-content/plugins/ws-scheduler/' );
 define( 'WS_SCHEDULER_PLUGIN_BASENAME', 'ws-scheduler/ws-scheduler.php' );
@@ -144,6 +144,7 @@ require_once ABSPATH . 'includes/class-ws-scheduler-email.php';
 require_once ABSPATH . 'includes/class-ws-scheduler-ajax.php';
 require_once ABSPATH . 'includes/class-ws-scheduler-activator.php';
 require_once ABSPATH . 'includes/class-ws-scheduler-deactivator.php';
+require_once ABSPATH . 'includes/class-ws-scheduler-privacy.php';
 require_once ABSPATH . 'includes/class-ws-scheduler.php';
 require_once ABSPATH . 'admin/class-ws-scheduler-admin.php';
 require_once ABSPATH . 'public/class-ws-scheduler-public.php';

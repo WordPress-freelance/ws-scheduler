@@ -69,6 +69,21 @@ class MockWpdb {
         return $this->return_var;
     }
 
+    public function get_col( $sql = null, $x = 0 ) {
+        $this->last_sql    = $sql;
+        $this->query_log[] = [ 'method' => 'get_col', 'sql' => $sql ];
+        // return_rows peut contenir soit des arrays (lignes), soit des scalars (colonne)
+        $out = [];
+        foreach ( (array) $this->return_rows as $r ) {
+            if ( is_array( $r ) ) {
+                $out[] = reset( $r );
+            } else {
+                $out[] = $r;
+            }
+        }
+        return $out;
+    }
+
     public function get_charset_collate() {
         return 'DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci';
     }
