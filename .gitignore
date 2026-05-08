@@ -17,3 +17,7 @@ assets/*.jpg
 # SVN build
 svn-repo/
 svn-deploy/
+.phpunit.result.cache
+composer-local.json
+composer-local.lock
+wp-admin/

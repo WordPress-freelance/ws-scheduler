@@ -39,6 +39,7 @@ class Test_WS_Scheduler_Slots extends TestCase {
     // ── get_slots_for_date ────────────────────────────────────────────
 
     public function test_invalid_date_returns_empty_array() {
+        $this->mockOptions(); // get_slots_for_date instancie DateTimeZone même pour une date invalide
         $result = WS_Scheduler_Slots::get_slots_for_date( 'not-a-date' );
         $this->assertIsArray( $result );
         $this->assertEmpty( $result );
@@ -69,7 +70,7 @@ class Test_WS_Scheduler_Slots extends TestCase {
     }
 
     public function test_get_slots_always_returns_array() {
-        // date invalide → []  sans mock nécessaire
+        $this->mockOptions();
         $result = WS_Scheduler_Slots::get_slots_for_date( '2020-01-01' );
         $this->assertIsArray( $result );
     }

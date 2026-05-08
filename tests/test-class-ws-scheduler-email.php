@@ -27,6 +27,9 @@ class Test_WS_Scheduler_Email extends TestCase {
             },
         ] );
         \WP_Mock::userFunction( 'wp_timezone_string', [ 'return' => 'UTC' ] );
+        // get_bloginfo est évalué AVANT get_option (PHP évalue tous les args avant l'appel),
+        // donc il doit exister sinon fatal "undefined function" en exécution isolée.
+        \WP_Mock::userFunction( 'get_bloginfo', [ 'return' => 'TestBlog' ] );
     }
 
     public function setUp(): void { parent::setUp(); }
