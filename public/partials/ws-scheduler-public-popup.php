@@ -1,5 +1,5 @@
 <?php defined( 'ABSPATH' ) || exit;
-$hide_logo = function_exists( 'ws_scheduler_pro_is_licensed' ) && ws_scheduler_pro_is_licensed() ? (bool) get_option( 'wsp_hide_logo', false ) : false;
+$show_powered = (bool) get_option( 'ws_show_powered_by', false );
 ?>
 <div id="ws-popup-overlay" class="ws-overlay" role="dialog" aria-modal="true" aria-labelledby="ws-popup-title">
   <div class="ws-popup" id="ws-popup">
@@ -136,7 +136,7 @@ $hide_logo = function_exists( 'ws_scheduler_pro_is_licensed' ) && ws_scheduler_p
       </div>
     </div>
 
-    <?php if ( ! $hide_logo ) : ?>
+    <?php if ( $show_powered ) : ?>
     <div class="ws-popup-footer">
       <a href="https://wordpress-freelance.com" target="_blank" rel="noopener" class="ws-powered">
         <?php printf( esc_html__( 'Propulsé par %s', 'ws-scheduler' ), '<strong>WebStrategy</strong>' ); ?>

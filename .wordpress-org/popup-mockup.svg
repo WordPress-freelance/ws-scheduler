@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="560" viewBox="0 0 880 560">
+  <title>WS Scheduler — Front-end popup (step 1 calendar + step 2 form)</title>
+  <defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+      .t1 { fill: #F0EDE8; }
+      .t2 { fill: #C4BFDA; }
+      .t3 { fill: #9590A8; }
+      .t4 { fill: #6E6888; }
+      .acc { fill: #7C5CBF; }
+      .acl { fill: #A899D4; }
+    </style>
+  </defs>
+
+  <!-- background overlay -->
+  <rect width="880" height="560" fill="#0A0812" opacity=".88"/>
+
+  <!-- ── POPUP 1 : Calendar ── -->
+  <rect x="40" y="24" width="360" height="510" rx="14" fill="#14121C" stroke="#2E2B38" stroke-width="1"/>
+  <!-- close -->
+  <rect x="372" y="34" width="22" height="22" rx="6" fill="#221D32" stroke="#4A4260" stroke-width=".5"/>
+  <text x="383" y="49" text-anchor="middle" font-size="11" fill="#9590A8">✕</text>
+
+  <!-- step badge -->
+  <rect x="60" y="44" width="68" height="16" rx="8" fill="#221D32" stroke="#4A4260" stroke-width=".5"/>
+  <text x="94" y="55" text-anchor="middle" font-size="8.5" fill="#9B8EC4" letter-spacing=".06em">ÉTAPE 1 / 2</text>
+
+  <!-- title -->
+  <text x="60" y="80" font-size="15" font-weight="600" class="t1">Choisissez votre créneau</text>
+  <text x="60" y="97" font-size="10.5" class="t3">Sélectionnez une date disponible, puis un horaire.</text>
+
+  <!-- nav -->
+  <rect x="60" y="108" width="24" height="24" rx="5" fill="#221D32" stroke="#4A4260" stroke-width=".5"/>
+  <text x="72" y="124" text-anchor="middle" font-size="13" fill="#9590A8">‹</text>
+  <text x="220" y="124" text-anchor="middle" font-size="13" font-weight="500" class="t1">Mai 2026</text>
+  <rect x="332" y="108" width="24" height="24" rx="5" fill="#221D32" stroke="#4A4260" stroke-width=".5"/>
+  <text x="344" y="124" text-anchor="middle" font-size="13" fill="#9590A8">›</text>
+
+  <!-- DOW headers -->
+  <text x="76" y="146" text-anchor="middle" font-size="8" class="t4">LUN</text>
+  <text x="124" y="146" text-anchor="middle" font-size="8" class="t4">MAR</text>
+  <text x="172" y="146" text-anchor="middle" font-size="8" class="t4">MER</text>
+  <text x="220" y="146" text-anchor="middle" font-size="8" class="t4">JEU</text>
+  <text x="268" y="146" text-anchor="middle" font-size="8" class="t4">VEN</text>
+  <text x="316" y="146" text-anchor="middle" font-size="8" class="t4">SAM</text>
+  <text x="364" y="146" text-anchor="middle" font-size="8" class="t4">DIM</text>
+
+  <!-- Row 1 (empty + closed) -->
+  <rect x="252" y="152" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="270" y="174" text-anchor="middle" font-size="10" fill="#4A4260">1</text>
+  <rect x="298" y="152" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="316" y="174" text-anchor="middle" font-size="10" fill="#4A4260">2</text>
+  <rect x="346" y="152" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="364" y="174" text-anchor="middle" font-size="10" fill="#4A4260">3</text>
+
+  <!-- Row 2 -->
+  <rect x="60" y="194" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="78" y="216" text-anchor="middle" font-size="10" fill="#4A4260">4</text>
+  <rect x="106" y="194" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="124" y="216" text-anchor="middle" font-size="10" fill="#4A4260">5</text>
+  <rect x="152" y="194" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="170" y="216" text-anchor="middle" font-size="10" fill="#4A4260">6</text>
+  <rect x="198" y="194" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="216" y="216" text-anchor="middle" font-size="10" fill="#4A4260">7</text>
+  <!-- available -->
+  <rect x="244" y="194" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="262" y="216" text-anchor="middle" font-size="10" class="t1">8</text>
+  <rect x="290" y="194" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="308" y="216" text-anchor="middle" font-size="10" fill="#4A4260">9</text>
+  <rect x="336" y="194" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="354" y="216" text-anchor="middle" font-size="10" fill="#4A4260">10</text>
+
+  <!-- Row 3 — selected 14 -->
+  <rect x="60" y="236" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="78" y="258" text-anchor="middle" font-size="10" class="t1">11</text>
+  <rect x="106" y="236" width="36" height="36" rx="6" fill="rgba(232,169,58,.07)" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="124" y="258" text-anchor="middle" font-size="10" fill="#6E6888">12</text>
+  <rect x="152" y="236" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="170" y="258" text-anchor="middle" font-size="10" class="t1">13</text>
+  <!-- SELECTED -->
+  <rect x="198" y="236" width="36" height="36" rx="6" fill="#7C5CBF"/>
+  <text x="216" y="258" text-anchor="middle" font-size="10" fill="#fff" font-weight="500">14</text>
+  <rect x="244" y="236" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="262" y="258" text-anchor="middle" font-size="10" class="t1">15</text>
+  <rect x="290" y="236" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="308" y="258" text-anchor="middle" font-size="10" fill="#4A4260">16</text>
+  <rect x="336" y="236" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="354" y="258" text-anchor="middle" font-size="10" fill="#4A4260">17</text>
+
+  <!-- Row 4 -->
+  <rect x="60" y="278" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="78" y="300" text-anchor="middle" font-size="10" class="t1">18</text>
+  <rect x="106" y="278" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="124" y="300" text-anchor="middle" font-size="10" class="t1">19</text>
+  <rect x="152" y="278" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="170" y="300" text-anchor="middle" font-size="10" class="t1">20</text>
+  <rect x="198" y="278" width="36" height="36" rx="6" fill="rgba(232,169,58,.07)" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="216" y="300" text-anchor="middle" font-size="10" fill="#6E6888">21</text>
+  <rect x="244" y="278" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="262" y="300" text-anchor="middle" font-size="10" class="t1">22</text>
+  <rect x="290" y="278" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="308" y="300" text-anchor="middle" font-size="10" fill="#4A4260">23</text>
+  <rect x="336" y="278" width="36" height="36" rx="6" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="354" y="300" text-anchor="middle" font-size="10" fill="#4A4260">24</text>
+
+  <!-- legend -->
+  <circle cx="68" cy="334" r="4" fill="#7C5CBF"/>
+  <text x="78" y="338" font-size="9" class="t4">Disponible</text>
+  <circle cx="130" cy="334" r="4" fill="#E8A93A"/>
+  <text x="140" y="338" font-size="9" class="t4">Complet</text>
+  <circle cx="188" cy="334" r="4" fill="#2E2B38"/>
+  <text x="198" y="338" font-size="9" class="t4">Fermé</text>
+
+  <!-- slots section -->
+  <text x="60" y="362" font-size="10" fill="#A899D4">⏱ Créneaux du mercredi 14 mai</text>
+  <rect x="60" y="370" width="54" height="24" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="87" y="386" text-anchor="middle" font-size="10" class="t2">09:00</text>
+  <rect x="120" y="370" width="54" height="24" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="147" y="386" text-anchor="middle" font-size="10" class="t2">09:30</text>
+  <rect x="180" y="370" width="54" height="24" rx="5" fill="#7C5CBF"/>
+  <text x="207" y="386" text-anchor="middle" font-size="10" fill="#fff">10:00</text>
+  <rect x="240" y="370" width="54" height="24" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="267" y="386" text-anchor="middle" font-size="10" class="t2">10:30</text>
+  <rect x="300" y="370" width="54" height="24" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="327" y="386" text-anchor="middle" font-size="10" class="t2">11:00</text>
+  <rect x="60" y="400" width="54" height="24" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="87" y="416" text-anchor="middle" font-size="10" class="t2">14:00</text>
+  <rect x="120" y="400" width="54" height="24" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="147" y="416" text-anchor="middle" font-size="10" class="t2">14:30</text>
+  <rect x="180" y="400" width="54" height="24" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="207" y="416" text-anchor="middle" font-size="10" class="t2">15:00</text>
+
+  <!-- footer step 1 -->
+  <line x1="60" y1="448" x2="380" y2="448" stroke="#2E2B38" stroke-width=".5"/>
+  <rect x="310" y="456" width="90" height="30" rx="7" fill="#7C5CBF"/>
+  <text x="355" y="475" text-anchor="middle" font-size="11" font-weight="500" fill="#fff">Continuer ›</text>
+
+  <!-- branding footer -->
+  <line x1="40" y1="496" x2="400" y2="496" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="220" y="518" text-anchor="middle" font-size="9" fill="#6E6888">Propulsé par WebStrategy · optionnel via Réglages</text>
+
+  <!-- ── POPUP 2 : Form ── -->
+  <rect x="480" y="24" width="360" height="510" rx="14" fill="#14121C" stroke="#2E2B38" stroke-width="1"/>
+  <rect x="812" y="34" width="22" height="22" rx="6" fill="#221D32" stroke="#4A4260" stroke-width=".5"/>
+  <text x="823" y="49" text-anchor="middle" font-size="11" fill="#9590A8">✕</text>
+
+  <rect x="500" y="44" width="68" height="16" rx="8" fill="#221D32" stroke="#4A4260" stroke-width=".5"/>
+  <text x="534" y="55" text-anchor="middle" font-size="8.5" fill="#9B8EC4" letter-spacing=".06em">ÉTAPE 2 / 2</text>
+
+  <text x="500" y="80" font-size="15" font-weight="600" class="t1">Vos coordonnées</text>
+  <text x="500" y="97" font-size="10.5" class="t3">Complétez le formulaire pour finaliser votre réservation.</text>
+
+  <!-- recap bar -->
+  <rect x="500" y="106" width="320" height="30" rx="7" fill="#221D32" stroke="#4A4260" stroke-width=".5"/>
+  <text x="516" y="124" font-size="10" class="t2">📅 Mercredi 14 mai · 10:00</text>
+  <text x="800" y="124" text-anchor="end" font-size="9" fill="#A899D4">‹ Modifier</text>
+
+  <!-- form row 1 -->
+  <text x="500" y="152" font-size="9.5" class="t2">Prénom *</text>
+  <rect x="500" y="158" width="150" height="28" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="512" y="176" font-size="11" class="t1">Sophie</text>
+  <text x="660" y="152" font-size="9.5" class="t2">Nom *</text>
+  <rect x="660" y="158" width="160" height="28" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="672" y="176" font-size="11" class="t1">Martin</text>
+
+  <!-- form row 2 -->
+  <text x="500" y="202" font-size="9.5" class="t2">Email *</text>
+  <rect x="500" y="208" width="150" height="28" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="512" y="226" font-size="10" class="t1">sophie@acme.fr</text>
+  <text x="660" y="202" font-size="9.5" class="t2">Téléphone</text>
+  <rect x="660" y="208" width="160" height="28" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="672" y="226" font-size="10" class="t1">+33 6 12 34 56 78</text>
+
+  <!-- form row 3 -->
+  <text x="500" y="252" font-size="9.5" class="t2">Société</text>
+  <rect x="500" y="258" width="320" height="28" rx="5" fill="#1A1724" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="512" y="276" font-size="11" class="t1">Acme SAS</text>
+
+  <!-- textarea -->
+  <text x="500" y="302" font-size="9.5" class="t2">Message (optionnel)</text>
+  <rect x="500" y="308" width="320" height="56" rx="5" fill="#1A1724" stroke="#7C5CBF" stroke-width=".8"/>
+  <text x="512" y="328" font-size="10" class="t3">Audit SEO de mon site e-commerce…</text>
+
+  <!-- step 2 footer -->
+  <line x1="480" y1="448" x2="840" y2="448" stroke="#2E2B38" stroke-width=".5"/>
+  <rect x="500" y="456" width="90" height="30" rx="7" fill="#221D32" stroke="#4A4260" stroke-width=".5"/>
+  <text x="545" y="475" text-anchor="middle" font-size="11" fill="#C4BFDA">‹ Retour</text>
+  <rect x="620" y="456" width="200" height="30" rx="7" fill="#7C5CBF"/>
+  <text x="720" y="475" text-anchor="middle" font-size="11" font-weight="500" fill="#fff">✓ Confirmer le rendez-vous</text>
+
+  <line x1="480" y1="496" x2="840" y2="496" stroke="#2E2B38" stroke-width=".5"/>
+  <text x="660" y="518" text-anchor="middle" font-size="9" fill="#6E6888">Propulsé par WebStrategy · optionnel via Réglages</text>
+</svg>

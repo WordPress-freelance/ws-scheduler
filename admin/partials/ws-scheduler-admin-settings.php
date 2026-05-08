@@ -10,8 +10,9 @@ $admin_email  = get_option( 'ws_admin_email', '' );
 if ( empty( $admin_email ) ) {
 	$admin_email = get_option( 'admin_email' );
 }
-$business     = get_option( 'ws_business_name', get_bloginfo( 'name' ) );
-$ws_locale    = get_option( 'ws_scheduler_locale', '' );
+$business        = get_option( 'ws_business_name', get_bloginfo( 'name' ) );
+$ws_locale       = get_option( 'ws_scheduler_locale', '' );
+$show_powered_by = (bool) get_option( 'ws_show_powered_by', false );
 $day_labels   = array(
 	1 => __( 'Lundi', 'ws-scheduler' ),
 	2 => __( 'Mardi', 'ws-scheduler' ),
@@ -140,6 +141,20 @@ $day_labels   = array(
               '<code>label="' . esc_html__( 'Mon texte', 'ws-scheduler' ) . '"</code>'
             );
           ?></p>
+        </div>
+
+        <div class="ws-card">
+          <div class="ws-card-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <?php esc_html_e( 'Crédits', 'ws-scheduler' ); ?>
+          </div>
+          <div class="ws-form-group">
+            <label class="ws-day-check" style="display:inline-flex;cursor:pointer;">
+              <input type="checkbox" name="ws_show_powered_by" value="1" <?php checked( $show_powered_by ); ?>>
+              <span style="margin-left:6px;"><?php esc_html_e( 'Afficher le lien « Propulsé par WebStrategy » dans le popup et les emails', 'ws-scheduler' ); ?></span>
+            </label>
+            <p class="ws-field-hint"><?php esc_html_e( 'Désactivé par défaut. Cochez cette case si vous souhaitez soutenir le projet en affichant le crédit.', 'ws-scheduler' ); ?></p>
+          </div>
         </div>
 
         <button type="submit" class="ws-btn-save">

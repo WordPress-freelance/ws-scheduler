@@ -199,7 +199,7 @@ class WS_Scheduler_Email {
 		if ( ! $c ) $c = self::get_colors();
 
 		$logo_html   = self::get_logo_html( $c );
-		$hide_powered = (bool) get_option( 'wsp_email_hide_powered', false );
+		$hide_powered = ! (bool) get_option( 'ws_show_powered_by', false );
 
 		$footer_html = '';
 		if ( ! $hide_powered ) {

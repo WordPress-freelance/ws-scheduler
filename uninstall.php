@@ -24,6 +24,7 @@ $options = array(
 	'ws_admin_email',
 	'ws_business_name',
 	'ws_scheduler_locale',
+	'ws_show_powered_by',
 );
 foreach ( $options as $opt ) {
 	delete_option( $opt );

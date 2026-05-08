@@ -24,14 +24,24 @@ class WS_Scheduler_Admin {
 			'toplevel_page_ws-scheduler',
 			'ws-scheduler_page_ws-scheduler-unavail',
 			'ws-scheduler_page_ws-scheduler-settings',
+			'ws-scheduler_page_ws-scheduler-licence',
 		);
 		if ( ! in_array( $hook_suffix, $allowed, true ) ) return;
 
-		wp_enqueue_style(
-			'ws-scheduler-fonts',
-			'https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,400&family=Inter:wght@400;500&display=swap',
-			array(), null
-		);
+		/**
+		 * Filter: ws_scheduler_load_google_fonts
+		 * Set to false to prevent loading Lora + Inter from Google Fonts CDN
+		 * (useful for GDPR-strict environments — bundle the fonts locally yourself).
+		 *
+		 * @param bool $load Default true.
+		 */
+		if ( apply_filters( 'ws_scheduler_load_google_fonts', true ) ) {
+			wp_enqueue_style(
+				'ws-scheduler-fonts',
+				'https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,400&family=Inter:wght@400;500&display=swap',
+				array(), null
+			);
+		}
 		wp_enqueue_style(
 			$this->plugin_name,
 			WS_SCHEDULER_PLUGIN_URL . 'admin/css/ws-scheduler-admin.css',
@@ -44,6 +54,7 @@ class WS_Scheduler_Admin {
 			'toplevel_page_ws-scheduler',
 			'ws-scheduler_page_ws-scheduler-unavail',
 			'ws-scheduler_page_ws-scheduler-settings',
+			'ws-scheduler_page_ws-scheduler-licence',
 		);
 		if ( ! in_array( $hook_suffix, $allowed, true ) ) return;
 
@@ -100,6 +111,7 @@ class WS_Scheduler_Admin {
 		add_submenu_page( 'ws-scheduler', __( 'Tableau de bord', 'ws-scheduler' ), __( 'Tableau de bord', 'ws-scheduler' ), 'manage_options', 'ws-scheduler',          array( $this, 'render_dashboard' ) );
 		add_submenu_page( 'ws-scheduler', __( 'Indisponibilités', 'ws-scheduler' ), __( 'Indisponibilités', 'ws-scheduler' ), 'manage_options', 'ws-scheduler-unavail',   array( $this, 'render_unavail' ) );
 		add_submenu_page( 'ws-scheduler', __( 'Réglages', 'ws-scheduler' ), __( 'Réglages', 'ws-scheduler' ), 'manage_options', 'ws-scheduler-settings',  array( $this, 'render_settings' ) );
+		add_submenu_page( 'ws-scheduler', __( 'Licence Pro', 'ws-scheduler' ), __( 'Licence Pro', 'ws-scheduler' ), 'manage_options', 'ws-scheduler-licence',  array( $this, 'render_licence' ) );
 	}
 
 	public function render_dashboard() {
@@ -112,6 +124,10 @@ class WS_Scheduler_Admin {
 
 	public function render_settings() {
 		include WS_SCHEDULER_PLUGIN_DIR . 'admin/partials/ws-scheduler-admin-settings.php';
+	}
+
+	public function render_licence() {
+		include WS_SCHEDULER_PLUGIN_DIR . 'admin/partials/ws-scheduler-admin-licence.php';
 	}
 
 	public function save_settings() {
@@ -127,6 +143,7 @@ class WS_Scheduler_Admin {
 		update_option( 'ws_button_label',   sanitize_text_field( $_POST['ws_button_label'] ?? __( 'Réserver un créneau', 'ws-scheduler' ) ) );
 		update_option( 'ws_business_name',  sanitize_text_field( $_POST['ws_business_name'] ?? '' ) );
 		update_option( 'ws_scheduler_locale', sanitize_text_field( $_POST['ws_scheduler_locale'] ?? '' ) );
+		update_option( 'ws_show_powered_by', isset( $_POST['ws_show_powered_by'] ) ? 1 : 0 );
 
 		$email = sanitize_email( $_POST['ws_admin_email'] ?? '' );
 		if ( empty( $email ) ) {

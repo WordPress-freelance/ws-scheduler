@@ -52,7 +52,6 @@ class WS_Scheduler {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_notice_throttle' );
 		$this->loader->add_action( 'admin_menu',            $plugin_admin, 'add_plugin_admin_menu' );
 		$this->loader->add_filter( 'admin_body_class',      $plugin_admin, 'admin_body_class' );
 		$this->loader->add_action( 'admin_head',            $plugin_admin, 'admin_head_reset' );

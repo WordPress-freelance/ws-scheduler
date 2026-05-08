@@ -1,142 +1,144 @@
 === WS Scheduler ===
 Contributors: webstrategy
-Tags: booking, appointments, calendar, scheduling, email
+Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
-Requires PHP: 7.4
-Tested up to: 6.5
+Tested up to: 6.7
 Stable tag: 4.0.0
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Système complet de prise de rendez-vous avec popup calendrier, formulaire et emails automatiques.
+Complete appointment booking system — popup calendar, real-time slots, automated emails. No subscription, no external service required.
 
 == Description ==
 
-WS Scheduler offre une solution simple et complète pour gérer les rendez-vous sur votre site WordPress. Installez le plugin, configurez vos paramètres, et laissez vos clients réserver via un calendrier élégant et responsive.
+WS Scheduler lets visitors book appointments directly on your site. A popup calendar shows real-time availability; both parties receive an automatic confirmation email.
 
-**Fonctionnalités principales :**
-- Popup calendrier responsive et élégante
-- Formulaire de réservation configuré
-- Emails de confirmation et annulation automatiques
-- Gestion flexible des heures travaillées et jours
-- Indisponibilités (période complète, créneau ponctuel, ou récurrence hebdomadaire)
-- Durée de créneau personnalisable
-- Tableau de bord avec aperçu des rendez-vous
-- Support multilingue (Français, Allemand, Espagnol)
+**Everything runs locally — no subscription, no SaaS, no data sent to external servers.**
+
+= Free features =
+
+* Popup booking calendar with real-time slot availability
+* Configurable working hours and slot duration (15 to 120 min)
+* Three unavailability modes: full period, specific slot, weekly recurring
+* Automatic HTML confirmation email to the client
+* Automatic notification email to the administrator
+* Cancellation emails with customizable content (via Pro)
+* Appointment dashboard: status management (confirmed, pending, cancelled)
+* Shortcode `[ws_booking_button]` and CSS class `.ws-book-btn` for theme builders
+* Multilingual (French, English, Spanish, German) — fully translatable
+* Compatible with Avada, Elementor, Divi, and all major page builders
+* LiteSpeed Cache, WP Rocket, W3 Total Cache, WP Super Cache compatible
+
+= Pro version =
+
+**WS Scheduler Pro** adds:
+
+* **Google Calendar sync** — each booking creates a Google Calendar event automatically
+* **Google Meet links** — a unique Meet link generated and included in every confirmation email
+* **Custom email templates** — colors, logo, greeting and footer text configurable from the admin
+* **White-label** — remove the "Powered by WebStrategy" credit from the popup and emails
+
+[Get WS Scheduler Pro →](https://plugin.wordpress-freelance.com)
+
+= How it works =
+
+1. Install and activate the plugin
+2. Configure your working hours in **WS Scheduler → Settings**
+3. Add `[ws_booking_button]` to any page, or apply the class `.ws-book-btn` to any element in your theme builder
+4. Visitors click the button → choose a date → fill in their details → receive a confirmation email
+
+= Privacy =
+
+All appointment data is stored in your WordPress database. No data is transmitted to external servers. The booking JavaScript relies only on your site's own AJAX endpoint (`admin-ajax.php`).
+
+If you use the Google Calendar / Meet integration (Pro), data is transmitted to Google's APIs under the OAuth2 flow you configure.
 
 == Installation ==
 
-1. **Depuis WordPress.org:**
-   - Allez dans Plugins → Ajouter
-   - Cherchez "WS Scheduler"
-   - Cliquez sur "Installer maintenant"
-   - Activez le plugin
+1. Upload the `ws-scheduler` folder to `/wp-content/plugins/`
+2. Activate the plugin in **Plugins → Installed Plugins**
+3. Go to **WS Scheduler → Settings** to configure working hours, slot duration, and notification email
+4. Add the booking button with `[ws_booking_button]` or the class `.ws-book-btn`
 
-2. **Manuel (via ZIP):**
-   - Téléchargez le plugin
-   - Décompressez-le dans `/wp-content/plugins/`
-   - Allez dans l'admin WordPress
-   - Activez "WS Scheduler"
+= Minimum requirements =
 
-**Configuration initiale :**
-1. Allez dans Réglages → WS Scheduler
-2. Configurez vos heures travaillées (par défaut : 09:00-18:00)
-3. Définissez la durée de créneau (par défaut : 30 minutes)
-4. Entrez votre email admin
-5. Donnez un nom à votre activité/entreprise
-6. Insérez le shortcode `[ws_booking_button]` dans une page ou un article
-7. (Optionnel) Gérez les indisponibilités via Réglages → WS Scheduler → Indisponibilités
-
-== Usage ==
-
-**Shortcode :**
-```
-[ws_booking_button]
-```
-
-Vous pouvez ajouter ce shortcode dans :
-- Pages et articles (éditeur classique)
-- Widgets texte
-- Constructeurs visuels (Avada, Elementor, etc.)
-
-**Tableau de bord :**
-- Consultez tous vos rendez-vous en attente, confirmés ou annulés
-- Modifiez ou annulez directement depuis l'admin
-- Les clients reçoivent automatiquement une notification par email
-
-== Screenshots ==
-
-1. **Popup calendrier** - Interface popup responsive pour la sélection de date
-2. **Formulaire de réservation** - Formulaire simple avec champs configurés
-3. **Tableau de bord** - Liste de tous les rendez-vous avec statuts
-4. **Paramètres** - Page de configuration des heures et durée de créneau
-5. **Indisponibilités** - Gestion des jours/plages fermés
+* WordPress 6.5+
+* PHP 7.4+
+* MySQL 5.7+ / MariaDB 10.3+
 
 == Frequently Asked Questions ==
 
-= Puis-je personnaliser les emails ? =
-Actuellement, les emails utilisent un template standard. Une future version Pro offrira la personnalisation complète des templates et couleurs.
+= How do I add the booking button? =
 
-= Comment annuler un rendez-vous ? =
-Les clients peuvent demander l'annulation via le lien fourni dans l'email de confirmation. Les administrateurs peuvent annuler directement depuis le tableau de bord. L'annulation envoie automatiquement une notification au client.
+Use the shortcode `[ws_booking_button]` in any page, post, or widget area. You can also apply the CSS class `ws-book-btn` to any existing `<button>` or `<a>` element in Avada, Elementor, Divi, or your theme's header builder.
 
-= Puis-je définir plusieurs calendriers ? =
-Pour le moment, WS Scheduler gère un seul calendrier par site. Pour plusieurs activités, vous pouvez utiliser plusieurs sites ou une future version Pro.
+= Can I customize the button label? =
 
-= Les clients doivent-ils se connecter ? =
-Non. WS Scheduler permet les réservations sans inscription. Les clients reçoivent une confirmation par email.
+Yes — go to **WS Scheduler → Settings → Front-office button**. You can also override per shortcode: `[ws_booking_button label="Book a call"]`.
 
-= Quel fuseau horaire est utilisé ? =
-WS Scheduler utilise le fuseau horaire configuré dans les réglages généraux de WordPress (Réglages → Général).
+= Does it work with caching plugins? =
 
-= Comment importer les rendez-vous existants ? =
-Une future version Pro inclura un export/import CSV. Pour l'instant, les rendez-vous doivent être ajoutés manuellement via l'admin.
+Yes. The plugin is specifically designed for LiteSpeed Cache, WP Rocket, W3 Total Cache, and WP Super Cache. The booking JavaScript is injected inline to prevent cache interference with script loading order.
 
-= Puis-je synchroniser avec Google Calendar ? =
-La synchronisation Google Calendar est une fonctionnalité de la version Pro (en développement).
+= Where is appointment data stored? =
 
-= Comment modifier les textes affichés ? =
-Tous les textes sont internationalisables (i18n) et peuvent être traduits ou modifiés via des plugins comme Loco Translate. Vous pouvez aussi modifier le language du site dans Réglages → Général → Langue du site.
+Locally in your WordPress database: tables `wp_ws_appointments` and `wp_ws_unavailabilities`. No external API calls are made by the Free version.
+
+= What does "uninstall" do? =
+
+Uninstalling removes both database tables and all plugin options. All appointment data is permanently deleted.
+
+= Can I block specific recurring time slots? =
+
+Yes. Go to **WS Scheduler → Unavailabilities** and choose "Weekly recurring". Select the days and hours — for example, every Monday and Wednesday from 12:00 to 14:00.
+
+= Is Google Calendar integration available? =
+
+Google Calendar and Google Meet sync are available in [WS Scheduler Pro](https://plugin.wordpress-freelance.com).
+
+= The "Powered by WebStrategy" credit appears in emails — how do I remove it? =
+
+You can enable or disable it in **WS Scheduler → Settings → Credits**. It is off by default. Permanent removal (also from the popup) is available in WS Scheduler Pro.
+
+== Screenshots ==
+
+1. Admin dashboard — appointment list with status filters and counters
+2. Unavailabilities manager — three input modes (full period, punctual slot, weekly recurring)
+3. Settings page — working hours, slot duration, notification email, button label
+4. Licence Pro page — feature overview and pricing
+5. Front-end popup — Step 1: calendar with available and unavailable dates
+6. Front-end popup — Step 2: booking form with recap bar
+7. Confirmation screen after successful booking
 
 == Changelog ==
 
 = 4.0.0 =
-- **Major refactoring** : Plugin autonome, suppression de la dépendance Hub Connector
-- Suppression de la page Licence Pro
-- Ajout de tests PHPUnit avec WP_Mock
-- Ajout de GitHub Actions CI pour les tests automatiques
-- Amélioration générale de l'architecture
-- Conformité stricte avec les directives WordPress.org
+* Removed dependency on ws-connector — the Free version is now fully standalone with no external API calls
+* Added opt-in display toggle for WebStrategy credit in Settings (off by default — guideline 10 compliance)
+* Registered Licence Pro page with feature overview and pricing
+* Fixed: `enqueue_notice_throttle` method reference removed (PHP warning)
+* Added `ws_scheduler_load_google_fonts` filter to disable Google Fonts CDN if needed
 
 = 3.9.10 =
-- JS inliné pour bypass des plugins de cache agressifs (LiteSpeed, WP Rocket)
+* Inline JS to bypass aggressive cache plugin interference (LiteSpeed Cache, WP Rocket)
+
+= 3.9.9 =
+* Automatic HTML cache purge (LiteSpeed, WP Rocket, W3TC, WP Super Cache, WP Fastest Cache) on plugin activation
 
 = 3.9.5 =
-- Fix : Suppression du nonce sur les endpoints de lecture publique (get_month_slots, get_available_slots)
-- Fix : Nonce conservé sur l'endpoint book_appointment (mutation)
-
-= 3.9.0 =
-- Migration vers WS Connector standalone
+* Removed nonce check on public read endpoints (`get_month_slots`, `get_available_slots`) to prevent false 403s from cached pages with expired nonces
 
 = 3.8.0 =
-- Refonte UX des indisponibilités
-- 3 modes de saisie : période, créneau ponctuel, récurrence hebdomadaire
-- Fix : Récurrence hebdomadaire ne fonctionnait pas correctement
-- Extension du schéma BDD : ajout colonnes time_start et time_end
+* Unavailability UX redesign: three distinct modes (full period, punctual slot, weekly recurring)
+* Fixed recurring unavailability logic (was using creation datetimes instead of reconstructing for the evaluated day)
+* Extended DB schema: `time_start` and `time_end` TIME columns added; idempotent migration on activation
+* Day-of-week pill selector UI
 
-== Support ==
+= 3.7.0 =
+* Security and ecosystem alignment audit
 
-Pour toute question ou problème :
-- Forum WordPress.org : https://wordpress.org/support/plugin/ws-scheduler/
-- Documentation : https://wordpress-freelance.com/plugins/ws-scheduler/
+== Upgrade Notice ==
 
-== License ==
-
-WS Scheduler est distribué sous la license GNU General Public License v2.0 ou ultérieur.
-
-== Credits ==
-
-Développé par **WebStrategy** — Expertise WordPress, SEO et GEO depuis 2005.
-https://wordpress-freelance.com
-
-Traductions contribuées par la communauté WordPress.
+= 4.0.0 =
+This version removes the ws-connector/hub_connector dependency. The plugin is now fully standalone. No data migration required — upgrade safely.
