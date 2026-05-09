@@ -4,7 +4,7 @@ Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.0.3
+Stable tag: 4.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 
 == Changelog ==
 
+= 4.0.4 =
+* Fixed: SEO — popup section titles ("Choose your slot", "Your details", "Booking confirmed!") were rendered as `<h2>` tags inside the popup, which is hidden by default but still present in the DOM on every front-end page. Document outline tools (Google, Lighthouse, SEO crawlers) would pick them up as page-level headings, polluting the heading hierarchy of the host page. Replaced with `<div role="heading" aria-level="2">` — visually identical (same `.ws-popup-title` class), invisible to SEO outline tools, still announced as level-2 headings by screen readers thanks to the ARIA role.
+
 = 4.0.3 =
 * Fixed: critical timezone bug in unavailability storage and reading. Hours saved in the admin (e.g. "Wednesday 13:30 → 18:00 recurring") were converted to UTC via `strtotime + gmdate` on save, then read back via `strtotime` (PHP timezone = UTC under WordPress) instead of via `wp_timezone_string`. Result: a 1-hour shift (2 hours in DST) on European servers, making slots that should have been blocked appear available on the front-end calendar. The fix removes the UTC conversion on save (TIME columns store local hours, not timestamps) and uses `DateTime::createFromFormat` with `wp_timezone_string` on read. Three regression tests added for Europe/Paris timezone scenarios (recurring afternoon block, full-day block, punctual slot).
 * Note: existing recurring/punctual unavailabilities created before this version on European-timezone sites may have stored shifted hours. After upgrading, recreate them from the admin to get correct local-hour storage.
@@ -171,6 +174,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 * Security and ecosystem alignment audit.
 
 == Upgrade Notice ==
+
+= 4.0.4 =
+SEO improvement: popup titles no longer leak as `<h2>` in the page document outline. Replaced with ARIA-equivalent divs. No database change.
 
 = 4.0.3 =
 Critical timezone fix for unavailabilities on European-timezone sites. Hours were shifted by 1-2 hours, leaving slots that should have been blocked available on the front-end. Existing unavailabilities should be recreated to use correct local-hour storage. No database schema change.

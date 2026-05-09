@@ -12,7 +12,7 @@ $show_powered = (bool) get_option( 'ws_show_powered_by', false );
     <div class="ws-step" id="ws-step-calendar" data-step="1">
       <div class="ws-popup-header">
         <span class="ws-popup-badge"><?php printf( esc_html__( 'Étape %1$d / %2$d', 'ws-scheduler' ), 1, 2 ); ?></span>
-        <h2 class="ws-popup-title" id="ws-popup-title"><?php esc_html_e( 'Choisissez votre créneau', 'ws-scheduler' ); ?></h2>
+        <div class="ws-popup-title" id="ws-popup-title" role="heading" aria-level="2"><?php esc_html_e( 'Choisissez votre créneau', 'ws-scheduler' ); ?></div>
         <p class="ws-popup-sub"><?php esc_html_e( 'Sélectionnez une date disponible, puis un horaire.', 'ws-scheduler' ); ?></p>
       </div>
 
@@ -66,7 +66,7 @@ $show_powered = (bool) get_option( 'ws_show_powered_by', false );
     <div class="ws-step" id="ws-step-form" data-step="2" hidden>
       <div class="ws-popup-header">
         <span class="ws-popup-badge"><?php printf( esc_html__( 'Étape %1$d / %2$d', 'ws-scheduler' ), 2, 2 ); ?></span>
-        <h2 class="ws-popup-title"><?php esc_html_e( 'Vos coordonnées', 'ws-scheduler' ); ?></h2>
+        <div class="ws-popup-title" role="heading" aria-level="2"><?php esc_html_e( 'Vos coordonnées', 'ws-scheduler' ); ?></div>
         <p class="ws-popup-sub"><?php esc_html_e( 'Complétez le formulaire pour finaliser votre réservation.', 'ws-scheduler' ); ?></p>
       </div>
 
@@ -126,7 +126,7 @@ $show_powered = (bool) get_option( 'ws_show_powered_by', false );
     <div class="ws-step" id="ws-step-confirm" data-step="3" hidden>
       <div class="ws-confirm-content">
         <div class="ws-confirm-icon">✓</div>
-        <h2 class="ws-popup-title"><?php esc_html_e( 'Rendez-vous confirmé !', 'ws-scheduler' ); ?></h2>
+        <div class="ws-popup-title" role="heading" aria-level="2"><?php esc_html_e( 'Rendez-vous confirmé !', 'ws-scheduler' ); ?></div>
         <p class="ws-popup-sub" id="ws-confirm-msg"><?php esc_html_e( 'Vous allez recevoir un email de confirmation.', 'ws-scheduler' ); ?></p>
         <a id="ws-meet-link" class="ws-meet-btn" href="#" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.6 11.6L22 7v10l-6.4-4.5v-1zM4 5h9a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V7c0-1.1.9-2 2-2z"/></svg>
