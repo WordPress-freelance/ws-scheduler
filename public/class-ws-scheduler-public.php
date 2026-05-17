@@ -112,6 +112,43 @@ class WS_Scheduler_Public {
 	}
 
 	/**
+	 * Exclut notre handle des combineurs/minifieurs de plugins de cache.
+	 *
+	 * S'applique à TOUS les tags <script> que WP émet pour notre handle :
+	 * - le tag inline injecté par wp_localize_script (config wsScheduler)
+	 * - le tag "before" et "after" injectés par wp_add_inline_script
+	 *
+	 * Attributs reconnus :
+	 *  - `data-no-optimize="1"`           → LiteSpeed Cache, WP Rocket
+	 *  - `data-no-minify="1"`             → LiteSpeed Cache
+	 *  - `data-no-defer="1"`              → LiteSpeed Cache, WP Rocket
+	 *  - `data-cfasync="false"`           → Cloudflare Rocket Loader
+	 *  - `data-noptimize="1"`             → Autoptimize
+	 *
+	 * Sans ces attributs, LiteSpeed Cache combine notre JS inliné avec
+	 * d'autres scripts inline du site dans un seul bundle minifié. Si un
+	 * autre script du bundle a un défaut de syntaxe, TOUT le bundle plante
+	 * et notre popup ne fonctionne plus — d'où "missing } after function
+	 * body" remonté sur LE bundle, pas notre code.
+	 *
+	 * @param string $tag    Le HTML du tag <script>.
+	 * @param string $handle Le handle du script enqueued.
+	 * @return string
+	 */
+	public function mark_script_no_optimize( $tag, $handle ) {
+		if ( $handle !== $this->plugin_name ) {
+			return $tag;
+		}
+		// Inject les attributs APRÈS `<script` et avant le premier `>` ou ` `
+		return preg_replace(
+			'/<script(\s|>)/',
+			'<script data-no-optimize="1" data-no-minify="1" data-no-defer="1" data-cfasync="false" data-noptimize="1"$1',
+			$tag,
+			1 // une seule occurrence (les ws_add_inline_script peuvent générer plusieurs <script>)
+		);
+	}
+
+	/**
 	 * Shortcode [ws_booking_button label="..." class="..."]
 	 *
 	 * Produit uniquement le HTML du bouton — l'enqueue du JS/CSS et

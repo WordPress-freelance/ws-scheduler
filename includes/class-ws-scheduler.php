@@ -16,7 +16,7 @@ class WS_Scheduler {
 	protected $version;
 
 	public function __construct() {
-		$this->version     = defined( 'WS_SCHEDULER_VERSION' ) ? WS_SCHEDULER_VERSION : '4.0.6';
+		$this->version     = defined( 'WS_SCHEDULER_VERSION' ) ? WS_SCHEDULER_VERSION : '4.0.7';
 		$this->plugin_name = 'ws-scheduler';
 
 		$this->load_dependencies();
@@ -79,6 +79,13 @@ class WS_Scheduler {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_footer',          $plugin_public, 'render_popup_once' );
 		$this->loader->add_shortcode( 'ws_booking_button', $plugin_public, 'render_booking_button' );
+
+		// Exclut notre <script> des combineurs/minifieurs de cache plugins
+		// (LiteSpeed Cache, WP Rocket, Autoptimize, etc.). Le JS est déjà
+		// inliné — pas besoin que les plugins de cache le combinent avec
+		// d'autres scripts inline, ce qui causait des erreurs de syntaxe
+		// "missing } after function body" sur le bundle minifié final.
+		$this->loader->add_filter( 'script_loader_tag', $plugin_public, 'mark_script_no_optimize', 10, 2 );
 
 		// Privacy / RGPD : exporter, eraser et texte suggéré pour la politique
 		// de confidentialité du site. Le plugin stocke des PII (email, nom,

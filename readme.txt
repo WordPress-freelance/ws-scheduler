@@ -4,7 +4,7 @@ Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.0.6
+Stable tag: 4.0.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -134,6 +134,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 
 == Changelog ==
 
+= 4.0.7 =
+* Fixed: front-end booking popup failed to open on sites using LiteSpeed Cache (or other JS-combining cache plugins) when another inline script in the same page had a syntax error. The cache plugin concatenated all inline scripts into a single bundle that failed to parse, blocking our JS along with the rest. Two-layer defense added : (1) the JS source now starts with a leading `;` to break hostile ASI when concatenated with a preceding script lacking a terminal semicolon ; (2) a `script_loader_tag` filter now marks our handle with `data-no-optimize="1"`, `data-no-minify="1"`, `data-no-defer="1"`, `data-cfasync="false"`, and `data-noptimize="1"` so all major cache plugins (LiteSpeed Cache, WP Rocket, Autoptimize, Cloudflare Rocket Loader) skip our script when combining/minifying.
+
 = 4.0.6 =
 * Changed: the `assets/` directory (10 SVG + 10 PNG screenshots, plugin icon, index.php) is now bundled inside the distribution ZIP at the plugin root. Previously stored only in the repo for the WordPress.org SVN /assets/ upload, the screenshots are now also shipped with the plugin itself.
 
@@ -186,6 +189,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 * Security and ecosystem alignment audit.
 
 == Upgrade Notice ==
+
+= 4.0.7 =
+Fixes the booking popup failing to open on sites where LiteSpeed Cache or another JS-combining cache plugin bundles inline scripts. Our script is now excluded from combining/minifying via standard cache plugin attributes. No database change.
 
 = 4.0.6 =
 The `assets/` folder (screenshots + icon) is now bundled inside the plugin ZIP at the root. No code change.

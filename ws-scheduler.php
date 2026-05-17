@@ -3,7 +3,7 @@
  * Plugin Name:       WS Scheduler
  * Plugin URI:        https://wordpress-freelance.com/plugins/ws-scheduler
  * Description:       Système de prise de rendez-vous complet avec popup calendrier, formulaire et emails automatiques.
- * Version:           4.0.6
+ * Version:           4.0.7
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            WebStrategy
@@ -131,7 +131,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'WS_SCHEDULER_VERSION',         '4.0.6' );
+define( 'WS_SCHEDULER_VERSION',         '4.0.7' );
 define( 'WS_SCHEDULER_PLUGIN_DIR',      plugin_dir_path( __FILE__ ) );
 define( 'WS_SCHEDULER_PLUGIN_URL',      plugin_dir_url( __FILE__ ) );
 define( 'WS_SCHEDULER_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );

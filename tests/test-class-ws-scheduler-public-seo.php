@@ -72,4 +72,64 @@ class Test_WS_Scheduler_Public_SEO extends TestCase {
             $partial
         );
     }
+
+    // ── Defense against cache plugin script combiners (4.0.7) ────────
+    //
+    // Bug reproduit en prod (Hostinger + LiteSpeed Cache) : le bundle JS
+    // combiné par LiteSpeed plantait avec "missing } after function body"
+    // — notre script inliné était combiné avec d'autres inline scripts
+    // (un de ces autres scripts avait une syntax error qui faisait planter
+    // tout le bundle, y compris le nôtre).
+    //
+    // Fix : le JS source commence par `;` pour casser l'ASI hostile, et un
+    // filtre script_loader_tag marque notre handle comme non-optimisable
+    // pour tous les cache plugins majeurs.
+
+    public function test_js_source_starts_with_defensive_semicolon() {
+        $js = file_get_contents(
+            __DIR__ . '/../public/js/ws-scheduler-public.js'
+        );
+        // Skip le block comment d'entête s'il y en a un
+        $code = preg_replace( '!^/\*.*?\*/\s*!s', '', $js );
+        $this->assertStringStartsWith(
+            ';',
+            $code,
+            'Le JS source doit commencer par `;` (après le block comment) ' .
+            'pour casser l\'ASI hostile quand un cache plugin combine ' .
+            'notre script avec un précédent sans `;` terminal.'
+        );
+    }
+
+    public function test_mark_script_no_optimize_returns_tag_unchanged_for_other_handles() {
+        $public = new WS_Scheduler_Public( 'ws-scheduler', '4.0.7' );
+        $original = '<script src="other.js"></script>';
+        $result = $public->mark_script_no_optimize( $original, 'jquery-core' );
+        $this->assertEquals( $original, $result );
+    }
+
+    public function test_mark_script_no_optimize_injects_all_cache_attrs_for_our_handle() {
+        $public = new WS_Scheduler_Public( 'ws-scheduler', '4.0.7' );
+        $original = '<script id="ws-scheduler-js-after">/* our inline JS */</script>';
+        $result = $public->mark_script_no_optimize( $original, 'ws-scheduler' );
+
+        // LiteSpeed Cache + WP Rocket
+        $this->assertStringContainsString( 'data-no-optimize="1"', $result );
+        // LiteSpeed Cache (minify exclusion)
+        $this->assertStringContainsString( 'data-no-minify="1"',   $result );
+        // LiteSpeed Cache + WP Rocket (defer exclusion)
+        $this->assertStringContainsString( 'data-no-defer="1"',    $result );
+        // Cloudflare Rocket Loader exclusion
+        $this->assertStringContainsString( 'data-cfasync="false"', $result );
+        // Autoptimize exclusion
+        $this->assertStringContainsString( 'data-noptimize="1"',   $result );
+    }
+
+    public function test_mark_script_no_optimize_preserves_script_content_and_attrs() {
+        $public = new WS_Scheduler_Public( 'ws-scheduler', '4.0.7' );
+        $original = '<script id="ws-scheduler-js-after">var x = 1;</script>';
+        $result = $public->mark_script_no_optimize( $original, 'ws-scheduler' );
+        $this->assertStringContainsString( 'id="ws-scheduler-js-after"', $result );
+        $this->assertStringContainsString( 'var x = 1;', $result );
+        $this->assertStringContainsString( '</script>', $result );
+    }
 }

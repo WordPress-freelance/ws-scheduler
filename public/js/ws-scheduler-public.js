@@ -1,8 +1,14 @@
 /**
  * WS Scheduler — Front-end popup JS
  * @since 3.5.4
+ *
+ * Le `;` initial ci-dessous est intentionnel : il protège contre les concats
+ * de plugins de cache (LiteSpeed Cache, WP Rocket, Autoptimize, etc.) qui
+ * combinent ce script avec un script précédent sans `;` terminal — ASI
+ * hostile qui tente d'invoquer `precedingExpression(function($){...})`
+ * → SyntaxError "missing } after function body".
  */
-(function($){
+;(function($){
   'use strict';
 
   let cfg          = window.wsScheduler || {},
