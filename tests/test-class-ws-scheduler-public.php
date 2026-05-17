@@ -10,7 +10,7 @@ class Test_WS_Scheduler_Public extends TestCase {
         $ref = new ReflectionProperty( WS_Scheduler_Public::class, 'popup_rendered' );
         $ref->setAccessible( true );
         $ref->setValue( null, false );
-        $this->public = new WS_Scheduler_Public( 'ws-scheduler', '4.0.7' );
+        $this->public = new WS_Scheduler_Public( 'ws-scheduler', '4.0.8' );
     }
     public function tearDown(): void { parent::tearDown(); }
 

@@ -132,4 +132,65 @@ class Test_WS_Scheduler_Public_SEO extends TestCase {
         $this->assertStringContainsString( 'var x = 1;', $result );
         $this->assertStringContainsString( '</script>', $result );
     }
+
+    // ── jQuery wait guard (4.0.8) ────────────────────────────────────
+    //
+    // Bug : sur les sites avec LiteSpeed Cache Defer JS ou WP Rocket
+    // Defer for JavaScript activé, jQuery est chargé async/defer alors
+    // que notre <script> inline reste synchrone — `(function($){...})(jQuery)`
+    // plantait avec `ReferenceError: jQuery is not defined`.
+    //
+    // Fix : le code est wrappé dans une fonction wsSchedulerInit appelée
+    // par un poller qui attend `window.jQuery` toutes les 50ms (max 5s).
+
+    public function test_js_source_has_jquery_wait_guard() {
+        $js = file_get_contents(
+            __DIR__ . '/../public/js/ws-scheduler-public.js'
+        );
+        // Le code métier doit être dans une fonction nommée, pas une IIFE directe
+        $this->assertStringContainsString(
+            'function wsSchedulerInit',
+            $js,
+            'Le JS doit définir une fonction wsSchedulerInit (au lieu d\'une IIFE) ' .
+            'pour pouvoir différer son exécution jusqu\'à ce que jQuery soit chargé.'
+        );
+        // Le poller doit utiliser setInterval pour attendre window.jQuery
+        $this->assertStringContainsString(
+            'setInterval',
+            $js,
+            'Le JS doit utiliser setInterval pour poller jQuery.'
+        );
+        $this->assertStringContainsString(
+            'window.jQuery',
+            $js,
+            'Le JS doit vérifier window.jQuery (pas juste jQuery global) dans le poller.'
+        );
+        // Le code NE DOIT PLUS terminer par `})(jQuery);` direct
+        // qui suppose jQuery dispo au moment de l\'exécution
+        $this->assertDoesNotMatchRegularExpression(
+            '/\}\)\(jQuery\);[\s]*$/',
+            $js,
+            'Le JS ne doit plus terminer par `})(jQuery);` direct — ' .
+            'ce pattern plante si un cache plugin défère jQuery.'
+        );
+    }
+
+    public function test_js_source_has_finite_polling_timeout() {
+        $js = file_get_contents(
+            __DIR__ . '/../public/js/ws-scheduler-public.js'
+        );
+        // Le poller doit s\'arrêter après un certain nombre de tentatives
+        // (sinon il continue indéfiniment si jQuery n\'arrive jamais)
+        $this->assertMatchesRegularExpression(
+            '/tries\s*>\s*\d+/',
+            $js,
+            'Le poller doit avoir une limite de tentatives finie.'
+        );
+        // Et émettre un message d\'erreur en cas d\'échec
+        $this->assertStringContainsString(
+            'jQuery not loaded',
+            $js,
+            'Le poller doit logger une erreur claire si jQuery n\'arrive jamais.'
+        );
+    }
 }

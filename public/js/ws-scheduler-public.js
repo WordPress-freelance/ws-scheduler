@@ -2,16 +2,22 @@
  * WS Scheduler — Front-end popup JS
  * @since 3.5.4
  *
- * Le `;` initial ci-dessous est intentionnel : il protège contre les concats
- * de plugins de cache (LiteSpeed Cache, WP Rocket, Autoptimize, etc.) qui
- * combinent ce script avec un script précédent sans `;` terminal — ASI
- * hostile qui tente d'invoquer `precedingExpression(function($){...})`
- * → SyntaxError "missing } after function body".
+ * Le `;` initial protège contre les concats de plugins de cache qui
+ * combinent ce script avec un précédent sans `;` terminal (ASI hostile).
+ *
+ * Le wrapper d'attente jQuery autour de l'IIFE protège contre les cache
+ * plugins qui défèrent le chargement de jQuery (LiteSpeed Defer JS,
+ * WP Rocket Defer for JavaScript) : notre script inline arrive avant
+ * que jQuery soit chargé → `(function($){...})(jQuery)` plantait avec
+ * `ReferenceError: jQuery is not defined`. On polle jQuery toutes les
+ * 50ms pendant max 5s avant d'exécuter notre code.
  */
-;(function($){
+;(function(){
   'use strict';
 
-  let cfg          = window.wsScheduler || {},
+  function wsSchedulerInit($) {
+
+    let cfg          = window.wsScheduler || {},
       overlay,
       curYear, curMonth,
       selectedDate = null,
@@ -246,4 +252,31 @@
     return days[d.getDay()] + ' ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
   }
 
-})(jQuery);
+  } // end wsSchedulerInit
+
+  // ── Boot : attend que jQuery soit chargé avant d'exécuter notre code ──
+  // Cache plugins (LiteSpeed Cache Defer JS, WP Rocket Defer for JavaScript)
+  // peuvent défer le chargement de jQuery. Notre script inline arrive avant
+  // que jQuery soit dispo dans window → ReferenceError "jQuery is not defined".
+  // On polle window.jQuery toutes les 50ms pendant max 5 secondes.
+  function wsTryBoot() {
+    if (typeof window.jQuery !== 'undefined') {
+      wsSchedulerInit(window.jQuery);
+      return true;
+    }
+    return false;
+  }
+
+  if (wsTryBoot()) { return; }
+
+  var tries = 0;
+  var iv = setInterval(function() {
+    if (wsTryBoot() || ++tries > 100) {
+      clearInterval(iv);
+      if (tries > 100 && window.console && window.console.error) {
+        window.console.error('WS Scheduler: jQuery not loaded after 5 seconds.');
+      }
+    }
+  }, 50);
+
+})();

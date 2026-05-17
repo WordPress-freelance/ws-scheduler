@@ -4,7 +4,7 @@ Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.0.7
+Stable tag: 4.0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -134,6 +134,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 
 == Changelog ==
 
+= 4.0.8 =
+* Fixed: front-end booking popup failed to open on sites using cache plugins with "Defer for JavaScript" enabled (LiteSpeed Cache Defer JS, WP Rocket Defer for JavaScript). jQuery was being deferred while our inline script ran synchronously, causing `ReferenceError: jQuery is not defined`. Our JS now wraps its IIFE in a boot function that polls `window.jQuery` every 50 ms (max 5 seconds) before executing — works regardless of how jQuery is loaded.
+
 = 4.0.7 =
 * Fixed: front-end booking popup failed to open on sites using LiteSpeed Cache (or other JS-combining cache plugins) when another inline script in the same page had a syntax error. The cache plugin concatenated all inline scripts into a single bundle that failed to parse, blocking our JS along with the rest. Two-layer defense added : (1) the JS source now starts with a leading `;` to break hostile ASI when concatenated with a preceding script lacking a terminal semicolon ; (2) a `script_loader_tag` filter now marks our handle with `data-no-optimize="1"`, `data-no-minify="1"`, `data-no-defer="1"`, `data-cfasync="false"`, and `data-noptimize="1"` so all major cache plugins (LiteSpeed Cache, WP Rocket, Autoptimize, Cloudflare Rocket Loader) skip our script when combining/minifying.
 
@@ -189,6 +192,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 * Security and ecosystem alignment audit.
 
 == Upgrade Notice ==
+
+= 4.0.8 =
+Fixes ReferenceError: jQuery is not defined when a cache plugin (LiteSpeed, WP Rocket) defers jQuery loading. Our script now waits for jQuery via polling. No database change.
 
 = 4.0.7 =
 Fixes the booking popup failing to open on sites where LiteSpeed Cache or another JS-combining cache plugin bundles inline scripts. Our script is now excluded from combining/minifying via standard cache plugin attributes. No database change.
