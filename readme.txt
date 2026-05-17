@@ -4,7 +4,7 @@ Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.0.5
+Stable tag: 4.0.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -134,6 +134,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 
 == Changelog ==
 
+= 4.0.6 =
+* Changed: the `assets/` directory (10 SVG + 10 PNG screenshots, plugin icon, index.php) is now bundled inside the distribution ZIP at the plugin root. Previously stored only in the repo for the WordPress.org SVN /assets/ upload, the screenshots are now also shipped with the plugin itself.
+
 = 4.0.5 =
 * Added: five additional screenshots in `assets/` for the WordPress.org plugin page — total now 10 covering both front and back office, including the plugin list action links (Settings | Pro version), the front-end booking button rendered on a sample contact page, the popup step 3 confirmation screen with Google Meet button (Pro), and the two HTML emails (client confirmation + admin notification) shown in a Gmail-like preview.
 * No code change — assets only.
@@ -183,6 +186,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 * Security and ecosystem alignment audit.
 
 == Upgrade Notice ==
+
+= 4.0.6 =
+The `assets/` folder (screenshots + icon) is now bundled inside the plugin ZIP at the root. No code change.
 
 = 4.0.5 =
 Assets-only release: five additional screenshots added for the WordPress.org plugin page. No code change.

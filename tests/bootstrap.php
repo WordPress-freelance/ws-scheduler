@@ -14,7 +14,7 @@ if ( ! defined( 'WPINC' ) )          define( 'WPINC', 'wp-includes' );
 if ( ! defined( 'OBJECT' ) )         define( 'OBJECT', 'OBJECT' );
 if ( ! defined( 'WP_CONTENT_DIR' ) ) define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
 
-define( 'WS_SCHEDULER_VERSION',         '4.0.5' );
+define( 'WS_SCHEDULER_VERSION',         '4.0.6' );
 define( 'WS_SCHEDULER_PLUGIN_DIR',      ABSPATH );
 define( 'WS_SCHEDULER_PLUGIN_URL',      'http://example.com/wp-content/plugins/ws-scheduler/' );
 define( 'WS_SCHEDULER_PLUGIN_BASENAME', 'ws-scheduler/ws-scheduler.php' );

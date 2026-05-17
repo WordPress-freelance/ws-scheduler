@@ -7,7 +7,7 @@ class Test_WS_Scheduler_Admin extends TestCase {
 
     public function setUp(): void {
         parent::setUp();
-        $this->admin = new WS_Scheduler_Admin( 'ws-scheduler', '4.0.5' );
+        $this->admin = new WS_Scheduler_Admin( 'ws-scheduler', '4.0.6' );
     }
     public function tearDown(): void { parent::tearDown(); }
 
