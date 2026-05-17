@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <style>.lora { font-family: 'Lora', Georgia, serif; }</style>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7C5CBF"/>
+      <stop offset="1" stop-color="#5A3F95"/>
+    </linearGradient>
+    <linearGradient id="checkGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#5FD49C"/>
+      <stop offset="1" stop-color="#2D6B4A"/>
+    </linearGradient>
+    <radialGradient id="overlay" cx="50%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#221D32" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#0E0C15" stop-opacity="0.95"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#5FD49C" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#5FD49C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="900" fill="#FAFAF8"/>
+  <rect x="0" y="0" width="1200" height="48" fill="#E5E1D9"/>
+  <circle cx="22" cy="24" r="6" fill="#FF6B5A"/>
+  <circle cx="42" cy="24" r="6" fill="#FFC53D"/>
+  <circle cx="62" cy="24" r="6" fill="#5FD49C"/>
+  <rect x="140" y="13" width="600" height="22" rx="11" fill="#fff" stroke="#D4D0C8"/>
+  <text x="156" y="28" fill="#7A7670" font-size="11">https://monsite.fr/contact</text>
+  <text class="lora" x="80" y="180" fill="#3A3A3A" font-size="40" font-weight="600" opacity="0.4">Travaillons</text>
+  <rect x="0" y="48" width="1200" height="852" fill="url(#overlay)"/>
+
+  <g transform="translate(336, 180)">
+    <rect width="528" height="588" rx="20" fill="#14121C" stroke="#2E2B38" stroke-width="1.5"/>
+
+    <g transform="translate(480, 24)" stroke="#9590A8" stroke-width="2" fill="none">
+      <line x1="0" y1="0" x2="14" y2="14"/>
+      <line x1="14" y1="0" x2="0" y2="14"/>
+    </g>
+
+    <!-- Check halo -->
+    <circle cx="264" cy="160" r="80" fill="url(#halo)"/>
+    <!-- Check circle -->
+    <circle cx="264" cy="160" r="48" fill="url(#checkGrad)"/>
+    <!-- Check mark -->
+    <path d="M244 162 l13 14 l25 -28" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text class="lora" x="264" y="266" fill="#F0EDE8" font-size="28" font-weight="600" text-anchor="middle">Rendez-vous confirmé !</text>
+    <text x="264" y="298" fill="#9590A8" font-size="14" text-anchor="middle">Vous allez recevoir un email de confirmation</text>
+    <text x="264" y="318" fill="#9590A8" font-size="14" text-anchor="middle">avec tous les détails.</text>
+
+    <!-- Recap -->
+    <g transform="translate(64, 360)">
+      <rect width="400" height="76" rx="10" fill="#221D32" stroke="#2E2B38"/>
+      <text x="20" y="28" fill="#9590A8" font-size="11" letter-spacing="1.2">VOTRE CRÉNEAU</text>
+      <text x="20" y="52" fill="#F0EDE8" font-size="15" font-weight="500">Vendredi 12 juin 2026</text>
+      <text x="20" y="68" fill="#A899D4" font-size="13">10:00 — 10:30 (30 min)</text>
+    </g>
+
+    <!-- Meet button (Pro) -->
+    <g transform="translate(64, 466)">
+      <rect width="400" height="48" rx="10" fill="url(#grad)"/>
+      <g transform="translate(20, 14)" stroke="#F0EDE8" fill="none" stroke-width="1.6">
+        <path d="M15 11 L20 7 v10 l-5-4 z" fill="#F0EDE8"/>
+        <rect x="0" y="5" width="14" height="14" rx="2"/>
+      </g>
+      <text x="200" y="30" fill="#F0EDE8" font-size="13" font-weight="600" text-anchor="middle">Rejoindre Google Meet</text>
+    </g>
+
+    <text x="264" y="540" fill="#4A4260" font-size="11" text-anchor="middle">Lien généré automatiquement (Pro)</text>
+  </g>
+</svg>

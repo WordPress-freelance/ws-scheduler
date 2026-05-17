@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <style>.lora { font-family: 'Lora', Georgia, serif; }</style>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7C5CBF"/>
+      <stop offset="1" stop-color="#5A3F95"/>
+    </linearGradient>
+    <radialGradient id="overlay" cx="50%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#221D32" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#0E0C15" stop-opacity="0.95"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="900" fill="#FAFAF8"/>
+  <rect x="0" y="0" width="1200" height="48" fill="#E5E1D9"/>
+  <circle cx="22" cy="24" r="6" fill="#FF6B5A"/>
+  <circle cx="42" cy="24" r="6" fill="#FFC53D"/>
+  <circle cx="62" cy="24" r="6" fill="#5FD49C"/>
+  <rect x="140" y="13" width="600" height="22" rx="11" fill="#fff" stroke="#D4D0C8"/>
+  <text x="156" y="28" fill="#7A7670" font-size="11">https://monsite.fr/contact</text>
+  <text class="lora" x="80" y="180" fill="#3A3A3A" font-size="40" font-weight="600" opacity="0.4">Travaillons</text>
+  <rect x="0" y="48" width="1200" height="852" fill="url(#overlay)"/>
+
+  <g transform="translate(296, 90)">
+    <rect width="608" height="784" rx="20" fill="#14121C" stroke="#2E2B38" stroke-width="1.5"/>
+    <g transform="translate(560, 24)" stroke="#9590A8" stroke-width="2" fill="none">
+      <line x1="0" y1="0" x2="14" y2="14"/>
+      <line x1="14" y1="0" x2="0" y2="14"/>
+    </g>
+
+    <rect x="40" y="40" width="92" height="26" rx="13" fill="#221D32" stroke="#7C5CBF"/>
+    <text x="86" y="57" fill="#A899D4" font-size="11" font-weight="500" text-anchor="middle">Étape 2 / 2</text>
+
+    <text class="lora" x="40" y="116" fill="#F0EDE8" font-size="28" font-weight="600">Vos coordonnées</text>
+    <text x="40" y="140" fill="#9590A8" font-size="13">Nous vous enverrons une confirmation par email.</text>
+
+    <g transform="translate(40, 164)">
+      <rect width="528" height="60" rx="10" fill="#221D32" stroke="#2E2B38"/>
+      <rect x="20" y="20" width="20" height="20" rx="3" fill="none" stroke="#A899D4" stroke-width="1.6"/>
+      <line x1="20" y1="26" x2="40" y2="26" stroke="#A899D4" stroke-width="1.6"/>
+      <text x="56" y="34" fill="#9590A8" font-size="11" letter-spacing="1.2">CRÉNEAU CHOISI</text>
+      <text x="56" y="54" fill="#F0EDE8" font-size="13" font-weight="500">Vendredi 12 juin 2026 · 10:00</text>
+      <text x="510" y="40" fill="#A899D4" font-size="11" text-anchor="end">Modifier</text>
+    </g>
+
+    <g transform="translate(40, 254)">
+      <text x="0" y="0" fill="#9590A8" font-size="11" letter-spacing="1.2">PRÉNOM *</text>
+      <rect x="0" y="14" width="256" height="44" rx="8" fill="#0E0C15" stroke="#7C5CBF" stroke-width="1.5"/>
+      <text x="16" y="42" fill="#F0EDE8" font-size="13">Sophie</text>
+      <text x="272" y="0" fill="#9590A8" font-size="11" letter-spacing="1.2">NOM *</text>
+      <rect x="272" y="14" width="256" height="44" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
+      <text x="288" y="42" fill="#F0EDE8" font-size="13">Martin</text>
+    </g>
+
+    <g transform="translate(40, 338)">
+      <text x="0" y="0" fill="#9590A8" font-size="11" letter-spacing="1.2">EMAIL *</text>
+      <rect x="0" y="14" width="528" height="44" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
+      <text x="16" y="42" fill="#F0EDE8" font-size="13">sophie@example.com</text>
+    </g>
+
+    <g transform="translate(40, 422)">
+      <text x="0" y="0" fill="#9590A8" font-size="11" letter-spacing="1.2">SOCIÉTÉ</text>
+      <rect x="0" y="14" width="256" height="44" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
+      <text x="16" y="42" fill="#F0EDE8" font-size="13">Acme Studio</text>
+      <text x="272" y="0" fill="#9590A8" font-size="11" letter-spacing="1.2">TÉLÉPHONE</text>
+      <rect x="272" y="14" width="256" height="44" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
+      <text x="288" y="42" fill="#9590A8" font-size="13">+33 6 …</text>
+    </g>
+
+    <g transform="translate(40, 506)">
+      <text x="0" y="0" fill="#9590A8" font-size="11" letter-spacing="1.2">MESSAGE</text>
+      <rect x="0" y="14" width="528" height="100" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
+      <text x="16" y="42" fill="#F0EDE8" font-size="13">Bonjour, j'aimerais discuter de la</text>
+      <text x="16" y="62" fill="#F0EDE8" font-size="13">refonte de notre site et de la</text>
+      <text x="16" y="82" fill="#F0EDE8" font-size="13">stratégie SEO pour le Q3.</text>
+    </g>
+
+    <g transform="translate(40, 650)">
+      <rect width="156" height="48" rx="10" fill="#221D32" stroke="#2E2B38"/>
+      <text x="78" y="30" fill="#C4BFDA" font-size="13" font-weight="500" text-anchor="middle">← Retour</text>
+      <rect x="172" width="356" height="48" rx="10" fill="url(#grad)"/>
+      <text x="350" y="30" fill="#F0EDE8" font-size="13" font-weight="600" text-anchor="middle">Confirmer le rendez-vous</text>
+    </g>
+
+    <text x="40" y="730" fill="#4A4260" font-size="11">Vos données sont stockées uniquement sur ce site (RGPD).</text>
+    <text x="40" y="746" fill="#4A4260" font-size="11">Aucun envoi à un service externe.</text>
+  </g>
+</svg>

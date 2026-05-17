@@ -4,7 +4,7 @@ Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.0.4
+Stable tag: 4.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -121,13 +121,22 @@ This plugin stores personal data submitted by visitors when they book an appoint
 
 == Screenshots ==
 
-1. Admin dashboard — appointment list with status filters and counters (upcoming, confirmed, pending, cancelled), and the in-dashboard installation help card.
-2. Unavailabilities manager — three input modes (full period, punctual slot, weekly recurring) and the list of active rules.
+1. Admin dashboard — appointment list with status filters and counters (upcoming, confirmed, pending, cancelled), plus the in-dashboard installation help card with shortcode and CSS class methods side by side.
+2. Unavailabilities manager — three input modes (full period, punctual slot, weekly recurring) and the list of active rules with mode-coded badges.
 3. Settings page — working days, opening hours, slot duration, notification email, button label, and the optional "Powered by" credit toggle (off by default).
-4. Front-end popup, step 1 — calendar with available, fully-booked, and closed dates clearly distinguished, plus the time slot picker for the selected day.
-5. Front-end popup, step 2 — booking form with a recap bar showing the chosen date and time.
+4. Plugins list — Settings and Pro version action links added to the WS Scheduler row via `plugin_action_links` (introduced in 4.0.2).
+5. Front-end — booking button rendered on a contact page via shortcode `[ws_booking_button]` or CSS class `.ws-book-btn` on any existing element.
+6. Front-end popup, step 1 — calendar with available, fully-booked, closed, and past dates clearly distinguished, plus the time slot picker for the selected day.
+7. Front-end popup, step 2 — booking form with a recap bar showing the chosen date and time, and fields for first name, last name, email, company, phone, and message.
+8. Front-end popup, step 3 — confirmation screen with a large check icon, the selected slot recap, and an optional "Join Google Meet" button (Pro).
+9. Email — confirmation sent to the client after booking. Dark-themed HTML with the appointment details, optional Google Meet link, and a sign-off from the business.
+10. Email — admin notification with the full client details (name, email, company, phone, message) and a direct link to the appointment in the back-office.
 
 == Changelog ==
+
+= 4.0.5 =
+* Added: five additional screenshots in `assets/` for the WordPress.org plugin page — total now 10 covering both front and back office, including the plugin list action links (Settings | Pro version), the front-end booking button rendered on a sample contact page, the popup step 3 confirmation screen with Google Meet button (Pro), and the two HTML emails (client confirmation + admin notification) shown in a Gmail-like preview.
+* No code change — assets only.
 
 = 4.0.4 =
 * Fixed: SEO — popup section titles ("Choose your slot", "Your details", "Booking confirmed!") were rendered as `<h2>` tags inside the popup, which is hidden by default but still present in the DOM on every front-end page. Document outline tools (Google, Lighthouse, SEO crawlers) would pick them up as page-level headings, polluting the heading hierarchy of the host page. Replaced with `<div role="heading" aria-level="2">` — visually identical (same `.ws-popup-title` class), invisible to SEO outline tools, still announced as level-2 headings by screen readers thanks to the ARIA role.
@@ -174,6 +183,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 * Security and ecosystem alignment audit.
 
 == Upgrade Notice ==
+
+= 4.0.5 =
+Assets-only release: five additional screenshots added for the WordPress.org plugin page. No code change.
 
 = 4.0.4 =
 SEO improvement: popup titles no longer leak as `<h2>` in the page document outline. Replaced with ARIA-equivalent divs. No database change.

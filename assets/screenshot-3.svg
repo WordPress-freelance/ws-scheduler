@@ -7,18 +7,14 @@
       <stop offset="1" stop-color="#5A3F95"/>
     </linearGradient>
   </defs>
-
   <rect width="1200" height="900" fill="#14121C"/>
 
-  <!-- WP sidebar -->
   <rect x="0" y="0" width="160" height="900" fill="#1d2327"/>
   <rect x="0" y="102" width="160" height="34" fill="#2271b1"/>
   <text x="22" y="68" fill="#a7aaad" font-size="11">Tableau de bord</text>
   <text x="22" y="90" fill="#a7aaad" font-size="11">Indisponibilités</text>
   <text x="22" y="124" fill="#fff" font-size="12" font-weight="500">Réglages</text>
-  <text x="22" y="146" fill="#a7aaad" font-size="11">Licence Pro</text>
 
-  <!-- Plugin top bar -->
   <rect x="160" y="0" width="1040" height="60" fill="#1A1724"/>
   <rect x="184" y="16" width="28" height="28" rx="6" fill="#7C5CBF"/>
   <text x="194" y="36" fill="#F0EDE8" font-size="14" font-weight="700">W</text>
@@ -27,110 +23,70 @@
   <text x="478" y="40" fill="#9590A8" font-size="11">Indisponibilités</text>
   <rect x="592" y="22" width="80" height="28" rx="14" fill="#221D32" stroke="#7C5CBF"/>
   <text x="612" y="40" fill="#F0EDE8" font-size="11" font-weight="500">Réglages</text>
-  <text x="688" y="40" fill="#9590A8" font-size="11">Licence Pro</text>
 
-  <!-- Title -->
   <text class="lora" x="200" y="118" fill="#F0EDE8" font-size="28" font-weight="600">Réglages</text>
   <text x="200" y="142" fill="#9590A8" font-size="13">Configurez vos horaires, durée des créneaux, emails et options.</text>
 
-  <!-- Two-column layout -->
-
-  <!-- LEFT — Working hours + slot duration -->
   <g transform="translate(200, 174)">
     <rect width="476" height="316" rx="12" fill="#1A1724" stroke="#2E2B38"/>
     <text x="24" y="36" fill="#F0EDE8" font-size="14" font-weight="600">Horaires d'ouverture</text>
-
     <text x="24" y="68" fill="#9590A8" font-size="11" letter-spacing="1.2">JOURS OUVRÉS</text>
     <g transform="translate(24, 80)">
-      <rect width="40" height="32" rx="16" fill="url(#g1)"/>
-      <text x="20" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">L</text>
-      <rect x="48" width="40" height="32" rx="16" fill="url(#g1)"/>
-      <text x="68" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">M</text>
-      <rect x="96" width="40" height="32" rx="16" fill="url(#g1)"/>
-      <text x="116" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">M</text>
-      <rect x="144" width="40" height="32" rx="16" fill="url(#g1)"/>
-      <text x="164" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">J</text>
-      <rect x="192" width="40" height="32" rx="16" fill="url(#g1)"/>
-      <text x="212" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">V</text>
-      <rect x="240" width="40" height="32" rx="16" fill="#221D32" stroke="#2E2B38"/>
-      <text x="260" y="20" fill="#9590A8" font-size="12" text-anchor="middle">S</text>
-      <rect x="288" width="40" height="32" rx="16" fill="#221D32" stroke="#2E2B38"/>
-      <text x="308" y="20" fill="#9590A8" font-size="12" text-anchor="middle">D</text>
+      <rect width="40" height="32" rx="16" fill="url(#g1)"/><text x="20" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">L</text>
+      <rect x="48" width="40" height="32" rx="16" fill="url(#g1)"/><text x="68" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">M</text>
+      <rect x="96" width="40" height="32" rx="16" fill="url(#g1)"/><text x="116" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">M</text>
+      <rect x="144" width="40" height="32" rx="16" fill="url(#g1)"/><text x="164" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">J</text>
+      <rect x="192" width="40" height="32" rx="16" fill="url(#g1)"/><text x="212" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">V</text>
+      <rect x="240" width="40" height="32" rx="16" fill="#221D32" stroke="#2E2B38"/><text x="260" y="20" fill="#9590A8" font-size="12" text-anchor="middle">S</text>
+      <rect x="288" width="40" height="32" rx="16" fill="#221D32" stroke="#2E2B38"/><text x="308" y="20" fill="#9590A8" font-size="12" text-anchor="middle">D</text>
     </g>
-
     <text x="24" y="148" fill="#9590A8" font-size="11" letter-spacing="1.2">DÉBUT</text>
     <rect x="24" y="160" width="200" height="40" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
     <text x="40" y="184" fill="#F0EDE8" font-size="13">09:00</text>
-
     <text x="252" y="148" fill="#9590A8" font-size="11" letter-spacing="1.2">FIN</text>
     <rect x="252" y="160" width="200" height="40" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
     <text x="268" y="184" fill="#F0EDE8" font-size="13">18:00</text>
-
     <text x="24" y="232" fill="#9590A8" font-size="11" letter-spacing="1.2">DURÉE D'UN CRÉNEAU</text>
     <rect x="24" y="244" width="428" height="40" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
     <text x="40" y="268" fill="#F0EDE8" font-size="13">30 min</text>
-    <g transform="translate(420, 254)" stroke="#9B8EC4" fill="none">
-      <path d="M0 4 l8 8 l8 -8" stroke-width="1.5"/>
-    </g>
   </g>
 
-  <!-- RIGHT — Notification email + Bouton -->
   <g transform="translate(700, 174)">
     <rect width="476" height="316" rx="12" fill="#1A1724" stroke="#2E2B38"/>
     <text x="24" y="36" fill="#F0EDE8" font-size="14" font-weight="600">Notifications</text>
-
     <text x="24" y="68" fill="#9590A8" font-size="11" letter-spacing="1.2">EMAIL ADMIN</text>
     <rect x="24" y="80" width="428" height="40" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
     <text x="40" y="104" fill="#F0EDE8" font-size="13">contact@monsite.fr</text>
-
     <text x="24" y="148" fill="#9590A8" font-size="11" letter-spacing="1.2">NOM DE L'ENTREPRISE</text>
     <rect x="24" y="160" width="428" height="40" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
     <text x="40" y="184" fill="#F0EDE8" font-size="13">Mon Site SEO</text>
-
     <text x="24" y="228" fill="#9590A8" font-size="11" letter-spacing="1.2">FENÊTRE DE RÉSERVATION (JOURS)</text>
     <rect x="24" y="240" width="428" height="40" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
     <text x="40" y="264" fill="#F0EDE8" font-size="13">90</text>
   </g>
 
-  <!-- Bottom row : Bouton frontend + Crédits -->
   <g transform="translate(200, 510)">
     <rect width="476" height="208" rx="12" fill="#1A1724" stroke="#2E2B38"/>
     <text x="24" y="36" fill="#F0EDE8" font-size="14" font-weight="600">Bouton Front-office</text>
-
     <text x="24" y="68" fill="#9590A8" font-size="11" letter-spacing="1.2">LIBELLÉ DU BOUTON</text>
     <rect x="24" y="80" width="428" height="40" rx="8" fill="#0E0C15" stroke="#2E2B38"/>
     <text x="40" y="104" fill="#F0EDE8" font-size="13">Réserver un créneau</text>
-
     <text x="24" y="148" fill="#9590A8" font-size="11" letter-spacing="1.2">APERÇU</text>
     <rect x="24" y="158" width="180" height="36" rx="8" fill="url(#g1)"/>
-    <g transform="translate(40, 174)" stroke="#F0EDE8" fill="none" stroke-width="1.6">
-      <rect width="14" height="14" rx="2"/>
-      <line x1="0" y1="5" x2="14" y2="5"/>
-      <line x1="4" y1="-2" x2="4" y2="3"/>
-      <line x1="10" y1="-2" x2="10" y2="3"/>
-    </g>
-    <text x="60" y="180" fill="#F0EDE8" font-size="12" font-weight="500">Réserver un créneau</text>
+    <text x="114" y="180" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">Réserver un créneau</text>
   </g>
 
   <g transform="translate(700, 510)">
     <rect width="476" height="208" rx="12" fill="#1A1724" stroke="#2E2B38"/>
     <text x="24" y="36" fill="#F0EDE8" font-size="14" font-weight="600">Crédits</text>
-
-    <!-- toggle off (default) -->
     <rect x="24" y="68" width="44" height="24" rx="12" fill="#221D32" stroke="#2E2B38"/>
     <circle cx="36" cy="80" r="9" fill="#4A4260"/>
     <text x="80" y="84" fill="#F0EDE8" font-size="13" font-weight="500">Afficher « Powered by WebStrategy »</text>
     <text x="80" y="104" fill="#9590A8" font-size="11">Désactivé par défaut. Aucun lien vers wordpress-freelance.com</text>
-    <text x="80" y="120" fill="#9590A8" font-size="11">n'est affiché côté visiteur tant que cette option est OFF.</text>
-
-    <!-- save button -->
+    <text x="80" y="120" fill="#9590A8" font-size="11">n'est affiché tant que cette option est OFF.</text>
     <rect x="24" y="148" width="180" height="44" rx="10" fill="url(#g1)"/>
     <text x="114" y="176" fill="#F0EDE8" font-size="13" font-weight="600" text-anchor="middle">Enregistrer</text>
-
-    <text x="220" y="176" fill="#9B8EC4" font-size="12">Modifications enregistrées il y a 3 min</text>
   </g>
 
-  <!-- Footer hint -->
-  <text x="200" y="780" fill="#4A4260" font-size="11">Conformité RGPD : les données client peuvent être exportées et effacées via Outils → Données personnelles.</text>
-  <text x="200" y="800" fill="#4A4260" font-size="11">Tag d'intégration : <tspan fill="#9B8EC4" font-family="monospace">[ws_booking_button]</tspan> ou classe CSS <tspan fill="#9B8EC4" font-family="monospace">.ws-book-btn</tspan> sur n'importe quel élément.</text>
+  <text x="200" y="780" fill="#4A4260" font-size="11">Tag d'intégration : <tspan fill="#9B8EC4" font-family="monospace">[ws_booking_button]</tspan> ou classe CSS <tspan fill="#9B8EC4" font-family="monospace">.ws-book-btn</tspan></text>
 </svg>

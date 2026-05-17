@@ -1,106 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Inter, system-ui, sans-serif">
   <defs>
-    <style>
-      .lora { font-family: 'Lora', Georgia, serif; }
-      .accent-grad { fill: url(#g1); }
-    </style>
+    <style>.lora { font-family: 'Lora', Georgia, serif; }</style>
     <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#7C5CBF"/>
       <stop offset="1" stop-color="#5A3F95"/>
     </linearGradient>
   </defs>
 
-  <!-- Page background -->
   <rect width="1200" height="900" fill="#14121C"/>
 
-  <!-- WP admin sidebar (left) -->
+  <!-- WP admin sidebar -->
   <rect x="0" y="0" width="160" height="900" fill="#1d2327"/>
   <rect x="0" y="46" width="160" height="34" fill="#2271b1"/>
   <text x="22" y="68" fill="#fff" font-size="12" font-weight="500">WS Scheduler</text>
   <text x="22" y="100" fill="#a7aaad" font-size="11">Tableau de bord</text>
   <text x="22" y="124" fill="#a7aaad" font-size="11">Indisponibilités</text>
   <text x="22" y="148" fill="#a7aaad" font-size="11">Réglages</text>
-  <text x="22" y="172" fill="#a7aaad" font-size="11">Licence Pro</text>
 
-  <!-- Plugin top bar (WebStrategy) -->
+  <!-- Plugin top bar -->
   <rect x="160" y="0" width="1040" height="60" fill="#1A1724"/>
-  <!-- Logo mark -->
   <rect x="184" y="16" width="28" height="28" rx="6" fill="#7C5CBF"/>
   <text x="194" y="36" fill="#F0EDE8" font-size="14" font-weight="700">W</text>
   <text x="222" y="36" fill="#F0EDE8" font-size="13" font-weight="600">WebStrategy</text>
-
-  <!-- Top bar nav -->
-  <rect x="360" y="22" width="118" height="28" rx="14" fill="#221D32" stroke="#7C5CBF" stroke-width="1"/>
+  <rect x="360" y="22" width="118" height="28" rx="14" fill="#221D32" stroke="#7C5CBF"/>
   <text x="382" y="40" fill="#F0EDE8" font-size="11" font-weight="500">Tableau de bord</text>
-
   <text x="500" y="40" fill="#9590A8" font-size="11">Indisponibilités</text>
   <text x="612" y="40" fill="#9590A8" font-size="11">Réglages</text>
-  <text x="688" y="40" fill="#9590A8" font-size="11">Licence Pro</text>
-
   <text x="1170" y="40" fill="#4A4260" font-size="10" text-anchor="end">monsite.fr</text>
 
   <!-- Page title -->
-  <rect x="200" y="100" width="36" height="36" rx="7" fill="#221D32"/>
-  <path d="M210 116 l4 12 5-8 5 8 4-12" stroke="#7C5CBF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="227" cy="115" r="2" fill="#9B8EC4"/>
-  <text class="lora" x="248" y="128" fill="#F0EDE8" font-size="28" font-weight="600">Tableau de bord</text>
-  <text x="496" y="128" fill="#9590A8" font-size="14">Rendez-vous</text>
+  <text class="lora" x="200" y="110" fill="#F0EDE8" font-size="28" font-weight="600">Tableau de bord</text>
+  <text x="200" y="132" fill="#9590A8" font-size="13">Rendez-vous · vue d'ensemble</text>
 
-  <!-- Stats grid (4 cards) -->
+  <!-- Stats grid -->
   <g>
-    <rect x="200" y="164" width="232" height="100" rx="12" fill="#1A1724" stroke="#2E2B38"/>
-    <text x="220" y="190" fill="#9590A8" font-size="11" letter-spacing="1.2">À VENIR</text>
-    <text class="lora" x="220" y="240" fill="#A899D4" font-size="44" font-weight="600">14</text>
+    <rect x="200" y="156" width="232" height="84" rx="12" fill="#1A1724" stroke="#2E2B38"/>
+    <text x="220" y="180" fill="#9590A8" font-size="11" letter-spacing="1.2">À VENIR</text>
+    <text class="lora" x="220" y="220" fill="#A899D4" font-size="36" font-weight="600">14</text>
 
-    <rect x="448" y="164" width="232" height="100" rx="12" fill="#1A1724" stroke="#2E2B38"/>
-    <text x="468" y="190" fill="#9590A8" font-size="11" letter-spacing="1.2">CONFIRMÉS</text>
-    <text class="lora" x="468" y="240" fill="#F0EDE8" font-size="44" font-weight="600">11</text>
+    <rect x="448" y="156" width="232" height="84" rx="12" fill="#1A1724" stroke="#2E2B38"/>
+    <text x="468" y="180" fill="#9590A8" font-size="11" letter-spacing="1.2">CONFIRMÉS</text>
+    <text class="lora" x="468" y="220" fill="#F0EDE8" font-size="36" font-weight="600">11</text>
 
-    <rect x="696" y="164" width="232" height="100" rx="12" fill="#1A1724" stroke="#2E2B38"/>
-    <text x="716" y="190" fill="#9590A8" font-size="11" letter-spacing="1.2">EN ATTENTE</text>
-    <text class="lora" x="716" y="240" fill="#FFB94A" font-size="44" font-weight="600">3</text>
+    <rect x="696" y="156" width="232" height="84" rx="12" fill="#1A1724" stroke="#2E2B38"/>
+    <text x="716" y="180" fill="#9590A8" font-size="11" letter-spacing="1.2">EN ATTENTE</text>
+    <text class="lora" x="716" y="220" fill="#FFB94A" font-size="36" font-weight="600">3</text>
 
-    <rect x="944" y="164" width="232" height="100" rx="12" fill="#1A1724" stroke="#2E2B38"/>
-    <text x="964" y="190" fill="#9590A8" font-size="11" letter-spacing="1.2">ANNULÉS</text>
-    <text class="lora" x="964" y="240" fill="#4A4260" font-size="44" font-weight="600">2</text>
+    <rect x="944" y="156" width="232" height="84" rx="12" fill="#1A1724" stroke="#2E2B38"/>
+    <text x="964" y="180" fill="#9590A8" font-size="11" letter-spacing="1.2">ANNULÉS</text>
+    <text class="lora" x="964" y="220" fill="#4A4260" font-size="36" font-weight="600">2</text>
   </g>
 
-  <!-- Filter pills -->
-  <g transform="translate(200, 296)">
-    <rect width="976" height="556" rx="12" fill="#1A1724" stroke="#2E2B38"/>
+  <!-- RDV table (compacted) -->
+  <g transform="translate(200, 260)">
+    <rect width="976" height="290" rx="12" fill="#1A1724" stroke="#2E2B38"/>
 
     <g transform="translate(24, 24)">
-      <rect width="80" height="32" rx="16" class="accent-grad"/>
-      <text x="40" y="20" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">Tous</text>
-
-      <rect x="92" width="100" height="32" rx="16" fill="#221D32" stroke="#2E2B38"/>
-      <text x="142" y="20" fill="#C4BFDA" font-size="12" text-anchor="middle">Confirmés</text>
-
-      <rect x="204" width="100" height="32" rx="16" fill="#221D32" stroke="#2E2B38"/>
-      <text x="254" y="20" fill="#C4BFDA" font-size="12" text-anchor="middle">En attente</text>
-
-      <rect x="316" width="84" height="32" rx="16" fill="#221D32" stroke="#2E2B38"/>
-      <text x="358" y="20" fill="#C4BFDA" font-size="12" text-anchor="middle">Annulés</text>
+      <rect width="80" height="30" rx="15" fill="url(#g1)"/>
+      <text x="40" y="19" fill="#F0EDE8" font-size="12" font-weight="500" text-anchor="middle">Tous</text>
+      <rect x="92" width="100" height="30" rx="15" fill="#221D32" stroke="#2E2B38"/>
+      <text x="142" y="19" fill="#C4BFDA" font-size="12" text-anchor="middle">Confirmés</text>
+      <rect x="204" width="100" height="30" rx="15" fill="#221D32" stroke="#2E2B38"/>
+      <text x="254" y="19" fill="#C4BFDA" font-size="12" text-anchor="middle">En attente</text>
+      <rect x="316" width="84" height="30" rx="15" fill="#221D32" stroke="#2E2B38"/>
+      <text x="358" y="19" fill="#C4BFDA" font-size="12" text-anchor="middle">Annulés</text>
     </g>
 
-    <!-- Table header -->
-    <line x1="0" y1="80" x2="976" y2="80" stroke="#2E2B38"/>
-    <g transform="translate(24, 100)" fill="#9590A8" font-size="10" letter-spacing="1.2">
+    <line x1="0" y1="78" x2="976" y2="78" stroke="#2E2B38"/>
+    <g transform="translate(24, 96)" fill="#9590A8" font-size="10" letter-spacing="1.2">
       <text x="0">DATE</text>
       <text x="120">HEURE</text>
       <text x="200">CLIENT</text>
       <text x="380">EMAIL</text>
       <text x="600">MESSAGE</text>
       <text x="760">STATUT</text>
-      <text x="880">ACTIONS</text>
     </g>
-    <line x1="0" y1="116" x2="976" y2="116" stroke="#2E2B38"/>
+    <line x1="0" y1="110" x2="976" y2="110" stroke="#2E2B38"/>
 
-    <!-- Table rows -->
     <g font-size="13">
-      <!-- Row 1 -->
-      <g transform="translate(24, 138)">
+      <g transform="translate(24, 132)">
         <text fill="#F0EDE8">12 juin 2026</text>
         <text x="120" fill="#A899D4">10:00</text>
         <text x="200" fill="#F0EDE8" font-weight="500">Sophie Martin</text>
@@ -108,17 +87,10 @@
         <text x="600" fill="#9590A8">Démo produit Q3…</text>
         <rect x="760" y="-14" width="86" height="22" rx="11" fill="#1B3A2A" stroke="#2D6B4A"/>
         <text x="803" y="2" fill="#5FD49C" font-size="11" text-anchor="middle">Confirmé</text>
-        <g transform="translate(880, -8)" stroke="#9590A8" fill="none">
-          <rect width="20" height="20" rx="4"/>
-          <path d="M6 10 h8 M10 6 v8"/>
-          <rect x="28" width="20" height="20" rx="4"/>
-          <path d="M34 6 l8 8 M42 6 l-8 8"/>
-        </g>
       </g>
-      <line x1="24" y1="156" x2="952" y2="156" stroke="#2E2B38" stroke-dasharray="2 4" opacity="0.5"/>
+      <line x1="24" y1="150" x2="952" y2="150" stroke="#2E2B38" stroke-dasharray="2 4" opacity="0.5"/>
 
-      <!-- Row 2 -->
-      <g transform="translate(24, 184)">
+      <g transform="translate(24, 178)">
         <text fill="#F0EDE8">12 juin 2026</text>
         <text x="120" fill="#A899D4">14:30</text>
         <text x="200" fill="#F0EDE8" font-weight="500">Léo Dubois</text>
@@ -126,17 +98,10 @@
         <text x="600" fill="#9590A8">Audit SEO site e-com…</text>
         <rect x="760" y="-14" width="86" height="22" rx="11" fill="#3A2D14" stroke="#6B5429"/>
         <text x="803" y="2" fill="#FFB94A" font-size="11" text-anchor="middle">En attente</text>
-        <g transform="translate(880, -8)" stroke="#9590A8" fill="none">
-          <rect width="20" height="20" rx="4"/>
-          <path d="M6 10 h8 M10 6 v8"/>
-          <rect x="28" width="20" height="20" rx="4"/>
-          <path d="M34 6 l8 8 M42 6 l-8 8"/>
-        </g>
       </g>
-      <line x1="24" y1="202" x2="952" y2="202" stroke="#2E2B38" stroke-dasharray="2 4" opacity="0.5"/>
+      <line x1="24" y1="196" x2="952" y2="196" stroke="#2E2B38" stroke-dasharray="2 4" opacity="0.5"/>
 
-      <!-- Row 3 -->
-      <g transform="translate(24, 230)">
+      <g transform="translate(24, 224)">
         <text fill="#F0EDE8">13 juin 2026</text>
         <text x="120" fill="#A899D4">09:00</text>
         <text x="200" fill="#F0EDE8" font-weight="500">Marie Lefèvre</text>
@@ -144,103 +109,58 @@
         <text x="600" fill="#9590A8">—</text>
         <rect x="760" y="-14" width="86" height="22" rx="11" fill="#1B3A2A" stroke="#2D6B4A"/>
         <text x="803" y="2" fill="#5FD49C" font-size="11" text-anchor="middle">Confirmé</text>
-        <g transform="translate(880, -8)" stroke="#9590A8" fill="none">
-          <rect width="20" height="20" rx="4"/>
-          <path d="M6 10 h8 M10 6 v8"/>
-          <rect x="28" width="20" height="20" rx="4"/>
-          <path d="M34 6 l8 8 M42 6 l-8 8"/>
-        </g>
       </g>
-      <line x1="24" y1="248" x2="952" y2="248" stroke="#2E2B38" stroke-dasharray="2 4" opacity="0.5"/>
+    </g>
+  </g>
 
-      <!-- Row 4 -->
-      <g transform="translate(24, 276)">
-        <text fill="#F0EDE8">14 juin 2026</text>
-        <text x="120" fill="#A899D4">11:30</text>
-        <text x="200" fill="#F0EDE8" font-weight="500">Pierre Garnier</text>
-        <text x="380" fill="#9590A8">pgarnier@startup.co</text>
-        <text x="600" fill="#9590A8">Roadmap H2…</text>
-        <rect x="760" y="-14" width="86" height="22" rx="11" fill="#1B3A2A" stroke="#2D6B4A"/>
-        <text x="803" y="2" fill="#5FD49C" font-size="11" text-anchor="middle">Confirmé</text>
-        <g transform="translate(880, -8)" stroke="#9590A8" fill="none">
-          <rect width="20" height="20" rx="4"/>
-          <path d="M6 10 h8 M10 6 v8"/>
-          <rect x="28" width="20" height="20" rx="4"/>
-          <path d="M34 6 l8 8 M42 6 l-8 8"/>
-        </g>
-      </g>
-      <line x1="24" y1="294" x2="952" y2="294" stroke="#2E2B38" stroke-dasharray="2 4" opacity="0.5"/>
+  <!-- Install help card -->
+  <g transform="translate(200, 572)">
+    <rect width="976" height="304" rx="12" fill="#1A1724" stroke="#2E2B38"/>
 
-      <!-- Row 5 -->
-      <g transform="translate(24, 322)">
-        <text fill="#F0EDE8">15 juin 2026</text>
-        <text x="120" fill="#A899D4">15:00</text>
-        <text x="200" fill="#F0EDE8" font-weight="500">Camille Roux</text>
-        <text x="380" fill="#9590A8">camille@agence.io</text>
-        <text x="600" fill="#9590A8">Refonte WordPress…</text>
-        <rect x="760" y="-14" width="86" height="22" rx="11" fill="#3A2D14" stroke="#6B5429"/>
-        <text x="803" y="2" fill="#FFB94A" font-size="11" text-anchor="middle">En attente</text>
-        <g transform="translate(880, -8)" stroke="#9590A8" fill="none">
-          <rect width="20" height="20" rx="4"/>
-          <path d="M6 10 h8 M10 6 v8"/>
-          <rect x="28" width="20" height="20" rx="4"/>
-          <path d="M34 6 l8 8 M42 6 l-8 8"/>
-        </g>
-      </g>
-      <line x1="24" y1="340" x2="952" y2="340" stroke="#2E2B38" stroke-dasharray="2 4" opacity="0.5"/>
+    <!-- Summary line -->
+    <circle cx="44" cy="40" r="11" fill="none" stroke="#A899D4" stroke-width="1.6"/>
+    <path d="M40 36 a3 3 0 0 1 6 1 c0 2 -3 2 -3 3" stroke="#A899D4" stroke-width="1.6" fill="none"/>
+    <circle cx="44" cy="45" r="1.2" fill="#A899D4"/>
+    <text class="lora" x="64" y="46" fill="#F0EDE8" font-size="17" font-weight="600">Comment afficher le bouton de réservation sur votre site</text>
+    <text x="952" y="46" fill="#9590A8" font-size="11" text-anchor="end">cliquer pour replier</text>
 
-      <!-- Row 6 -->
-      <g transform="translate(24, 368)">
-        <text fill="#F0EDE8">16 juin 2026</text>
-        <text x="120" fill="#A899D4">10:30</text>
-        <text x="200" fill="#F0EDE8" font-weight="500">Thomas Albert</text>
-        <text x="380" fill="#9590A8">t.albert@finance.eu</text>
-        <text x="600" fill="#9590A8">Stratégie Q4…</text>
-        <rect x="760" y="-14" width="86" height="22" rx="11" fill="#2A1F2F" stroke="#4A3A55"/>
-        <text x="803" y="2" fill="#9590A8" font-size="11" text-anchor="middle">Annulé</text>
-        <g transform="translate(880, -8)" stroke="#9590A8" fill="none">
-          <rect width="20" height="20" rx="4"/>
-          <path d="M6 10 h8 M10 6 v8"/>
-          <rect x="28" width="20" height="20" rx="4"/>
-          <path d="M34 6 l8 8 M42 6 l-8 8"/>
-        </g>
-      </g>
-      <line x1="24" y1="386" x2="952" y2="386" stroke="#2E2B38" stroke-dasharray="2 4" opacity="0.5"/>
+    <!-- Méthode 1 -->
+    <g transform="translate(24, 70)">
+      <rect width="446" height="216" rx="10" fill="#221D32" stroke="#2E2B38"/>
+      <rect x="14" y="14" width="80" height="22" rx="11" fill="#7C5CBF"/>
+      <text x="54" y="29" fill="#F0EDE8" font-size="11" font-weight="600" text-anchor="middle">MÉTHODE 1</text>
+      <text x="104" y="30" fill="#F0EDE8" font-size="14" font-weight="500">Shortcode</text>
 
-      <!-- Row 7 -->
-      <g transform="translate(24, 414)">
-        <text fill="#F0EDE8">17 juin 2026</text>
-        <text x="120" fill="#A899D4">14:00</text>
-        <text x="200" fill="#F0EDE8" font-weight="500">Julie Hernandez</text>
-        <text x="380" fill="#9590A8">julie.h@design.fr</text>
-        <text x="600" fill="#9590A8">Branding new product…</text>
-        <rect x="760" y="-14" width="86" height="22" rx="11" fill="#1B3A2A" stroke="#2D6B4A"/>
-        <text x="803" y="2" fill="#5FD49C" font-size="11" text-anchor="middle">Confirmé</text>
-        <g transform="translate(880, -8)" stroke="#9590A8" fill="none">
-          <rect width="20" height="20" rx="4"/>
-          <path d="M6 10 h8 M10 6 v8"/>
-          <rect x="28" width="20" height="20" rx="4"/>
-          <path d="M34 6 l8 8 M42 6 l-8 8"/>
-        </g>
-      </g>
-      <line x1="24" y1="432" x2="952" y2="432" stroke="#2E2B38" stroke-dasharray="2 4" opacity="0.5"/>
+      <text x="14" y="64" fill="#C4BFDA" font-size="12">Collez ce shortcode dans n'importe quelle page,</text>
+      <text x="14" y="80" fill="#C4BFDA" font-size="12">article ou widget texte :</text>
 
-      <!-- Row 8 -->
-      <g transform="translate(24, 460)">
-        <text fill="#F0EDE8">18 juin 2026</text>
-        <text x="120" fill="#A899D4">16:00</text>
-        <text x="200" fill="#F0EDE8" font-weight="500">Romain Petit</text>
-        <text x="380" fill="#9590A8">romain@petit-conseil.fr</text>
-        <text x="600" fill="#9590A8">Optimisation Core Web…</text>
-        <rect x="760" y="-14" width="86" height="22" rx="11" fill="#1B3A2A" stroke="#2D6B4A"/>
-        <text x="803" y="2" fill="#5FD49C" font-size="11" text-anchor="middle">Confirmé</text>
-        <g transform="translate(880, -8)" stroke="#9590A8" fill="none">
-          <rect width="20" height="20" rx="4"/>
-          <path d="M6 10 h8 M10 6 v8"/>
-          <rect x="28" width="20" height="20" rx="4"/>
-          <path d="M34 6 l8 8 M42 6 l-8 8"/>
-        </g>
-      </g>
+      <rect x="14" y="92" width="418" height="34" rx="6" fill="#0E0C15" stroke="#2E2B38"/>
+      <text x="28" y="114" fill="#A899D4" font-size="13" font-family="Courier New, monospace">[ws_booking_button]</text>
+
+      <text x="14" y="148" fill="#9590A8" font-size="11">Pour personnaliser le libellé du bouton :</text>
+      <rect x="14" y="158" width="418" height="34" rx="6" fill="#0E0C15" stroke="#2E2B38"/>
+      <text x="28" y="180" fill="#A899D4" font-size="12" font-family="Courier New, monospace">[ws_booking_button label="Réserver"]</text>
+    </g>
+
+    <!-- Méthode 2 -->
+    <g transform="translate(494, 70)">
+      <rect width="446" height="216" rx="10" fill="#221D32" stroke="#2E2B38"/>
+      <rect x="14" y="14" width="80" height="22" rx="11" fill="#7C5CBF"/>
+      <text x="54" y="29" fill="#F0EDE8" font-size="11" font-weight="600" text-anchor="middle">MÉTHODE 2</text>
+      <text x="104" y="30" fill="#F0EDE8" font-size="14" font-weight="500">Classe CSS sur bouton existant</text>
+
+      <text x="14" y="64" fill="#C4BFDA" font-size="12">Pratique pour Avada, Elementor, Divi :</text>
+      <text x="14" y="80" fill="#C4BFDA" font-size="12">ajoutez la classe CSS</text>
+
+      <rect x="184" y="68" width="78" height="20" rx="3" fill="#0E0C15" stroke="#2E2B38"/>
+      <text x="195" y="82" fill="#A899D4" font-size="11" font-family="Courier New, monospace">ws-book-btn</text>
+
+      <text x="14" y="116" fill="#C4BFDA" font-size="12">à n'importe quel bouton existant. Le clic</text>
+      <text x="14" y="132" fill="#C4BFDA" font-size="12">ouvrira la popup automatiquement.</text>
+
+      <text x="14" y="164" fill="#9590A8" font-size="11">Exemple dans le champ « Classe CSS » :</text>
+      <rect x="14" y="174" width="200" height="32" rx="6" fill="#0E0C15" stroke="#2E2B38"/>
+      <text x="28" y="194" fill="#A899D4" font-size="13" font-family="Courier New, monospace">ws-book-btn</text>
     </g>
   </g>
 </svg>

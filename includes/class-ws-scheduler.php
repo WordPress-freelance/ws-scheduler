@@ -16,7 +16,7 @@ class WS_Scheduler {
 	protected $version;
 
 	public function __construct() {
-		$this->version     = defined( 'WS_SCHEDULER_VERSION' ) ? WS_SCHEDULER_VERSION : '4.0.4';
+		$this->version     = defined( 'WS_SCHEDULER_VERSION' ) ? WS_SCHEDULER_VERSION : '4.0.5';
 		$this->plugin_name = 'ws-scheduler';
 
 		$this->load_dependencies();

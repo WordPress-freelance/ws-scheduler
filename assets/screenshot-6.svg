@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <style>.lora { font-family: 'Lora', Georgia, serif; }</style>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7C5CBF"/>
+      <stop offset="1" stop-color="#5A3F95"/>
+    </linearGradient>
+    <radialGradient id="overlay" cx="50%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#221D32" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#0E0C15" stop-opacity="0.95"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="900" fill="#FAFAF8"/>
+  <rect x="0" y="0" width="1200" height="48" fill="#E5E1D9"/>
+  <circle cx="22" cy="24" r="6" fill="#FF6B5A"/>
+  <circle cx="42" cy="24" r="6" fill="#FFC53D"/>
+  <circle cx="62" cy="24" r="6" fill="#5FD49C"/>
+  <rect x="140" y="13" width="600" height="22" rx="11" fill="#fff" stroke="#D4D0C8"/>
+  <text x="156" y="28" fill="#7A7670" font-size="11">https://monsite.fr/contact</text>
+
+  <text class="lora" x="80" y="180" fill="#3A3A3A" font-size="40" font-weight="600" opacity="0.5">Travaillons ensemble</text>
+
+  <rect x="0" y="48" width="1200" height="852" fill="url(#overlay)"/>
+
+  <g transform="translate(248, 80)">
+    <rect width="704" height="780" rx="20" fill="#14121C" stroke="#2E2B38" stroke-width="1.5"/>
+
+    <g transform="translate(656, 24)" stroke="#9590A8" stroke-width="2" fill="none">
+      <line x1="0" y1="0" x2="14" y2="14"/>
+      <line x1="14" y1="0" x2="0" y2="14"/>
+    </g>
+
+    <rect x="40" y="40" width="92" height="26" rx="13" fill="#221D32" stroke="#7C5CBF"/>
+    <text x="86" y="57" fill="#A899D4" font-size="11" font-weight="500" text-anchor="middle">Étape 1 / 2</text>
+
+    <text class="lora" x="40" y="116" fill="#F0EDE8" font-size="28" font-weight="600">Choisissez votre créneau</text>
+    <text x="40" y="140" fill="#9590A8" font-size="13">Sélectionnez une date disponible, puis un horaire.</text>
+
+    <g transform="translate(40, 176)">
+      <rect width="36" height="36" rx="8" fill="#221D32" stroke="#2E2B38"/>
+      <path d="M22 12 l-6 6 l6 6" stroke="#A899D4" stroke-width="2" fill="none"/>
+      <text x="200" y="24" fill="#F0EDE8" font-size="15" font-weight="500" text-anchor="middle">Juin 2026</text>
+      <rect x="364" width="36" height="36" rx="8" fill="#221D32" stroke="#2E2B38"/>
+      <path d="M378 12 l6 6 l-6 6" stroke="#A899D4" stroke-width="2" fill="none"/>
+    </g>
+
+    <g transform="translate(40, 230)" font-size="10" letter-spacing="1.4" fill="#9590A8" text-anchor="middle">
+      <text x="26">LUN</text><text x="78">MAR</text><text x="130">MER</text>
+      <text x="182">JEU</text><text x="234">VEN</text><text x="286">SAM</text><text x="338">DIM</text>
+    </g>
+
+    <g transform="translate(40, 252)" font-size="13">
+      <g><text x="26" y="22" fill="#4A4260" text-anchor="middle">26</text><text x="78" y="22" fill="#4A4260" text-anchor="middle">27</text><text x="130" y="22" fill="#4A4260" text-anchor="middle">28</text><text x="182" y="22" fill="#4A4260" text-anchor="middle">29</text><text x="234" y="22" fill="#4A4260" text-anchor="middle">30</text><text x="286" y="22" fill="#4A4260" text-anchor="middle">31</text><text x="338" y="22" fill="#4A4260" text-anchor="middle">1</text></g>
+
+      <g transform="translate(0,44)">
+        <circle cx="26" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="26" y="20" fill="#F0EDE8" text-anchor="middle">2</text><circle cx="26" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="78" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="78" y="20" fill="#F0EDE8" text-anchor="middle">3</text><circle cx="78" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="130" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="130" y="20" fill="#F0EDE8" text-anchor="middle">4</text><circle cx="130" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="182" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="182" y="20" fill="#F0EDE8" text-anchor="middle">5</text><circle cx="182" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="234" cy="14" r="18" fill="#1A1724" stroke="#6B5429" stroke-width="1.5"/><text x="234" y="20" fill="#C4BFDA" text-anchor="middle">6</text><circle cx="234" cy="40" r="3" fill="#FFB94A"/>
+        <text x="286" y="20" fill="#4A4260" text-anchor="middle">7</text><text x="338" y="20" fill="#4A4260" text-anchor="middle">8</text>
+      </g>
+
+      <g transform="translate(0,88)">
+        <circle cx="26" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="26" y="20" fill="#F0EDE8" text-anchor="middle">9</text><circle cx="26" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="78" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="78" y="20" fill="#F0EDE8" text-anchor="middle">10</text><circle cx="78" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="130" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="130" y="20" fill="#F0EDE8" text-anchor="middle">11</text><circle cx="130" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="182" cy="14" r="18" fill="url(#grad)"/><text x="182" y="20" fill="#F0EDE8" text-anchor="middle" font-weight="600">12</text><circle cx="182" cy="40" r="3" fill="#A899D4"/>
+        <circle cx="234" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="234" y="20" fill="#F0EDE8" text-anchor="middle">13</text><circle cx="234" cy="40" r="3" fill="#5FD49C"/>
+        <text x="286" y="20" fill="#4A4260" text-anchor="middle">14</text><text x="338" y="20" fill="#4A4260" text-anchor="middle">15</text>
+      </g>
+
+      <g transform="translate(0,132)">
+        <circle cx="26" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="26" y="20" fill="#F0EDE8" text-anchor="middle">16</text><circle cx="26" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="78" cy="14" r="18" fill="#1A1724" stroke="#4A4260" stroke-width="1.5" stroke-dasharray="3 2"/><text x="78" y="20" fill="#9590A8" text-anchor="middle">17</text><text x="78" y="42" fill="#4A4260" text-anchor="middle" font-size="9">FERMÉ</text>
+        <circle cx="130" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="130" y="20" fill="#F0EDE8" text-anchor="middle">18</text><circle cx="130" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="182" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="182" y="20" fill="#F0EDE8" text-anchor="middle">19</text><circle cx="182" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="234" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="234" y="20" fill="#F0EDE8" text-anchor="middle">20</text><circle cx="234" cy="40" r="3" fill="#5FD49C"/>
+        <text x="286" y="20" fill="#4A4260" text-anchor="middle">21</text><text x="338" y="20" fill="#4A4260" text-anchor="middle">22</text>
+      </g>
+
+      <g transform="translate(0,176)">
+        <circle cx="26" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="26" y="20" fill="#F0EDE8" text-anchor="middle">23</text><circle cx="26" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="78" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="78" y="20" fill="#F0EDE8" text-anchor="middle">24</text><circle cx="78" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="130" cy="14" r="18" fill="#1A1724" stroke="#6B5429" stroke-width="1.5"/><text x="130" y="20" fill="#C4BFDA" text-anchor="middle">25</text><circle cx="130" cy="40" r="3" fill="#FFB94A"/>
+        <circle cx="182" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="182" y="20" fill="#F0EDE8" text-anchor="middle">26</text><circle cx="182" cy="40" r="3" fill="#5FD49C"/>
+        <circle cx="234" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="234" y="20" fill="#F0EDE8" text-anchor="middle">27</text><circle cx="234" cy="40" r="3" fill="#5FD49C"/>
+        <text x="286" y="20" fill="#4A4260" text-anchor="middle">28</text><text x="338" y="20" fill="#4A4260" text-anchor="middle">29</text>
+      </g>
+
+      <g transform="translate(0,220)">
+        <circle cx="26" cy="14" r="18" fill="#1A1724" stroke="#2D6B4A" stroke-width="1.5"/><text x="26" y="20" fill="#F0EDE8" text-anchor="middle">30</text><circle cx="26" cy="40" r="3" fill="#5FD49C"/>
+        <text x="78" y="20" fill="#4A4260" text-anchor="middle">1</text><text x="130" y="20" fill="#4A4260" text-anchor="middle">2</text>
+        <text x="182" y="20" fill="#4A4260" text-anchor="middle">3</text><text x="234" y="20" fill="#4A4260" text-anchor="middle">4</text>
+        <text x="286" y="20" fill="#4A4260" text-anchor="middle">5</text><text x="338" y="20" fill="#4A4260" text-anchor="middle">6</text>
+      </g>
+    </g>
+
+    <g transform="translate(40, 548)" font-size="11" fill="#9590A8">
+      <circle cx="6" cy="0" r="4" fill="#5FD49C"/><text x="18" y="4">Disponible</text>
+      <circle cx="106" cy="0" r="4" fill="#FFB94A"/><text x="118" y="4">Complet</text>
+      <circle cx="190" cy="0" r="4" fill="#4A4260"/><text x="202" y="4">Fermé</text>
+    </g>
+
+    <g transform="translate(40, 588)">
+      <text x="0" y="14" fill="#C4BFDA" font-size="13" font-weight="500">Créneaux du <tspan fill="#A899D4">vendredi 12 juin</tspan></text>
+      <g font-size="13" font-weight="500">
+        <rect y="34" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="46" y="58" fill="#F0EDE8" text-anchor="middle">09:00</text>
+        <rect x="100" y="34" width="92" height="40" rx="8" fill="url(#grad)"/><text x="146" y="58" fill="#F0EDE8" text-anchor="middle">10:00</text>
+        <rect x="200" y="34" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="246" y="58" fill="#F0EDE8" text-anchor="middle">10:30</text>
+        <rect x="300" y="34" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="346" y="58" fill="#F0EDE8" text-anchor="middle">11:00</text>
+        <rect x="400" y="34" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="446" y="58" fill="#F0EDE8" text-anchor="middle">11:30</text>
+        <rect x="500" y="34" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="546" y="58" fill="#F0EDE8" text-anchor="middle">14:30</text>
+        <rect y="84" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="46" y="108" fill="#F0EDE8" text-anchor="middle">15:00</text>
+        <rect x="100" y="84" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="146" y="108" fill="#F0EDE8" text-anchor="middle">15:30</text>
+        <rect x="200" y="84" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="246" y="108" fill="#F0EDE8" text-anchor="middle">16:00</text>
+        <rect x="300" y="84" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="346" y="108" fill="#F0EDE8" text-anchor="middle">16:30</text>
+        <rect x="400" y="84" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="446" y="108" fill="#F0EDE8" text-anchor="middle">17:00</text>
+        <rect x="500" y="84" width="92" height="40" rx="8" fill="#221D32" stroke="#2E2B38"/><text x="546" y="108" fill="#F0EDE8" text-anchor="middle">17:30</text>
+      </g>
+    </g>
+  </g>
+</svg>
