@@ -108,6 +108,12 @@ $show_powered = (bool) get_option( 'ws_show_powered_by', false );
           <label for="ws_message"><?php esc_html_e( 'Message (optionnel)', 'ws-scheduler' ); ?></label>
           <textarea id="ws_message" name="message" rows="3" placeholder="<?php esc_attr_e( 'Précisez l\'objet de votre rendez-vous…', 'ws-scheduler' ); ?>"></textarea>
         </div>
+        <?php // Honeypot : caché aux humains (position absolue + aria-hidden + tabindex=-1 + autocomplete=off).
+              // Les bots qui parsent le HTML remplissent tous les inputs et déclenchent le rejet côté serveur. ?>
+        <div class="ws-hp-field" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;">
+          <label for="ws_website">Website (leave empty)</label>
+          <input type="text" id="ws_website" name="ws_website" value="" tabindex="-1" autocomplete="off">
+        </div>
       </div>
 
       <div class="ws-step-footer">

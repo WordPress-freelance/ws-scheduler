@@ -23,7 +23,7 @@ class Test_WS_Scheduler_Admin_Advanced extends TestCase {
 
     public function setUp(): void {
         parent::setUp();
-        $this->admin = new WS_Scheduler_Admin( 'ws-scheduler', '4.0.8' );
+        $this->admin = new WS_Scheduler_Admin( 'ws-scheduler', '4.0.9' );
         $_POST = [];
     }
 

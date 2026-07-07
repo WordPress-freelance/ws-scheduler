@@ -4,7 +4,7 @@ Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.0.8
+Stable tag: 4.0.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -134,6 +134,10 @@ This plugin stores personal data submitted by visitors when they book an appoint
 
 == Changelog ==
 
+= 4.0.9 =
+* Security: added IP rate-limiting to all three public AJAX endpoints (book_appointment: 5 hits/hour/IP, get_available_slots: 120/hour/IP, get_month_slots: 60/hour/IP). Prevents spam bookings, confirmation email flooding, and intensive scraping of the availability schedule. Thresholds are filterable via `ws_scheduler_rate_limit_max_hits` and `ws_scheduler_rate_limit_window`. IPs are hashed with a WordPress salt before storage in transients (RGPD-friendly, no plaintext IP stored). Supports Cloudflare (`CF-Connecting-IP`) and reverse proxy headers (`X-Forwarded-For`, `X-Real-IP`) transparently.
+* Security: added a hidden honeypot field (`ws_website`) to the front-end booking form. Bots that auto-fill all inputs are silently rejected server-side without insertion or email dispatch (returns a fake success to avoid revealing the detection). The honeypot check runs before rate-limiting so bot traffic doesn't consume the legitimate quota.
+
 = 4.0.8 =
 * Fixed: front-end booking popup failed to open on sites using cache plugins with "Defer for JavaScript" enabled (LiteSpeed Cache Defer JS, WP Rocket Defer for JavaScript). jQuery was being deferred while our inline script ran synchronously, causing `ReferenceError: jQuery is not defined`. Our JS now wraps its IIFE in a boot function that polls `window.jQuery` every 50 ms (max 5 seconds) before executing — works regardless of how jQuery is loaded.
 
@@ -192,6 +196,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 * Security and ecosystem alignment audit.
 
 == Upgrade Notice ==
+
+= 4.0.9 =
+Adds anti-abuse protection : IP rate-limiting on all three public AJAX endpoints + hidden honeypot on the booking form. No database change, no configuration required.
 
 = 4.0.8 =
 Fixes ReferenceError: jQuery is not defined when a cache plugin (LiteSpeed, WP Rocket) defers jQuery loading. Our script now waits for jQuery via polling. No database change.

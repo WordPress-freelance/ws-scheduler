@@ -9,6 +9,7 @@ class Test_WS_Scheduler_Ajax extends TestCase {
     public function setUp(): void {
         parent::setUp();
         $_POST = [];
+        $GLOBALS['_ws_test_transients'] = []; // rate-limiter isolation entre tests
         $this->wpdb_backup = $GLOBALS['wpdb'] ?? null;
         $GLOBALS['wpdb']   = new MockWpdb();
         $this->ajax = new WS_Scheduler_Ajax();

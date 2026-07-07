@@ -14,7 +14,7 @@ if ( ! defined( 'WPINC' ) )          define( 'WPINC', 'wp-includes' );
 if ( ! defined( 'OBJECT' ) )         define( 'OBJECT', 'OBJECT' );
 if ( ! defined( 'WP_CONTENT_DIR' ) ) define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
 
-define( 'WS_SCHEDULER_VERSION',         '4.0.8' );
+define( 'WS_SCHEDULER_VERSION',         '4.0.9' );
 define( 'WS_SCHEDULER_PLUGIN_DIR',      ABSPATH );
 define( 'WS_SCHEDULER_PLUGIN_URL',      'http://example.com/wp-content/plugins/ws-scheduler/' );
 define( 'WS_SCHEDULER_PLUGIN_BASENAME', 'ws-scheduler/ws-scheduler.php' );
@@ -88,6 +88,34 @@ if ( ! function_exists( 'plugin_dir_url' ) ) {
 if ( ! function_exists( 'plugin_basename' ) ) {
     function plugin_basename( $f ) { return 'ws-scheduler/ws-scheduler.php'; }
 }
+
+// Store en mémoire pour les transients (rate-limiter) — non mockable
+// intentionnellement, les tests métier n'ont pas à savoir qu'il existe.
+// Les tests du rate-limiter lui-même utilisent WS_Scheduler_Rate_Limiter::reset()
+// pour repartir d'un état propre.
+if ( ! isset( $GLOBALS['_ws_test_transients'] ) ) {
+    $GLOBALS['_ws_test_transients'] = [];
+}
+if ( ! function_exists( 'get_transient' ) ) {
+    function get_transient( $key ) {
+        return $GLOBALS['_ws_test_transients'][ $key ] ?? false;
+    }
+}
+if ( ! function_exists( 'set_transient' ) ) {
+    function set_transient( $key, $value, $expiration = 0 ) {
+        $GLOBALS['_ws_test_transients'][ $key ] = $value;
+        return true;
+    }
+}
+if ( ! function_exists( 'delete_transient' ) ) {
+    function delete_transient( $key ) {
+        unset( $GLOBALS['_ws_test_transients'][ $key ] );
+        return true;
+    }
+}
+if ( ! function_exists( 'wp_salt' ) ) {
+    function wp_salt( $scheme = 'auth' ) { return 'test-salt-' . $scheme; }
+}
 if ( ! function_exists( 'esc_url' ) ) {
     function esc_url( $u ) { return $u; }
 }
@@ -141,6 +169,7 @@ require_once ABSPATH . 'includes/class-ws-scheduler-i18n.php';
 require_once ABSPATH . 'includes/class-ws-scheduler-db.php';
 require_once ABSPATH . 'includes/class-ws-scheduler-slots.php';
 require_once ABSPATH . 'includes/class-ws-scheduler-email.php';
+require_once ABSPATH . 'includes/class-ws-scheduler-rate-limiter.php';
 require_once ABSPATH . 'includes/class-ws-scheduler-ajax.php';
 require_once ABSPATH . 'includes/class-ws-scheduler-activator.php';
 require_once ABSPATH . 'includes/class-ws-scheduler-deactivator.php';

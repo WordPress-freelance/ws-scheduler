@@ -18,6 +18,7 @@ class Test_WS_Scheduler_Ajax_Booking extends TestCase {
     public function setUp(): void {
         parent::setUp();
         $_POST = [];
+        $GLOBALS['_ws_test_transients'] = []; // rate-limiter isolation entre tests
         $this->wpdb_backup = $GLOBALS['wpdb'] ?? null;
         $this->db          = new MockWpdb();
         $this->db->return_rows = [];   // pas de booked, pas d'unavail

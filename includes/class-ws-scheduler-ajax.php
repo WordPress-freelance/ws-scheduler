@@ -12,6 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class WS_Scheduler_Ajax {
 
 	public function get_available_slots() {
+		if ( ! WS_Scheduler_Rate_Limiter::check_and_increment( 'get_available_slots' ) ) {
+			wp_send_json_error( WS_Scheduler_Rate_Limiter::throttled_message() );
+			return;
+		}
 		$date = sanitize_text_field( isset( $_POST['date'] ) ? $_POST['date'] : '' );
 		if ( ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $date ) ) {
 			wp_send_json_error( __( 'Date invalide.', 'ws-scheduler' ) );
@@ -23,6 +27,10 @@ class WS_Scheduler_Ajax {
 	}
 
 	public function get_month_slots() {
+		if ( ! WS_Scheduler_Rate_Limiter::check_and_increment( 'get_month_slots' ) ) {
+			wp_send_json_error( WS_Scheduler_Rate_Limiter::throttled_message() );
+			return;
+		}
 		$year  = (int) ( isset( $_POST['year'] )  ? $_POST['year']  : date( 'Y' ) );
 		$month = (int) ( isset( $_POST['month'] ) ? $_POST['month'] : date( 'm' ) );
 		if ( $month < 1 || $month > 12 ) {
@@ -36,6 +44,26 @@ class WS_Scheduler_Ajax {
 
 	public function book_appointment() {
 		check_ajax_referer( 'ws_scheduler_nonce', 'nonce' );
+
+		// Honeypot : champ caché absent du formulaire légitime. Si rempli,
+		// c'est un bot qui a auto-fill tous les inputs. On simule un succès
+		// pour ne PAS révéler au bot qu'il a été détecté (pas d'erreur, pas
+		// d'insertion en base, pas d'email envoyé — le RDV n'existe jamais).
+		if ( ! empty( $_POST['ws_website'] ) ) {
+			wp_send_json_success( array(
+				'message'   => __( 'Rendez-vous confirmé !', 'ws-scheduler' ),
+				'meet_link' => '',
+			) );
+			return;
+		}
+
+		// Rate-limit par IP : max 5 réservations/heure/IP (filtrable).
+		// À placer APRÈS le honeypot pour ne pas polluer le compteur avec
+		// des tentatives bot triviales qu'on gère gratuitement.
+		if ( ! WS_Scheduler_Rate_Limiter::check_and_increment( 'book_appointment' ) ) {
+			wp_send_json_error( WS_Scheduler_Rate_Limiter::throttled_message() );
+			return;
+		}
 
 		$required = array( 'first_name', 'last_name', 'email', 'slot_start' );
 		foreach ( $required as $field ) {

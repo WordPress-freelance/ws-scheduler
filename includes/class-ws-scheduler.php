@@ -16,7 +16,7 @@ class WS_Scheduler {
 	protected $version;
 
 	public function __construct() {
-		$this->version     = defined( 'WS_SCHEDULER_VERSION' ) ? WS_SCHEDULER_VERSION : '4.0.8';
+		$this->version     = defined( 'WS_SCHEDULER_VERSION' ) ? WS_SCHEDULER_VERSION : '4.0.9';
 		$this->plugin_name = 'ws-scheduler';
 
 		$this->load_dependencies();
@@ -33,6 +33,7 @@ class WS_Scheduler {
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'includes/class-ws-scheduler-db.php';
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'includes/class-ws-scheduler-slots.php';
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'includes/class-ws-scheduler-email.php';
+		require_once WS_SCHEDULER_PLUGIN_DIR . 'includes/class-ws-scheduler-rate-limiter.php';
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'includes/class-ws-scheduler-ajax.php';
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'includes/class-ws-scheduler-privacy.php';
 		require_once WS_SCHEDULER_PLUGIN_DIR . 'admin/class-ws-scheduler-admin.php';
