@@ -60,6 +60,11 @@
     if (!overlay.length) return;
     resetPopup();
     overlay.addClass('ws-visible');
+    // Style inline en plus de la classe : LiteSpeed UCSS (Unique CSS) supprime
+    // la règle `.ws-overlay.ws-visible{display:flex}` car la classe n'est
+    // jamais présente dans le HTML statique au moment du crawl. Un style
+    // inline ne peut pas être amputé par un optimiseur CSS.
+    overlay.css({ display: 'flex' });
     $('body').css('overflow','hidden');
     let now = new Date();
     curYear  = now.getFullYear();
@@ -72,6 +77,7 @@
   function closePopup() {
     if (!overlay || !overlay.length) return;
     overlay.removeClass('ws-visible');
+    overlay.css({ display: '' });
     $('body').css('overflow','');
   }
 

@@ -38,6 +38,53 @@ class WS_Scheduler_Public {
 			$this->version,
 			'all'
 		);
+
+		// Défense contre les optimiseurs CSS (LiteSpeed UCSS/CCSS, Autoptimize,
+		// WP Rocket "Remove Unused CSS"). Ils génèrent un CSS "critique" ne
+		// gardant que les sélecteurs présents dans le HTML au moment du crawl :
+		// nos classes d'état posées par JS (.ws-visible, .ws-cal-day.available,
+		// .ws-slot-btn.selected…) n'y sont jamais, leurs règles sont supprimées
+		// et la popup reste invisible alors que le JS s'exécute correctement.
+		add_filter( 'style_loader_tag',               array( $this, 'exclude_style_from_cache_optimization' ), 999, 2 );
+		add_filter( 'litespeed_optimize_css_excludes', array( $this, 'litespeed_css_excludes' ), 999 );
+		add_filter( 'litespeed_optm_ucss_exc',         array( $this, 'litespeed_css_excludes' ), 999 );
+		add_filter( 'litespeed_optm_ucss_whitelist',   array( $this, 'litespeed_ucss_whitelist' ), 999 );
+		add_filter( 'litespeed_optm_ccss_whitelist',   array( $this, 'litespeed_ucss_whitelist' ), 999 );
+	}
+
+	/**
+	 * Marque le tag <link> de notre feuille pour les optimiseurs CSS.
+	 */
+	public function exclude_style_from_cache_optimization( $tag, $handle ) {
+		if ( $handle !== $this->plugin_name ) return $tag;
+		$attrs = ' data-no-optimize="1" data-no-minify="1" data-no-combine="1" data-noptimize="1"';
+		return preg_replace( '/<link(\s|>)/i', '<link' . $attrs . '$1', $tag, 1 );
+	}
+
+	/**
+	 * Patterns à exclure de la combine/minify/UCSS LiteSpeed pour notre CSS.
+	 */
+	public function litespeed_css_excludes( $excludes ) {
+		if ( ! is_array( $excludes ) ) {
+			$excludes = empty( $excludes ) ? array() : array( $excludes );
+		}
+		return array_values( array_unique( array_merge( $excludes, array( 'ws-scheduler-public.css', 'ws-scheduler' ) ) ) );
+	}
+
+	/**
+	 * Sélecteurs d'état posés par JS à conserver dans l'UCSS/CCSS LiteSpeed.
+	 */
+	public function litespeed_ucss_whitelist( $whitelist ) {
+		if ( ! is_array( $whitelist ) ) {
+			$whitelist = empty( $whitelist ) ? array() : array( $whitelist );
+		}
+		$ours = array(
+			'.ws-overlay', '.ws-overlay.ws-visible', '.ws-visible',
+			'.ws-popup', '.ws-step', '.ws-step[hidden]',
+			'.ws-cal-day', '.ws-cal-day.available', '.ws-cal-day.full', '.ws-cal-day.closed', '.ws-cal-day.selected',
+			'.ws-slot-btn', '.ws-slot-btn.selected', '.ws-invalid', '.ws-book-btn', '.ws-form-fields', '.ws-hp-field',
+		);
+		return array_values( array_unique( array_merge( $whitelist, $ours ) ) );
 	}
 
 	/**

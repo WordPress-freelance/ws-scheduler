@@ -4,7 +4,7 @@ Tags: appointment, booking, calendar, scheduler, reservation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.0.9
+Stable tag: 4.0.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -133,6 +133,9 @@ This plugin stores personal data submitted by visitors when they book an appoint
 10. Email — admin notification with the full client details (name, email, company, phone, message) and a direct link to the appointment in the back-office.
 
 == Changelog ==
+
+= 4.0.10 =
+* Fixed: booking popup did not open on sites running LiteSpeed Cache with UCSS (Unique CSS) or other "remove unused CSS" optimizers. The open-state rule `.ws-overlay.ws-visible{display:flex}` was stripped because the class is only added by JS and never present in the static HTML. The JS now sets `display:flex` inline on open, and the plugin declares its stylesheet and state selectors to LiteSpeed (UCSS/CCSS whitelist, combine/minify excludes) and marks the <link> with data-no-optimize.
 
 = 4.0.9 =
 * Security: added IP rate-limiting to all three public AJAX endpoints (book_appointment: 5 hits/hour/IP, get_available_slots: 120/hour/IP, get_month_slots: 60/hour/IP). Prevents spam bookings, confirmation email flooding, and intensive scraping of the availability schedule. Thresholds are filterable via `ws_scheduler_rate_limit_max_hits` and `ws_scheduler_rate_limit_window`. IPs are hashed with a WordPress salt before storage in transients (RGPD-friendly, no plaintext IP stored). Supports Cloudflare (`CF-Connecting-IP`) and reverse proxy headers (`X-Forwarded-For`, `X-Real-IP`) transparently.

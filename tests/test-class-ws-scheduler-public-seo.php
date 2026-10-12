@@ -193,4 +193,47 @@ class Test_WS_Scheduler_Public_SEO extends TestCase {
             'Le poller doit logger une erreur claire si jQuery n\'arrive jamais.'
         );
     }
+
+    /* ── 4.0.10 : résistance à LiteSpeed UCSS / optimiseurs CSS ───────── */
+
+    public function test_js_sets_inline_display_on_open_and_clears_on_close() {
+        // Régression UCSS : LiteSpeed Unique CSS supprime `.ws-overlay.ws-visible{display:flex}`
+        // (classe posée par JS, absente du HTML statique). La classe seule ne
+        // suffit plus : le JS doit poser le display en inline à l'ouverture.
+        $js = file_get_contents( __DIR__ . '/../public/js/ws-scheduler-public.js' );
+        $this->assertMatchesRegularExpression( "/addClass\('ws-visible'\);[\s\S]{0,400}?overlay\.css\(\s*\{\s*display:\s*'flex'\s*\}\s*\)/", $js );
+        $this->assertMatchesRegularExpression( "/removeClass\('ws-visible'\);[\s\S]{0,120}?overlay\.css\(\s*\{\s*display:\s*''\s*\}\s*\)/", $js );
+    }
+
+    public function test_exclude_style_injects_cache_attrs_for_our_handle_only() {
+        $public = new WS_Scheduler_Public( 'ws-scheduler', '4.0.10' );
+        $tag = '<link rel="stylesheet" id="ws-scheduler-css" href="x/ws-scheduler-public.css" media="all" />';
+        $out = $public->exclude_style_from_cache_optimization( $tag, 'ws-scheduler' );
+        foreach ( array( 'data-no-optimize="1"', 'data-no-minify="1"', 'data-no-combine="1"', 'data-noptimize="1"' ) as $a ) {
+            $this->assertStringContainsString( $a, $out );
+        }
+        $this->assertStringContainsString( 'ws-scheduler-public.css', $out );
+        $other = '<link rel="stylesheet" id="avada-css" href="x/avada.css" />';
+        $this->assertSame( $other, $public->exclude_style_from_cache_optimization( $other, 'avada' ) );
+    }
+
+    public function test_litespeed_css_excludes_merges_and_accepts_string_or_empty() {
+        $public = new WS_Scheduler_Public( 'ws-scheduler', '4.0.10' );
+        $out = $public->litespeed_css_excludes( array( 'other.css' ) );
+        $this->assertContains( 'other.css', $out );
+        $this->assertContains( 'ws-scheduler-public.css', $out );
+        $this->assertContains( 'ws-scheduler-public.css', $public->litespeed_css_excludes( 'legacy.css' ) );
+        $empty = $public->litespeed_css_excludes( '' );
+        $this->assertIsArray( $empty );
+        $this->assertNotContains( '', $empty );
+    }
+
+    public function test_litespeed_ucss_whitelist_keeps_js_state_selectors_and_dedupes() {
+        $public = new WS_Scheduler_Public( 'ws-scheduler', '4.0.10' );
+        $out = $public->litespeed_ucss_whitelist( array( '.keep-me', '.ws-visible' ) );
+        foreach ( array( '.ws-overlay.ws-visible', '.ws-visible', '.ws-cal-day.available', '.ws-slot-btn.selected', '.ws-step[hidden]', '.keep-me' ) as $sel ) {
+            $this->assertContains( $sel, $out, "Manque $sel" );
+        }
+        $this->assertSame( 1, array_count_values( $out )['.ws-visible'] );
+    }
 }
